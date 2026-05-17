@@ -1,0 +1,35 @@
+# Grav core (provided by linuxserver/grav image)
+vendor/
+system/
+bin/
+index.php
+now.json
+robots.txt
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+SECURITY.md
+composer.lock
+webserver-configs/
+
+# Grav runtime dirs
+cache/
+logs/
+tmp/
+backup/
+images/
+assets/
+
+# Grav user runtime
+user/accounts/
+user/data/
+user/config/security.yaml
+
+# Static export output (in PVC, not in repo)
+static-export/
+
+# k8s secrets (never commit)
+k8s/secret.yaml
+
+# macOS
+.DS_Store

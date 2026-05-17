@@ -1,0 +1,15 @@
+# LAN-only — same pattern as hubble.192.168.1.15.dyn.k8s.it
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grav
+  namespace: grav
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`grav-192.168.1.15.dyn.k8s.it`)
+      kind: Rule
+      services:
+        - name: grav-svc
+          port: 80

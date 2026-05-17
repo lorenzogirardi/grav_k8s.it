@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grav
+  namespace: grav
+  labels:
+    app: grav
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grav
+  template:
+    metadata:
+      labels:
+        app: grav
+      annotations:
+        prometheus.io/scrape: "false"
+    spec:
+      initContainers:
+        # Bootstrap Grav user/ dir into PVC on first run
+        - name: init-grav
+          image: lscr.io/linuxserver/grav:latest
+          command: [/bin/sh, -c]
+          args:
+            - |
+              if [ ! -f /config/www/.initialized ]; then
+                echo "First run: waiting for Grav files to be present..."
+                # linuxserver entrypoint populates /config/www on first boot
+                # We just touch the sentinel after s6 has finished
+                sleep 5
+                touch /config/www/.initialized 2>/dev/null || true
+              fi
+          volumeMounts:
+            - name: grav-config
+              mountPath: /config
+      containers:
+        - name: grav
+          image: lscr.io/linuxserver/grav:latest
+          ports:
+            - containerPort: 80
+              name: http
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Rome"
+          volumeMounts:
+            - name: grav-config
+              mountPath: /config
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 10
+      volumes:
+        - name: grav-config
+          persistentVolumeClaim:
+            claimName: grav-config

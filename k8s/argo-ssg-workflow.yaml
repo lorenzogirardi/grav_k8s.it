@@ -1,0 +1,86 @@
+---
+# CronWorkflow: runs SSG export and pushes static output to gh-pages branch
+# Trigger: every 6 hours, or manually via Argo UI
+# Requirements:
+#   - Secret grav-secrets with GITHUB_TOKEN (PAT with repo contents:write)
+#   - Static Site Generator plugin installed in Grav
+#   - SSG output_dir configured to /config/www/static-export (see user/config/plugins/static-site-generator.yaml)
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: grav-ssg-publish
+  namespace: grav
+spec:
+  schedule: "0 */6 * * *"
+  timezone: "Europe/Rome"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  workflowSpec:
+    serviceAccountName: grav-ssg-sa
+    ttlStrategy:
+      secondsAfterCompletion: 86400
+    templates:
+      - name: ssg-and-push
+        steps:
+          - - name: export-and-publish
+              template: export-publish
+
+      - name: export-publish
+        script:
+          # Single-node k3s: RWO PVC mountable by multiple pods on same node
+          image: lscr.io/linuxserver/grav:latest
+          command: [/bin/sh]
+          source: |
+            set -e
+
+            # git is not in the linuxserver/grav image — install it
+            apk add --no-cache git > /dev/null 2>&1
+
+            GRAV_ROOT="/config/www"
+            OUTPUT_DIR="${GRAV_ROOT}/static-export"
+            REPO="lorenzogirardi/grav_k8s.it"
+            BRANCH="gh-pages"
+
+            echo "==> Running SSG export..."
+            cd "${GRAV_ROOT}"
+            php bin/plugin static-site-generator export
+
+            if [ ! -d "${OUTPUT_DIR}" ] || [ -z "$(ls -A ${OUTPUT_DIR})" ]; then
+              echo "ERROR: SSG export produced no output in ${OUTPUT_DIR}"
+              exit 1
+            fi
+
+            echo "==> Pushing to ${REPO}:${BRANCH}..."
+            cd "${OUTPUT_DIR}"
+            git init -b "${BRANCH}"
+            git config user.email "grav-ssg-bot@k8s.it"
+            git config user.name "Grav SSG Bot"
+            git add -A
+            git commit -m "SSG deploy: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push --force \
+              "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}.git" \
+              HEAD:"${BRANCH}"
+
+            echo "==> Done."
+          env:
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: grav-secrets
+                  key: GITHUB_TOKEN
+          volumeMounts:
+            - name: grav-config
+              mountPath: /config
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+    volumes:
+      - name: grav-config
+        persistentVolumeClaim:
+          claimName: grav-config
+    entrypoint: ssg-and-push
