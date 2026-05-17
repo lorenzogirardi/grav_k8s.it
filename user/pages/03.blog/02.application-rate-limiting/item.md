@@ -31,7 +31,7 @@ For this scenario we have 2 greddy options:
   
 
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-sidecar-ratelimit#the-code-way>)the code way
+## the code way
 
 This is the simplest one but has some side effects,  
 first of all can be reaused just for the same language apps.  
@@ -40,7 +40,7 @@ that can be good or bad depending of the strategy applied,
 imagine the request interceptor for example will consume cpu and may  _false_ metrics if we are not aware of it.  
   
 But anyway , it can be a solution , so in a simple python code you have to add the following for example  
-(i will use the usual [app](<https://github.com/lorenzogirardi/py-test-backend/tree/ratelimit/docker>) i'm using for labs stuff)  
+(i will use the usual [app](https://github.com/lorenzogirardi/py-test-backend/tree/ratelimit/docker) i'm using for labs stuff)  
 I'ts Flask so you just have to add the following:  
 in requirements.txt --> `Flask-Limiter`
 
@@ -67,7 +67,7 @@ And add the limiting option in the route u'd like to rate
     @limiter.limit("28 per second")
     
 
-### [](<https://github.com/lorenzogirardi/Kubernetes-sidecar-ratelimit#handson>)Handson
+### Handson
 
 Just moved from `@limiter.limit("28 per second")` to `@limiter.limit("2 per second")`
     
@@ -180,7 +180,7 @@ just few concepts anyway are:
   
 
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-sidecar-ratelimit#the-sidecar-way>)the sidecar way
+## the sidecar way
 
 Yes i know , this is a  _stretch_ , since we have service mesh , gateway etc etc that embrace this concept.  
 However, for a specific reason, i created just a sidecar container that can be reused without the needs to implement the infrastructure mentioned before
@@ -376,7 +376,7 @@ And now the Rate limiting section
 
 we have a bucket of 29 token , and every second it re-enable the 29 token in the bucket ... i mean ... 29req/second  _almost_ :-)
 
-### [](<https://github.com/lorenzogirardi/Kubernetes-sidecar-ratelimit#handson-1>)Handson
+### Handson
 
 Again i changed the rate limit to 2req/second
     

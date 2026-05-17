@@ -65,7 +65,7 @@ Why I Moved from ESXi to Proxmox
 
 ### 3\. **Customization and Flexibility**
 
-  * ESXi once relied on tools like `[ESXi-Customizer](<https://www.v-front.de/p/esxi-customizer.html>)` to inject missing drivers — which are now broken or unsupported.
+  * ESXi once relied on tools like `[ESXi-Customizer](https://www.v-front.de/p/esxi-customizer.html)` to inject missing drivers — which are now broken or unsupported.
 
   * Proxmox, thanks to Linux's modular driver support, works _out of the box_ or is easily tunable.
 
@@ -103,7 +103,7 @@ both are supporting 32gb ram , ryzen can reach up to 64
 
 ### Step 1: Backup Everything
 
-  * **Backup VMs** in ESXi first (i used [ghettovcb](<https://github.com/lamw/ghettoVCB>))
+  * **Backup VMs** in ESXi first (i used [ghettovcb](https://github.com/lamw/ghettoVCB))
 
 
 
@@ -144,7 +144,7 @@ Feature| VMware ESXi| Proxmox VE
 ---|---|---  
 **UI**|  Polished but proprietary| Functional, open, web-based  
 **Storage**|  Datastores (VMFS)| ZFS, Ceph, LVM, Directory-based  
-**Backup**|  Add-on required (e.g., Veeam)| [Built-in Backup/Restore system](<https://gist.github.com/lorenzogirardi/2337bdc557f9ec5e0cce7877b022fd45>)  
+**Backup**|  Add-on required (e.g., Veeam)| [Built-in Backup/Restore system](https://gist.github.com/lorenzogirardi/2337bdc557f9ec5e0cce7877b022fd45)  
 **Snapshots**|  Basic, no schedules (free version)| Scheduled, ZFS-native snapshots  
 **Cluster Setup**|  Requires vCenter (paid)| Built-in, easy 1-liner commands  
 **Container Support**|  No native container support| Native LXC container management  

@@ -31,7 +31,7 @@ However we have 3 different topics to describe in this project
 
 
 
-## [](<https://github.com/lorenzogirardi/kubernetes-postfix#what-is-an-email>)what is an email
+## what is an email
 
 send email sometimes is a dedicated work in an enterprise company.  
 There are many aspect to consider , not only infrastructure , like che segmentation of domains strategy,  
@@ -49,7 +49,7 @@ Here some topic that you probably know:
 
 
 
-## [](<https://github.com/lorenzogirardi/kubernetes-postfix#postfix-configuration>)postfix configuration
+## postfix configuration
 
 The second one is more related to middleware behaviour  
 i have a domain "example.com" and i'd like to
@@ -64,7 +64,7 @@ i have a domain "example.com" and i'd like to
 For all those topics the main configuration is in virtual and transport map in  _postfix_  
 There are some articles in internet, i'll avoid to reinvent hot water with the explanation.
 
-## [](<https://github.com/lorenzogirardi/kubernetes-postfix#postfix-in-kubernetes>)postfix in kubernetes
+## postfix in kubernetes
 
 just as recap this was the configuration in the cloud vps
 
@@ -76,7 +76,7 @@ now i just whitched the MX to my own microk8s lab
 
 However , inside the box a lot of implementation way can be taken
 
-### [](<https://github.com/lorenzogirardi/kubernetes-postfix#scenario-1>)Scenario 1:
+### Scenario 1:
 
 you can build an image for each dedicate purpose
 
@@ -87,17 +87,17 @@ you can build an image for each dedicate purpose
 
 
 
-### [](<https://github.com/lorenzogirardi/kubernetes-postfix#scenario-2>)Scenario 2:
+### Scenario 2:
 
 looking the configuration adopted in  _Scenario 1_ , you can add an ingress tcp forward where  
 you can also add a tls layer with cert-manager (the new kube-lego).
 
-### [](<https://github.com/lorenzogirardi/kubernetes-postfix#scenario-3>)Scenario 3:
+### Scenario 3:
 
 _Scenario 2_ plus external storage for logs  
 etc etc
 
-### [](<https://github.com/lorenzogirardi/kubernetes-postfix#scenario-lazy>)Scenario Lazy:
+### Scenario Lazy:
 
 Embedded docker images with all you need with a node port (used only because i have a standalone kubernetes node).
 
@@ -298,7 +298,7 @@ Last one is the check on the client side with the righ option enabled
 
 [![clientemail](/user/images/kubernetes-postfix/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539383336383833352f6d6973632f656d61696c6f7074696f6e2e706e67)](<https://camo.githubusercontent.com/66fffe878e76dbeff1853c4abaf19f846af46529/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539383336383833352f6d6973632f656d61696c6f7074696f6e2e706e67>)
 
-## [](<https://github.com/lorenzogirardi/kubernetes-postfix#conclusion>)Conclusion
+## Conclusion
 
 You can add postfix infrastructure to kubernetes with no problems at all ,  
 this project is a  _prototype_ , in a production infrastructure you can work around this to let it rock solid and scalable

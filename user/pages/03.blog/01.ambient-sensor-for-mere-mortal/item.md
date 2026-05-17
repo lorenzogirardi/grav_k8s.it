@@ -174,13 +174,13 @@ local DEVICE = "name device" --> name of you board/room
 local HOST = "server database" --> your influxdb installation  
 local URI = "/write?db=collectd" --> your database name 
 
-So we have the hardware , we loaded the firmware, we created the code, but how to interact with the platform... well there are many way however [ESPlorer](<https://esp8266.ru/esplorer/>) has a nice gui even if it's java based ☠️
+So we have the hardware , we loaded the firmware, we created the code, but how to interact with the platform... well there are many way however [ESPlorer](https://esp8266.ru/esplorer/) has a nice gui even if it's java based ☠️
 
 ![](/user/images/ambient-sensor-for-mere-mortal/ESPlorer-panels.png)
 
 ### Results
 
-[https://services.k8s.it/grafana/d/000000079/temperature?viewPanel=5&orgId=2&refresh=1m](<https://services.k8s.it/grafana/d/000000079/temperature?viewPanel=5&orgId=2&refresh=1m>)
+[https://services.k8s.it/grafana/d/000000079/temperature?viewPanel=5&orgId=2&refresh=1m](https://services.k8s.it/grafana/d/000000079/temperature?viewPanel=5&orgId=2&refresh=1m)
 
 above you can see the live results .... and on grafana we can create a graph like this
 

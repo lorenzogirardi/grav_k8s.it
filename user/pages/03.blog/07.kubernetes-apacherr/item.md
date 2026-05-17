@@ -18,13 +18,13 @@ True but internet was not built yesterday and for some reasons out of my knowled
 people are ostinated to manage rewrite rules in apache instead to use a dedicated router application (react, zuul .. database!?!?! etc etc)  
 However sometimes we have to balance between the academic vision and the reality.
 
-## [](<https://github.com/lorenzogirardi/kubernetes-apacherr#digression>)digression
+## digression
 
 Talking about apache https , nginx , haproxy ... i'm referring to the idea behind manage a complex website.  
 A website could be composed my hundreds of microservices but the domain it's usually one  
-[www.example.com](<http://www.example.com/>)
+[www.example.com](http://www.example.com/)
 
-[www.example.com](<http://www.example.com/>) has the root path /  
+[www.example.com](http://www.example.com/) has the root path /  
 /it/ managed by cms  
 /it/offerte managed by cms  
 /uk/ managed by cms  
@@ -76,7 +76,7 @@ in order to dinamically generate the right url with canonical pages.
 Many and many others assumptions can be covered by this componet, however we have to stay grounded  
 and check how we can manage an apache responsible to redirects proxypass an rewrite rules.
 
-## [](<https://github.com/lorenzogirardi/kubernetes-apacherr#some-concepts-about-this-project>)Some concepts about this project
+## Some concepts about this project
 
 Even if we are working in a dynamic environment it's no rare to have the traditional layers
 
@@ -92,7 +92,7 @@ A product that own a dedicated business, like seo, sem , vanity urls etc etc.
 Having those considerations, we can "downgrade" apache httpd in layer 2 like any application  
 and honor the DMZ (if needed ?!?!) on top by ingress/haproxy/bigf5 (where maybe we can terminate the TLS).
 
-## [](<https://github.com/lorenzogirardi/kubernetes-apacherr#implementation>)Implementation
+## Implementation
 
 The code in this project is designet to manage apache configuration by configmap,  
 however some websites are really complex and there are some limits implication with ectd max object size.
@@ -100,6 +100,6 @@ however some websites are really complex and there are some limits implication w
 In this scenario it's higly raccomended to deploy the release with a standard pipeline with compiled  
 container on the source.
 
-## [](<https://github.com/lorenzogirardi/kubernetes-apacherr#deploy>)deploy
+## deploy
 
 `kubectl apply -f apacherr/deployment/`

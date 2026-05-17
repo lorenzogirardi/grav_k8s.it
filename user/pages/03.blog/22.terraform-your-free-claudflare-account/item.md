@@ -31,7 +31,7 @@ and some others with Incapsula
 
 It's now the moment to talk about Cloudflare
 
-[Claudflare](<https://www.cloudflare.com/>) provide a good free account that allow you to hide your source ip or you want to discover how it's work the free waf protection or have a https certificate having your origin in http and so on ... but what is really cool and quickwin than the competitors is the API support and the native integration with [Terraform](<https://www.terraform.io/docs/providers/cloudflare/index.html>)
+[Claudflare](https://www.cloudflare.com/) provide a good free account that allow you to hide your source ip or you want to discover how it's work the free waf protection or have a https certificate having your origin in http and so on ... but what is really cool and quickwin than the competitors is the API support and the native integration with [Terraform](https://www.terraform.io/docs/providers/cloudflare/index.html)
 
 ![](/user/images/terraform-your-free-claudflare-account/git-terraform-cloudflare.png)
 
@@ -45,7 +45,7 @@ First of all , retrive the api key from Cloudflare portal
 
 ![](/user/images/terraform-your-free-claudflare-account/cloudflare-global-apikey.png)
 
-then start the main terraform file in a dedicated folder (better in a [gitlab](<https://gitlab.com/>) repo)
+then start the main terraform file in a dedicated folder (better in a [gitlab](https://gitlab.com/) repo)
     
     
     $ cat cloudflare-auth.tf  

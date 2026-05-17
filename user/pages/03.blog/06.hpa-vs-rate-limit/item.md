@@ -69,7 +69,7 @@ This _story_ is not a true o false sentence, it's a sort of analysis based on a 
 
 ## HPA
 
-In Kubernetes, a _HorizontalPodAutoscaler_ automatically updates a workload resource (such as a [Deployment](<https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>) or [StatefulSet](<https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/>)), with the aim of automatically scaling the workload to match demand.
+In Kubernetes, a _HorizontalPodAutoscaler_ automatically updates a workload resource (such as a [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) or [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)), with the aim of automatically scaling the workload to match demand.
 
 ### Patterns
 
@@ -116,7 +116,7 @@ Sometimes we can have a spike of requests that are legit... for example consider
 
 ## Simulation
 
-  * [python](<https://github.com/lorenzogirardi/py-test-backend>) app that generates fibonacci sequence
+  * [python](https://github.com/lorenzogirardi/py-test-backend) app that generates fibonacci sequence
   * fibonacci number 18500
   * load test done using gatling
   * Application capped on cpu (each request is ~10mcpu) with max of 300mcpu for pod (cpu bound)
@@ -276,7 +276,7 @@ Naaaa .... no more than 24 rps
 
 ### AUTOSCALING Internal rate limit
 
-[Here how to](<https://www.k8s.it/application-rate-limiting.html>)
+[Here how to](https://www.k8s.it/application-rate-limiting.html)
 
 #### [optimal] 1 pod start - hpa 25rps\- 15 min - 99 max requests rate-limit 27
 
@@ -381,7 +381,7 @@ No issue at all , since the rl is performed by envoy the python app has no “sp
 
 This application is cpu bound … so I used req/s even if the right autoscaling metric is the cpu usage, however, I would say that each application has the intent to serve requests.  
 Create a dedicated configuration, application per application, for the hpa is the best option but it requires **HUGE** know-how and time …  
-Considering the sentence before, I was impressed about [Active users](<https://gatling.io/docs/gatling/reference/current/stats/reports/#:~:text=%E2%80%9CActive%20users%E2%80%9D%20is%20neither%20%E2%80%9C,load%20at%20a%20given%20second%E2%80%9D.>) since share the correct clue at high levels about the status of the application, it’s really really close to measuring the enervation of the app
+Considering the sentence before, I was impressed about [Active users](https://gatling.io/docs/gatling/reference/current/stats/reports/#:~:text=%E2%80%9CActive%20users%E2%80%9D%20is%20neither%20%E2%80%9C,load%20at%20a%20given%20second%E2%80%9D.) since share the correct clue at high levels about the status of the application, it’s really really close to measuring the enervation of the app
 
 ![](/user/images/hpa-vs-rate-limit/Screenshot-2023-02-16-at-22.30.45.png)
 
@@ -440,7 +440,7 @@ In a dynamic infrastructure where we have autoscaling and downscaling, a legit p
 **AND…**   
 during the night, it's supposed to have the minimum pods available as there is less user traffic for example.
 
-So … I’ll remark on the drawback of cost savings following the matrix based on hpa patterns (cit [brewster's millions](<https://www.imdb.com/title/tt0088850/>))  
+So … I’ll remark on the drawback of cost savings following the matrix based on hpa patterns (cit [brewster's millions](https://www.imdb.com/title/tt0088850/))  
 As much as we are close to using fewer resources as possible, as much we are increasing corner cases and unexpected situations.  
   
 Be careful to evaluate the rate limit concept 

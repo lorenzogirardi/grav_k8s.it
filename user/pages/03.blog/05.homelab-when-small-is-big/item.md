@@ -39,7 +39,7 @@ i'd like to have a solution that is able to cover all my needs in terms of hobby
 
 ### Hardware
 
-Base: [Intel® NUC NUC7PJYH](<https://ark.intel.com/content/www/us/en/ark/products/126137/intel-nuc-kit-nuc7pjyh.html>)
+Base: [Intel® NUC NUC7PJYH](https://ark.intel.com/content/www/us/en/ark/products/126137/intel-nuc-kit-nuc7pjyh.html)
 
 ![](/user/images/homelab-when-small-is-big/Screenshot-2021-02-19-at-16.39.21-2.png)
 
@@ -64,13 +64,13 @@ Now:
 
 **Why** vmware?  
 Because the virtualization stack is really important to have an abstraction layer ,  
-see this [post](<https://www.k8s.it/kubernetes-destroyed-the-virtualization-or-not.html>)
+see this [post](https://www.k8s.it/kubernetes-destroyed-the-virtualization-or-not.html)
 
 **Why** 6.7?  
 Because the vmkernel in 7.0 is changed and is not possible import external network driver (needed for this nuc model), even if there is a trick with usb network adapter and <https://flings.vmware.com/usb-network-native-driver-for-esxi> vmware labs usb drivers.
 
 **How** build the image with Realtek network card ?  
-First of all you need a windows :( , than you should need to identify your hardware driver , in my case <https://vibsdepot.v-front.de/wiki/index.php/Net55-r8168> and at the end you need to rebuild the image with [ESXi-Customizer-PS](<https://www.v-front.de/p/esxi-customizer-ps.html>)
+First of all you need a windows :( , than you should need to identify your hardware driver , in my case <https://vibsdepot.v-front.de/wiki/index.php/Net55-r8168> and at the end you need to rebuild the image with [ESXi-Customizer-PS](https://www.v-front.de/p/esxi-customizer-ps.html)
 
 ![](/user/images/homelab-when-small-is-big/Screenshot-2021-02-19-at-17.16.41.png)
 
@@ -230,7 +230,7 @@ And ... well thats all ... you have your weekly snapshot
 2021-02-13 22:00:01 -- info: CONFIG - RSYNC_LINK = 0  
 2021-02-13 22:00:01 -- info: CONFIG - BACKUP_FILES_CHMOD =  
 2021-02-13 22:00:01 -- info: CONFIG - EMAIL_LOG = 1  
-2021-02-13 22:00:01 -- info: CONFIG - EMAIL_SERVER = [smtp.xxs.it](<http://smtp.k8s.it/>)  
+2021-02-13 22:00:01 -- info: CONFIG - EMAIL_SERVER = [smtp.xxs.it](http://smtp.k8s.it/)  
 2021-02-13 22:00:01 -- info: CONFIG - EMAIL_SERVER_PORT = 25  
 2021-02-13 22:00:01 -- info: CONFIG - EMAIL_DELAY_INTERVAL = 1  
 2021-02-13 22:00:01 -- info: CONFIG - EMAIL_FROM = [[email protected]](</cdn-cgi/l/email-protection#d4b3bcb1a0a0bb829796f9b5b9b5a0b1a6b5a7a194bfeca7fabda0>)  

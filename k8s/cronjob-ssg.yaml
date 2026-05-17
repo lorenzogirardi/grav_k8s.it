@@ -29,29 +29,47 @@ spec:
                   ln -s /config/www/user /app/www/public/user
 
                   GRAV_ROOT="/app/www/public"
-                  OUTPUT_DIR="/app/www/public/user/data/persist"
+                  OUTPUT_DIR="/config/www/user/data/persist"
                   REPO="lorenzogirardi/grav_k8s.it"
                   BRANCH="gh-pages"
 
                   echo "==> Running static-generator export..."
                   cd "${GRAV_ROOT}"
                   php bin/plugin static-generator page / "@root.descendants" \
-                    --assets --static-assets --images --force
+                    --env=gh-pages --assets --static-assets --images --force
 
                   if [ ! -d "${OUTPUT_DIR}" ] || [ -z "$(ls -A ${OUTPUT_DIR})" ]; then
                     echo "ERROR: no output in ${OUTPUT_DIR}"; exit 1
                   fi
 
+                  echo "==> Fixing asset paths for GitHub Pages subpath /grav_k8s.it ..."
+                  # Two-pass BRE sed (busybox-safe, idempotent):
+                  # pass 1: strip any existing prefix; pass 2: add prefix
+                  find "${OUTPUT_DIR}" -name "*.html" -exec sed -i \
+                    -e 's|href="/grav_k8s\.it/|href="/|g' \
+                    -e 's|src="/grav_k8s\.it/|src="/|g' \
+                    {} \;
+                  find "${OUTPUT_DIR}" -name "*.html" -exec sed -i \
+                    -e 's|href="/|href="/grav_k8s.it/|g' \
+                    -e 's|src="/|src="/grav_k8s.it/|g' \
+                    {} \;
+
                   echo "==> Pushing to ${REPO}:${BRANCH}..."
-                  cd "${OUTPUT_DIR}"
-                  git init -b "${BRANCH}"
-                  git config user.email "grav-ssg-bot@k8s.it"
-                  git config user.name "Grav SSG Bot"
-                  git add -A
-                  git commit -m "SSG deploy: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-                  git push --force \
-                    "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}.git" \
-                    HEAD:"${BRANCH}"
+                  git config --global --add safe.directory "${OUTPUT_DIR}"
+                  GIT="git -C ${OUTPUT_DIR}"
+                  $GIT init
+                  $GIT checkout -B "${BRANCH}" 2>/dev/null || true
+                  $GIT config user.email "grav-ssg-bot@k8s.it"
+                  $GIT config user.name "Grav SSG Bot"
+                  $GIT add -A
+                  if $GIT diff --cached --quiet; then
+                    echo "Nothing changed, skipping push"
+                  else
+                    $GIT commit -m "SSG deploy: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+                    $GIT push --force \
+                      "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}.git" \
+                      HEAD:"${BRANCH}"
+                  fi
 
                   echo "==> Done."
               env:

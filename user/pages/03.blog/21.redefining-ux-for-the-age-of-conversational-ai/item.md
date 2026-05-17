@@ -74,7 +74,7 @@ What’s new (and truly disruptive) is the rise of AI-powered chat interfaces.
 
 This shift means that sites must expose product data in ways instantly consumable by AI—not just for classic SEO, but for rich, contextual, real-time answers. JSON-LD becomes the bridge, enabling e-commerce sites to participate fully in the conversational, intent-driven commerce ecosystem.
 
-The days when classic SEO alone could guarantee visibility for products online are ending. As users move to conversational AI platforms—ChatGPT, Gemini, Perplexity, and Mistral—websites must expose data in a way that is instantly machine-readable and context-aware. This involves a shift from simple keywords and descriptions to rich, structured data using [JSON-LD](<https://json-ld.org/>) and [schema.org](<https://schema.org/>).
+The days when classic SEO alone could guarantee visibility for products online are ending. As users move to conversational AI platforms—ChatGPT, Gemini, Perplexity, and Mistral—websites must expose data in a way that is instantly machine-readable and context-aware. This involves a shift from simple keywords and descriptions to rich, structured data using [JSON-LD](https://json-ld.org/) and [schema.org](https://schema.org/).
 
 ## User Behavior Shift: Conversational AI Discovery Is the New Entry Point
 

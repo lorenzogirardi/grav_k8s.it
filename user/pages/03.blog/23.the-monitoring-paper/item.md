@@ -19,8 +19,8 @@ taxonomy:
 Contrary to popular belief, monitoring an infrastructure is the opposite to just have some metrics about applications and network
 
 There are many many documents the lead this topic,  
-one of the most interesting it's just few pages from Google around [the art of slos](<https://static.googleusercontent.com/media/sre.google/it//static/pdf/art-of-slos-slides.pdf>)  
-or the [book](<https://www.k8s.it/media/files/The Art of SLOs - Google.pdf>) version i took from a google onsite deep dive. [](<https://www.k8s.it/media/files/The Art of SLOs - Google.pdf>)
+one of the most interesting it's just few pages from Google around [the art of slos](https://static.googleusercontent.com/media/sre.google/it//static/pdf/art-of-slos-slides.pdf)  
+or the [book](https://www.k8s.it/media/files/The Art of SLOs - Google.pdf) version i took from a google onsite deep dive. 
 
 To better details this topic i'd like to use simple statements:
 
@@ -100,7 +100,7 @@ always on the system metrics we can go more in deep checking a virtual machine i
 
 ![](/user/images/the-monitoring-paper/Screenshot-2021-01-05-at-15.53.29.png)
 
-In the 2 images for example we can assume that we have something that move the cpu close to 100% cyclically (it's a [crawler](<https://www.k8s.it/kubernetes-sitespeedio.html>) to perform check on website pages every hours)
+In the 2 images for example we can assume that we have something that move the cpu close to 100% cyclically (it's a [crawler](https://www.k8s.it/kubernetes-sitespeedio.html) to perform check on website pages every hours)
 
 #### **Application**
 
@@ -146,7 +146,7 @@ From the 100 visitors , who will continue the navigation till the purchase, the 
 
 ![](/user/images/the-monitoring-paper/conversion-impact-score-funnel-NEW.png)
 
-This images comes from an 2015 [article](<https://blogs.akamai.com/2015/07/conversion-impact-score-what-is-it-and-why-do-you-need-to-know-yours.html>) from Akamai that is really still actual ...  
+This images comes from an 2015 [article](https://blogs.akamai.com/2015/07/conversion-impact-score-what-is-it-and-why-do-you-need-to-know-yours.html) from Akamai that is really still actual ...  
 Conversion is always impacted by page response time , more close you are in the first navigation phases like searching rather than checkout where you probably have more clear will to purchase  
   
 Now we know the data around the usage of our website and we can create **GOALs** and **KPI** to improve those values in order to better fit with the customer expectation.
@@ -196,7 +196,7 @@ It’s not only ONE value that show off the healthiness, but the combination of 
 
 ![](/user/images/the-monitoring-paper/Screenshot-2021-01-05-at-17.46.34.png)
 
-This concept is really important, imagine a dynamic infrastructure based on kubernetes [HPA](<https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/>)
+This concept is really important, imagine a dynamic infrastructure based on kubernetes [HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
 
 ![](/user/images/the-monitoring-paper/Screenshot-2021-01-05-at-18.22.01.png)
 

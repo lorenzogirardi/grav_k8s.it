@@ -32,7 +32,7 @@ However you can reach the GOAL just using docker and crontab for example
   
 
 
-## [](<https://github.com/lorenzogirardi/kubernetes-sitespeed.io#motivations>)Motivations
+## Motivations
 
 Well ... a website is a product itself,  
 it could be a Wordpress, a Magento ecommerce or a structured multiple applications that owns each ones a different section of the website.
@@ -80,7 +80,7 @@ From the multitude of products , webtest , lighthouse , selenium and so on i rea
   
 
 
-### [](<https://github.com/lorenzogirardi/kubernetes-sitespeed.io#goal>)GOAL
+### GOAL
 
   * be able to have an objective trend
   * check the goodness of releases
@@ -93,7 +93,7 @@ From the multitude of products , webtest , lighthouse , selenium and so on i rea
   
 
 
-## [](<https://github.com/lorenzogirardi/kubernetes-sitespeed.io#the-customer-point-of-view>)The customer point of view
+## The customer point of view
 
 You have to know your product and your customer ...
 
@@ -103,7 +103,7 @@ On the opposite side if you are a retailer , and the product is quite common wit
   
 
 
-### [](<https://github.com/lorenzogirardi/kubernetes-sitespeed.io#speed>)Speed
+### Speed
 
 we usually define a  _slowness_ by a perception.
 
@@ -140,7 +140,7 @@ Even if you don't agree with the speed category, remember to look the graphs and
   
 
 
-## [](<https://github.com/lorenzogirardi/kubernetes-sitespeed.io#sitespeedio>)Sitespeed.io
+## Sitespeed.io
 
 This tool is open source , has a huge extension , in this scenario  
 i'll use only parts of that since i don't need the video recording, or HAR files and so on.
@@ -164,7 +164,7 @@ is know easy understand that you can extend in crontab this code and add some ot
   
 
 
-### [](<https://github.com/lorenzogirardi/kubernetes-sitespeed.io#case-of-study>)Case of study
+### Case of study
 
 Since we have identified the tool i have to specify the use case
 
@@ -184,7 +184,7 @@ However i'd like to explore a workflow manager ... not just for this case but al
   
 
 
-#### [](<https://github.com/lorenzogirardi/kubernetes-sitespeed.io#argo>)Argo
+#### Argo
 
 I chose this product because i was interested to have something similar to Rundeck , but with more extended capability in order to be possible build a ci/cd without spinnaker  
 <https://argoproj.github.io/>
@@ -250,7 +250,7 @@ Last but not least .... logs are in the UI [![argo_5](/user/images/kubernetes-si
   
 
 
-### [](<https://github.com/lorenzogirardi/kubernetes-sitespeed.io#results>)Results
+### Results
 
 We are now able to see the metrics in grafana...
 
@@ -260,7 +260,7 @@ is the  _influxdb_ backend that could be rendered using
 
 <https://github.com/sitespeedio/grafana-bootstrap-docker/blob/main/dashboards/influxdb/pageSummary.json>
 
-LIVE VIEW [https://services.k8s.it/grafana/d/000000053/pagesummary-influxdb?orgId=2&refresh=15m](<https://services.k8s.it/grafana/d/000000053/pagesummary-influxdb?orgId=2&refresh=15m>)
+LIVE VIEW [https://services.k8s.it/grafana/d/000000053/pagesummary-influxdb?orgId=2&refresh=15m](https://services.k8s.it/grafana/d/000000053/pagesummary-influxdb?orgId=2&refresh=15m)
 
 [![grafana_1](/user/images/kubernetes-sitespeedio/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313636313234342f6d6973632f67726166616e615f312e706e67)](<https://camo.githubusercontent.com/db62aefc87c98b7a8ded25c187d55e255a412a62/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313636313234342f6d6973632f67726166616e615f312e706e67>)
 
@@ -282,7 +282,7 @@ However you can also use  _graphite_ backend with the same metrics (even more wi
   
 
 
-## [](<https://github.com/lorenzogirardi/kubernetes-sitespeed.io#whats-next>)WHAT'S NEXT
+## WHAT'S NEXT
 
 Sitespeed is really good to have an high level view but also details that probably could save load time.
 

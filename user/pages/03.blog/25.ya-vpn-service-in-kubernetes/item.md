@@ -21,7 +21,7 @@ taxonomy:
 
 ## Why
 
-Honestly i was scared to dismiss my beloved ipsec based on [strongswan](<https://github.com/lorenzogirardi/kubernetes-strongswan>),  
+Honestly i was scared to dismiss my beloved ipsec based on [strongswan](https://github.com/lorenzogirardi/kubernetes-strongswan),  
 however on of my colleagues shared me how low is the overhead of wireguard, so i was interested to check myself.
 
   

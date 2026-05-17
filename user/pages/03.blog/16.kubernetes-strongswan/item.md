@@ -27,7 +27,7 @@ Requirements:
 
 
 
-## [](<https://github.com/lorenzogirardi/kubernetes-strongswan#why>)WHY
+## WHY
 
 The traditional ipsec-xauth vpn with ikev1 is based on PSK  
 and a client username/password , this is a problem when the credential are stored in a file  
@@ -37,7 +37,7 @@ So the idea is to deploy something that doesn't need any interaction
 after the deploy and manage the clients, with the company standards,  
 like password expiration, password complexity, groups attributions and so on.
 
-## [](<https://github.com/lorenzogirardi/kubernetes-strongswan#how>)HOW
+## HOW
 
 In order to have a fully managed services we can leverage the usage of ldap procedures (that all company has).  
 Strongswan (a fork of *swan ipsec software) could be integrated with ldap with pam.  

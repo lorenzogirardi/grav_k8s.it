@@ -64,7 +64,7 @@ On a secondary binary in the last years the static cms are growth
 
 
 However if you are not so nerd ... or your are tremendously lazy (like me)  
-a grate alternative is [Publii](<https://getpublii.com/>)
+a grate alternative is [Publii](https://getpublii.com/)
 
 Publii includes a WYSIWYG (What You See Is What You Get) editor for content creation,  
 really easy to use , and the client is available for multiple platform (win,linux,mac)
@@ -75,7 +75,7 @@ I mentioned Publii before, this tool is just a simple way for lazy people to cre
 Publii is not a pretty collaborative tool but is not supposed to have this kind of interaction on a static website, is more close to a human interaction only.  
 On the opposite side Jekyll and the other families are more close to be collaborative based on a git project and part of a pipeline flow (runner/actions)
 
-Based on the backend for you html files, lets explore the [github pages](<https://pages.github.com/>)  
+Based on the backend for you html files, lets explore the [github pages](https://pages.github.com/)  
 This service is free with few limits  
  _Published GitHub Pages sites may be no larger than 1 GB._  
 _GitHub Pages sites have a soft bandwidth limit of 100GB per month._  
@@ -85,12 +85,12 @@ It's really easy to use and demand the security on the github account (always 2f
 They offer a dns based on your github account and you can manage paths,  
 moreover you have the TLS/SSL for free
 
-With Publii configuration is quite easy and you can follow the instruction [here](<https://getpublii.com/docs/host-static-website-github-pages.html>)
+With Publii configuration is quite easy and you can follow the instruction [here](https://getpublii.com/docs/host-static-website-github-pages.html)
 
 Another solution is use s3 as a repository, this require a bit more stuff sometimes, however even if it's a cheeper option, why not use an s3 on-prem if it's available   
 (this is just an excuse to use kubernetes, i still suggest to use the github pages, however i like to have this kind of exercise)
 
-So welcome [minio](<https://min.io/>) , a kubernetes object storage  
+So welcome [minio](https://min.io/) , a kubernetes object storage  
 The configuration is quite simple, as usual you can start with the namespace creation  
 `kind: "Namespace"  
 apiVersion: "v1"  
@@ -235,11 +235,11 @@ how we can introduce the security headers ?
 
 ![](/user/images/maximum-yield-with-minimum-expense/screencapture-securityheaders-2020-12-24-20_33_23.png)
 
-Again Cloudflare help us with the [Workers](<https://blog.cloudflare.com/cloudflare-workers-unleashed/>) feature
+Again Cloudflare help us with the [Workers](https://blog.cloudflare.com/cloudflare-workers-unleashed/) feature
 
 ![](/user/images/maximum-yield-with-minimum-expense/screencapture-dash-cloudflare-9fb3653b948e447567a30f6b83e51eaf-workers-edit-security-headers-2020-12-24-20_38_25-2.png)
 
-The code ([rif](<https://scotthelme.co.uk/security-headers-cloudflare-worker/>).) is adding those headers with serverless function for each request
+The code ([rif](https://scotthelme.co.uk/security-headers-cloudflare-worker/).) is adding those headers with serverless function for each request
 
 `const securityHeaders = {  
 "Content-Security-Policy": "upgrade-insecure-requests",  
@@ -310,7 +310,7 @@ What is missing now ?
 
 A bit of **awareness**
 
-Are we safe ? maybe but better an external opinion , around the online scanner there are multiple tools , however [Probely](<https://probely.com/>) has a good free plan
+Are we safe ? maybe but better an external opinion , around the online scanner there are multiple tools , however [Probely](https://probely.com/) has a good free plan
 
 ![](/user/images/maximum-yield-with-minimum-expense/Screenshot-2020-12-26-at-14.58.41.png)
 
@@ -324,11 +324,11 @@ Is now time to know , how is performing the website to do this i already had a d
 
 <https://www.k8s.it/kubernetes-sitespeedio.html>
 
-but again we have some other feature serverless style like [upptime](<https://github.com/upptime/upptime>) ,with github actions you can create a monitoring system like this <https://lorenzogirardi.github.io/status/>
+but again we have some other feature serverless style like [upptime](https://github.com/upptime/upptime) ,with github actions you can create a monitoring system like this <https://lorenzogirardi.github.io/status/>
 
 ![](/user/images/maximum-yield-with-minimum-expense/Screenshot-2020-12-26-at-15.04.18.png)![](/user/images/maximum-yield-with-minimum-expense/Screenshot-2020-12-27-at-13.36.35.png)
 
-Another alternative is [hetrixtools](<https://hetrixtools.com/>) , free up top 15 probes that give you the possibility to monitor your websites and smtp, and have an alerting system out of the box with a telegram bot email and sms (up to 50)
+Another alternative is [hetrixtools](https://hetrixtools.com/) , free up top 15 probes that give you the possibility to monitor your websites and smtp, and have an alerting system out of the box with a telegram bot email and sms (up to 50)
 
 ![](/user/images/maximum-yield-with-minimum-expense/screencapture-hetrixtools-report-uptime-c7596615176a822f81d67cfddc4aa179-2020-12-26-15_14_22.png)![](/user/images/maximum-yield-with-minimum-expense/Screenshot-2020-12-26-at-15.07.32.png)
 

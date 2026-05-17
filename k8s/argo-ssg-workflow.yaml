@@ -49,7 +49,7 @@ spec:
             echo "==> Running static-generator export..."
             cd "${GRAV_ROOT}"
             php bin/plugin static-generator page / "@root.descendants" \
-              --assets --static-assets --images --force
+              --env=gh-pages --assets --static-assets --images --force
 
             if [ ! -d "${OUTPUT_DIR}" ] || [ -z "$(ls -A ${OUTPUT_DIR})" ]; then
               echo "ERROR: no output in ${OUTPUT_DIR}"

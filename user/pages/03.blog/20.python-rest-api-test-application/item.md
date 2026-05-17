@@ -20,7 +20,7 @@ taxonomy:
 
 Working most of the times (always) in Platform i'm usually play with the infrastructure, however sometimes to create prototype i need backends that are done for the specific purpose.
 
-## [](<https://github.com/lorenzogirardi/py-test-backend#goals>)GOALS:
+## GOALS:
 
   * The application must be a REST api
   * Run in kubernetes  
@@ -31,7 +31,7 @@ Working most of the times (always) in Platform i'm usually play with the infrast
 
 
 
-### [](<https://github.com/lorenzogirardi/py-test-backend#docker-and-kubernetes>)Docker and kubernetes
+### Docker and kubernetes
 
 The application is working with GET, POST, PUT, DELETE  
 enouth to cover most of the usages based on rest api.
@@ -88,7 +88,7 @@ in this way if i create a namespace  _pippo_ the dns that i have to call to reac
   
 
 
-### [](<https://github.com/lorenzogirardi/py-test-backend#usage>)Usage
+### Usage
 
 The application answer on /api/ with the main html page with methods
 

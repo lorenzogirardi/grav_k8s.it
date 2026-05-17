@@ -45,7 +45,7 @@ So forget about service mesh and have the focus only on the apigw.
   
 
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-apigw#goal>)GOAL
+## GOAL
 
 Needed:
 
@@ -77,7 +77,7 @@ Important:
   
 
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-apigw#software-opportunity>)Software opportunity
+## Software opportunity
 
 Around the api gateway world we have some possibility, some of those are onprem, some other in cloud or hybrid.
 
@@ -175,10 +175,10 @@ CONS:
   
 
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-apigw#scenario>)Scenario
+## Scenario
 
 I tried some cloud solution like Aws and Mashery,  
-i played also with some onprem solution, anyway i found out the right compromise with [Kong](<https://konghq.com/kong/>)
+i played also with some onprem solution, anyway i found out the right compromise with [Kong](https://konghq.com/kong/)
 
 where compromise is :
 
@@ -205,7 +205,7 @@ where compromise is :
   
 
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-apigw#infrastructure>)Infrastructure
+## Infrastructure
 
   * kubernetes
   * backend application
@@ -239,7 +239,7 @@ DELETE| http://[hostname]/api/delete/context/[context_id]| Delete acontext
   
 
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-apigw#configuration>)Configuration
+## Configuration
 
 git repo --> <https://github.com/lorenzogirardi/Kubernetes-apigw>
 
@@ -353,7 +353,7 @@ Now i'd like to have also an Admin UI, i'm not fan of web ui ,
 however i need to know if this interface could be shared outside IT  
 to delegate some business ownership and so on.
 
-Kong Enterprise has it's own web ui instead the community one needs a third party tool... [Konga](<https://github.com/pantsel/konga>)
+Kong Enterprise has it's own web ui instead the community one needs a third party tool... [Konga](https://github.com/pantsel/konga)
 
 In the same way of kong, konga needs a database , and in the same way i elaborated a bit the default deployment
     
@@ -568,7 +568,7 @@ and 2 on /api/get/
   
 
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-apigw#use-cases>)Use cases
+## Use cases
 
 I created 3 users , one on the example above and a new one with a double of requests per second
 
@@ -701,7 +701,7 @@ You can check the headers with curl
   
 
 
-### [](<https://github.com/lorenzogirardi/Kubernetes-apigw#rules-precedence>)Rules Precedence
+### Rules Precedence
 
 A plugin will always be run once and only once per request. But the configuration with which it will run depends on the entities it has been configured for.
 
@@ -728,7 +728,7 @@ Example: if the rate-limiting plugin is applied twice (with different configurat
   
 
 
-### [](<https://github.com/lorenzogirardi/Kubernetes-apigw#waf>)WAF
+### WAF
 
 Last but not lease , the api is configured behind Cloudflare,
 
@@ -775,7 +775,7 @@ Endpoint: `https://services.k8s.it/api/`
   
 
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-apigw#conclusion>)Conclusion
+## Conclusion
 
 Kong is a scalable, open source API Gateway.  
 Kong runs in front of any RESTful API and is extended through Plugins, which provide extra functionality and services beyond the core platform.
@@ -798,6 +798,6 @@ Monitoring is also covered well by default kong official prometheus available he
 
 [![kong_monitor](/user/images/kubernetes-apigw/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313630353732333433362f6d6973632f6b6f6e665f6d6f6e69746f722e706e67)](<https://camo.githubusercontent.com/28dedd2eae334443bd6e668838f06caedc99f3c5cbd95e5b8d12869015cad8e9/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313630353732333433362f6d6973632f6b6f6e665f6d6f6e69746f722e706e67>)
 
-Live: [https://services.k8s.it/grafana/d/mY9p7dQmz/kong?orgId=2&refresh=1m](<https://services.k8s.it/grafana/d/mY9p7dQmz/kong?orgId=2&refresh=1m>)
+Live: [https://services.k8s.it/grafana/d/mY9p7dQmz/kong?orgId=2&refresh=1m](https://services.k8s.it/grafana/d/mY9p7dQmz/kong?orgId=2&refresh=1m)
 
 **If your business exposes APIs, the API GATEWAY is a requirement to handle the third party.**

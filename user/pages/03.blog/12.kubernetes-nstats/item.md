@@ -16,7 +16,7 @@ taxonomy:
 
 Here we go ... another weird sidecar container
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-nstats#motivations>)Motivations
+## Motivations
 
   
   
@@ -51,7 +51,7 @@ Answer is not easy , i mean
   * you can profile the application
   * you can profile the vm/pod
   * you can have a dedicated APM
-  * you can have installed a [service mesh](<https://github.com/lorenzogirardi/kubernetes-servicemesh>)  
+  * you can have installed a [service mesh](https://github.com/lorenzogirardi/kubernetes-servicemesh)  
   
 
 
@@ -71,7 +71,7 @@ Well even if we are in 2021 i'm habit to use **iftop** to understand the usage ,
   
 
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-nstats#goals>)GOALs
+## GOALs
 
   
   
@@ -90,12 +90,12 @@ Well even if we are in 2021 i'm habit to use **iftop** to understand the usage ,
   
 
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-nstats#implementation>)Implementation
+## Implementation
 
 Project https://github.com/lorenzogirardi/Kubernetes-nstats  
   
 My colleagues has done an amazing work with a GO container able to have this kind of observability.  
-I tried to imagine a prototype with a win-win solution and i started evaluation this interesting [project](<https://github.com/scottmsilver/iftop-telegraf-influx>),  
+I tried to imagine a prototype with a win-win solution and i started evaluation this interesting [project](https://github.com/scottmsilver/iftop-telegraf-influx),  
 where most the work as already done with the following steps:
 
   * Create an iftop static dump
@@ -114,7 +114,7 @@ Kubernetes-nstats
 |-- format.py  
 `-- parse.awk
 
-### [](<https://github.com/lorenzogirardi/Kubernetes-nstats#dockerfile>)Dockerfile
+### Dockerfile
     
     
     FROM debian:stretch-slim
@@ -139,7 +139,7 @@ Kubernetes-nstats
 
 CRON ?!?!?! ... yes it's a prototype and for this scope k8s cronjob are not effective. The most interesting part is `env > /code/env.sh` that is used to create an environment file based on the docker environment variables.
 
-### [](<https://github.com/lorenzogirardi/Kubernetes-nstats#code>)Code
+### Code
 
 cron.sh
     
@@ -273,7 +273,7 @@ and finally we ship the metrics to influxdb with `| /usr/bin/curl -i -XPOST 'htt
   
 
 
-## [](<https://github.com/lorenzogirardi/Kubernetes-nstats#results>)Results
+## Results
 
 You can build an run locally `docker build -t nstats .`  
 `docker run -d -e IFACE=eth0 -e INFLUX=192.168.1.28:8086 -e IDB=test nstats`

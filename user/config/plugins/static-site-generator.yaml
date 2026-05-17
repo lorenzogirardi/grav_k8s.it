@@ -1,7 +1,0 @@
-enabled: true
-# Output dir relative to Grav root — must match argo-ssg-workflow.yaml OUTPUT_DIR
-output_dir: static-export
-# Exclude admin and cache paths from static export
-skip_existing: false
-routes_by_taxonomy: true
-simultaneous_requests: 10

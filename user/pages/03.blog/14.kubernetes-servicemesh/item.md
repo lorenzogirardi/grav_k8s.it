@@ -87,11 +87,11 @@ if your infrastructure is able to embrace it and only if you know what you are d
 
 
 
-## [](<https://github.com/lorenzogirardi/kubernetes-servicemesh#service-mesh-sample-lab>)Service Mesh sample lab
+## Service Mesh sample lab
 
 This lab is provided to discover and test the functionality w'd like to implement in our environment
 
-### [](<https://github.com/lorenzogirardi/kubernetes-servicemesh#basic-setup>)Basic setup
+### Basic setup
 
   * minikube v1.6.2
   * Kubernetes v1.17.0 on Docker '19.03.5'
@@ -106,7 +106,7 @@ This lab is provided to discover and test the functionality w'd like to implemen
 
 
 
-#### [](<https://github.com/lorenzogirardi/kubernetes-servicemesh#namespaces>)Namespaces
+#### Namespaces
 
 a → traefik (ingress)  
 b → apache  
@@ -214,7 +214,7 @@ requirements.txt
     pytest-flask
     
 
-### [](<https://github.com/lorenzogirardi/kubernetes-servicemesh#folders-structure>)Folders structure
+### Folders structure
     
     
     kubernetes/
@@ -238,7 +238,7 @@ requirements.txt
         └── C-02-app-dpl.yaml
     
 
-### [](<https://github.com/lorenzogirardi/kubernetes-servicemesh#startup>)Startup
+### Startup
 
 kubernetes$ kubectl apply -f 00-traefik/
     
@@ -301,26 +301,26 @@ make sure virtualbox 8081 port should be available
 
 [![Virtualbox port forwarding](/user/images/kubernetes-servicemesh/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537333731352f6d6973632f696d675f7669727475616c626f782d706f7274666f7277617264696e672e706e67)](<https://camo.githubusercontent.com/f303afac85505ee6e02651c55518f1eb809a6f97/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537333731352f6d6973632f696d675f7669727475616c626f782d706f7274666f7277617264696e672e706e67>)
 
-## [](<https://github.com/lorenzogirardi/kubernetes-servicemesh#flow>)flow
+## flow
 
 [![flow](/user/images/kubernetes-servicemesh/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537333731342f6d6973632f696d675f666c6f772e706e67)](<https://camo.githubusercontent.com/70a420864968278b8940023ba6aa95dd7bf932a6/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537333731342f6d6973632f696d675f666c6f772e706e67>)
 
-##### [](<https://github.com/lorenzogirardi/kubernetes-servicemesh#inizialize-the-redis-database>)inizialize the redis database
+##### inizialize the redis database
 
 `$ curl http://pippo.lan/count/set`  
 {"time": "b'2019-12-28 20:06:33.919059'"}
 
-##### [](<https://github.com/lorenzogirardi/kubernetes-servicemesh#test-from-apache-to-application-case-1>)test from apache to application (case 1)
+##### test from apache to application (case 1)
 
 `$ curl http://pippo.lan/count/get`  
 {"time": "b'2019-12-28 20:06:33.919059'"}
 
-##### [](<https://github.com/lorenzogirardi/kubernetes-servicemesh#test-from-apache-to-redis-case-2>)test from apache to redis (case 2)
+##### test from apache to redis (case 2)
 
 `$ curl http://pippo.lan/redis/GET/time`  
 {"GET":"2019-12-28 20:06:33.919059"}
 
-##### [](<https://github.com/lorenzogirardi/kubernetes-servicemesh#network-rule-example>)network rule example
+##### network rule example
 
 cilium labels
     
@@ -378,12 +378,12 @@ cilium/hubble <https://github.com/cilium/hubble> [![hubble](/user/images/kuberne
 
 istio/kiali [![kiali](/user/images/kubernetes-servicemesh/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537343036392f6d6973632f697374696f2d6b69616c692e706e67)](<https://camo.githubusercontent.com/79a5b07227e5651705810596cef972d074ed201f/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537343036392f6d6973632f697374696f2d6b69616c692e706e67>)
 
-video Cilium example --> [img/cilium.mkv](<https://res.cloudinary.com/ethzero/video/upload/v1594574074/misc/cilium.mkv>)
+video Cilium example --> [img/cilium.mkv](https://res.cloudinary.com/ethzero/video/upload/v1594574074/misc/cilium.mkv)
 
-video Istio + Cilium example --> [img/istio.mkv](<https://res.cloudinary.com/ethzero/video/upload/v1594574090/misc/istio.mkv>)  
+video Istio + Cilium example --> [img/istio.mkv](https://res.cloudinary.com/ethzero/video/upload/v1594574090/misc/istio.mkv)  
 
 
-## [](<https://github.com/lorenzogirardi/kubernetes-servicemesh#requirements>)requirements
+## requirements
 
   * use service mesh to segregate redis "d" to accept connections only from application "c"  
 expected "case 1" still working, "case 2" stop working and receive an error

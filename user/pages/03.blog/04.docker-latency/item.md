@@ -5,7 +5,7 @@ taxonomy:
     tag: []
 ---
 
-## [](<https://github.com/lorenzogirardi/docker-latency#aka-the-network-blaming-tool>)aka the network blaming tool
+## aka the network blaming tool
 
 So again another grafana stack with docker  
 Well yes but with a precise scope
@@ -19,19 +19,19 @@ _the vpn is slow_ ,  _i cannot connect to ... $something_ , bla bla bla
 In my experience this is usually due to the quality of the provider,  
 sometimes is also a problem on route path on T2/T3 providers
 
-### [](<https://github.com/lorenzogirardi/docker-latency#how-we-can-undestand-if-our-network-is-really-slow->)HOW we can undestand if our network is really slow ?
+### HOW we can undestand if our network is really slow ?
 
 The idea is to start a grafana stack ready-made to handle the basics statistics of our internet connection.  
 We need to choose some endpoints to monitor, example , your vpn endpoint , your datacenter/office public ip , the main dns servers and so on
 
-#### [](<https://github.com/lorenzogirardi/docker-latency#requirements>)Requirements
+#### Requirements
 
   * Docker
   * Docker Compose
 
 
 
-#### [](<https://github.com/lorenzogirardi/docker-latency#stack>)Stack
+#### Stack
 
   * Influxdb
   * Grafana
@@ -39,7 +39,7 @@ We need to choose some endpoints to monitor, example , your vpn endpoint , your 
 
 
 
-#### [](<https://github.com/lorenzogirardi/docker-latency#tree>)Tree
+#### Tree
     
     
     ├── .env
@@ -73,7 +73,7 @@ Since this tool is hosted in your laptop (could be everywhere), never mind the  
     INFLUXDB_DATABASE=ping
     
 
-### [](<https://github.com/lorenzogirardi/docker-latency#configuration>)Configuration
+### Configuration
 
 We just need to choose the endpoints we'd like to monitor from our internet connection This could be done editing  _telegraf.conf_
     
@@ -104,7 +104,7 @@ Edit  _urls =_ adding / modify the endpoints
 
 The configuration is collecting information every 10 seconds , and run a ping command 7 time each with 1 second delay.
 
-### [](<https://github.com/lorenzogirardi/docker-latency#startup>)Startup
+### Startup
 
 Inside the main folder run
 
@@ -137,7 +137,7 @@ you will have all details about the endpoint chosen , packet loss especially
 100% packet loss simulated disabling network card for few seconds.  
 The dashboard is using variables in order to create 1 row for each endpoint.
 
-### [](<https://github.com/lorenzogirardi/docker-latency#conclusion>)Conclusion
+### Conclusion
 
 Now we have data, so we know what is going on in our internet connection and we can probably  
 have more details about the  _infomagic_ words like ...  _is slow_

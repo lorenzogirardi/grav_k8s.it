@@ -60,6 +60,6 @@ heapster, collectd, influxdb and grafana as a monitoring stack
 
 backend docker example (nginx on arm) k8s-helloworld-arm
 
-[live demo](<https://services.k8s.it/hello/>)
+[live demo](https://services.k8s.it/hello/)
 
-[monitoring](<https://services.k8s.it/grafana/dashboard/db/all-k8s-nodes?refresh=1m&orgId=2&from=now-24h&to=now>)
+[monitoring](https://services.k8s.it/grafana/dashboard/db/all-k8s-nodes?refresh=1m&orgId=2&from=now-24h&to=now)

@@ -43,7 +43,7 @@ There are many answer , but it's better to test with a lab some of those
 #### Environment settings
 
 Imagine an application that is managing a service  
-In this example is a [python api](<https://github.com/lorenzogirardi/py-test-backend>) that answer for a fibonacci serie
+In this example is a [python api](https://github.com/lorenzogirardi/py-test-backend) that answer for a fibonacci serie
 
 `$ curl -i https://oracolo.k8s.it/api/fiHTTP/1.1 200 OK`  
 `Date: Mon, 21 Feb 2022 15:18:50 GMT`  
