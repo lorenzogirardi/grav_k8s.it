@@ -1,10 +1,10 @@
 ---
 # CronWorkflow: runs SSG export and pushes static output to gh-pages branch
-# Trigger: every 6 hours, or manually via Argo UI
-# Requirements:
-#   - Secret grav-secrets with GITHUB_TOKEN (PAT with repo contents:write)
-#   - Static Site Generator plugin installed in Grav
-#   - SSG output_dir configured to /config/www/static-export (see user/config/plugins/static-site-generator.yaml)
+# Trigger: every 6 hours, or manually via kubectl (see k8s/README.md)
+# Plugin: static-generator by OleVik (installed at /app/www/public/user/plugins/static-generator)
+# Grav root in linuxserver image: /app/www/public
+# User data (PVC): /config → symlinked into /app/www/public/user
+# SSG output: /app/www/public/user/data/static-generator/
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
@@ -34,20 +34,25 @@ spec:
           source: |
             set -e
 
-            # git is not in the linuxserver/grav image — install it
             apk add --no-cache git > /dev/null 2>&1
 
-            GRAV_ROOT="/config/www"
-            OUTPUT_DIR="${GRAV_ROOT}/static-export"
+            # s6-overlay replaces /app/www/public/user (real dir) with symlink at runtime
+            # Since we bypass s6, do it manually
+            rm -rf /app/www/public/user
+            ln -s /config/www/user /app/www/public/user
+
+            GRAV_ROOT="/app/www/public"
+            OUTPUT_DIR="/app/www/public/user/data/persist"
             REPO="lorenzogirardi/grav_k8s.it"
             BRANCH="gh-pages"
 
-            echo "==> Running SSG export..."
+            echo "==> Running static-generator export..."
             cd "${GRAV_ROOT}"
-            php bin/plugin static-site-generator export
+            php bin/plugin static-generator page / "@root.descendants" \
+              --assets --static-assets --images --force
 
             if [ ! -d "${OUTPUT_DIR}" ] || [ -z "$(ls -A ${OUTPUT_DIR})" ]; then
-              echo "ERROR: SSG export produced no output in ${OUTPUT_DIR}"
+              echo "ERROR: no output in ${OUTPUT_DIR}"
               exit 1
             fi
 

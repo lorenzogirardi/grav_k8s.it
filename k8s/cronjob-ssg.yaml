@@ -1,0 +1,76 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: grav-ssg-publish
+  namespace: grav
+spec:
+  schedule: "0 */6 * * *"
+  timeZone: "Europe/Rome"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: ssg-publish
+              image: lscr.io/linuxserver/grav:latest
+              command: [/bin/sh, -c]
+              args:
+                - |
+                  set -e
+                  apk add --no-cache git > /dev/null 2>&1
+
+                  # s6-overlay replaces /app/www/public/user (real dir) with symlink at runtime
+                  # Since we bypass s6, do it manually
+                  rm -rf /app/www/public/user
+                  ln -s /config/www/user /app/www/public/user
+
+                  GRAV_ROOT="/app/www/public"
+                  OUTPUT_DIR="/app/www/public/user/data/persist"
+                  REPO="lorenzogirardi/grav_k8s.it"
+                  BRANCH="gh-pages"
+
+                  echo "==> Running static-generator export..."
+                  cd "${GRAV_ROOT}"
+                  php bin/plugin static-generator page / "@root.descendants" \
+                    --assets --static-assets --images --force
+
+                  if [ ! -d "${OUTPUT_DIR}" ] || [ -z "$(ls -A ${OUTPUT_DIR})" ]; then
+                    echo "ERROR: no output in ${OUTPUT_DIR}"; exit 1
+                  fi
+
+                  echo "==> Pushing to ${REPO}:${BRANCH}..."
+                  cd "${OUTPUT_DIR}"
+                  git init -b "${BRANCH}"
+                  git config user.email "grav-ssg-bot@k8s.it"
+                  git config user.name "Grav SSG Bot"
+                  git add -A
+                  git commit -m "SSG deploy: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+                  git push --force \
+                    "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}.git" \
+                    HEAD:"${BRANCH}"
+
+                  echo "==> Done."
+              env:
+                - name: GITHUB_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: grav-secrets
+                      key: GITHUB_TOKEN
+              volumeMounts:
+                - name: grav-config
+                  mountPath: /config
+              resources:
+                requests:
+                  memory: "256Mi"
+                  cpu: "200m"
+                limits:
+                  memory: "512Mi"
+                  cpu: "500m"
+          volumes:
+            - name: grav-config
+              persistentVolumeClaim:
+                claimName: grav-config
