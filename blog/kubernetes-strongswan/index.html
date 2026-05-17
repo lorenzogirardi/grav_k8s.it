@@ -95,7 +95,7 @@ the goal of this is to have the less effort possible when we have to manage user
 <li>Strongswan</li>
 <li>Microsoft Acrive Directory / openldap / freeipa etc etc LDAP (i'll use ldap instead the software name)</li>
 </ul>
-<h2><a href="/grav_k8s.it/blog/kubernetes-strongswan/&lt;https://github.com/lorenzogirardi/kubernetes-strongswan#why&gt;"></a>WHY</h2>
+<h2>WHY</h2>
 <p>The traditional ipsec-xauth vpn with ikev1 is based on PSK<br />
 and a client username/password , this is a problem when the credential are stored in a file<br />
 in kubernetes update a file always mean rollout a new deploy or create a procedure to<br />
@@ -103,7 +103,7 @@ make effective the changes.<br />
 So the idea is to deploy something that doesn't need any interaction<br />
 after the deploy and manage the clients, with the company standards,<br />
 like password expiration, password complexity, groups attributions and so on.</p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-strongswan/&lt;https://github.com/lorenzogirardi/kubernetes-strongswan#how&gt;"></a>HOW</h2>
+<h2>HOW</h2>
 <p>In order to have a fully managed services we can leverage the usage of ldap procedures (that all company has).<br />
 Strongswan (a fork of *swan ipsec software) could be integrated with ldap with pam.<br />
 pam is ... well --&gt; <a href="https://tldp.org/HOWTO/User-Authentication-HOWTO/x115.html">https://tldp.org/HOWTO/User-Authentication-HOWTO/x115.html</a></p>

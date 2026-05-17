@@ -99,7 +99,7 @@ Shit happens it's just for my stuff.</p>
 <li>postfix configuration</li>
 <li>postfix in kubernetes</li>
 </ul>
-<h2><a href="/grav_k8s.it/blog/kubernetes-postfix/&lt;https://github.com/lorenzogirardi/kubernetes-postfix#what-is-an-email&gt;"></a>what is an email</h2>
+<h2>what is an email</h2>
 <p>send email sometimes is a dedicated work in an enterprise company.<br />
 There are many aspect to consider , not only infrastructure , like che segmentation of domains strategy,<br />
 email answer engagement and each isp is using a different threashold to mark your email as a spam,<br />
@@ -113,7 +113,7 @@ however now we will focus only on the generic configuration with some minimum re
 <li>Dkim (a private and public certificate to match the smtp and emails)</li>
 <li>Dmarc (a mix with SPF and Dkim to protect the domain from unauthorized use )</li>
 </ul>
-<h2><a href="/grav_k8s.it/blog/kubernetes-postfix/&lt;https://github.com/lorenzogirardi/kubernetes-postfix#postfix-configuration&gt;"></a>postfix configuration</h2>
+<h2>postfix configuration</h2>
 <p>The second one is more related to middleware behaviour<br />
 i have a domain "example.com" and i'd like to</p>
 <ul>
@@ -124,13 +124,13 @@ i have a domain "example.com" and i'd like to</p>
 </ul>
 <p>For all those topics the main configuration is in virtual and transport map in  <em>postfix</em><br />
 There are some articles in internet, i'll avoid to reinvent hot water with the explanation.</p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-postfix/&lt;https://github.com/lorenzogirardi/kubernetes-postfix#postfix-in-kubernetes&gt;"></a>postfix in kubernetes</h2>
+<h2>postfix in kubernetes</h2>
 <p>just as recap this was the configuration in the cloud vps</p>
 <p><a href="/grav_k8s.it/blog/kubernetes-postfix/&lt;https://camo.githubusercontent.com/66d40f312601abf8ba03699a66366d6455c0805f/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539383336363436332f6d6973632f7670732e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-postfix/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539383336363436332f6d6973632f7670732e706e67" alt="vps" /></a></p>
 <p>now i just whitched the MX to my own microk8s lab</p>
 <p><a href="/grav_k8s.it/blog/kubernetes-postfix/&lt;https://camo.githubusercontent.com/fd6de4c35300c6596ca2eafcfde2d501bd4c9576/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539383336363436352f6d6973632f6d6963726f6b38732e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-postfix/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539383336363436352f6d6973632f6d6963726f6b38732e706e67" alt="microk8s" /></a></p>
 <p>However , inside the box a lot of implementation way can be taken</p>
-<h3><a href="/grav_k8s.it/blog/kubernetes-postfix/&lt;https://github.com/lorenzogirardi/kubernetes-postfix#scenario-1&gt;"></a>Scenario 1:</h3>
+<h3>Scenario 1:</h3>
 <p>you can build an image for each dedicate purpose</p>
 <ul>
 <li>postfix</li>
@@ -138,13 +138,13 @@ There are some articles in internet, i'll avoid to reinvent hot water with the e
 <li>opendkim</li>
 <li>tls</li>
 </ul>
-<h3><a href="/grav_k8s.it/blog/kubernetes-postfix/&lt;https://github.com/lorenzogirardi/kubernetes-postfix#scenario-2&gt;"></a>Scenario 2:</h3>
+<h3>Scenario 2:</h3>
 <p>looking the configuration adopted in  <em>Scenario 1</em> , you can add an ingress tcp forward where<br />
 you can also add a tls layer with cert-manager (the new kube-lego).</p>
-<h3><a href="/grav_k8s.it/blog/kubernetes-postfix/&lt;https://github.com/lorenzogirardi/kubernetes-postfix#scenario-3&gt;"></a>Scenario 3:</h3>
+<h3>Scenario 3:</h3>
 <p><em>Scenario 2</em> plus external storage for logs<br />
 etc etc</p>
-<h3><a href="/grav_k8s.it/blog/kubernetes-postfix/&lt;https://github.com/lorenzogirardi/kubernetes-postfix#scenario-lazy&gt;"></a>Scenario Lazy:</h3>
+<h3>Scenario Lazy:</h3>
 <p>Embedded docker images with all you need with a node port (used only because i have a standalone kubernetes node).</p>
 <p>Well having everything in one single container the docker image reflect the pachage used in a virtual machine</p>
 <pre><code>FROM debian:buster
@@ -321,7 +321,7 @@ and the company CI/CD</p>
 but the certificate is applied <code>opendkim[22]: 91E522A000C: DKIM-Signature field added</code></p>
 <p>Last one is the check on the client side with the righ option enabled</p>
 <p><a href="/grav_k8s.it/blog/kubernetes-postfix/&lt;https://camo.githubusercontent.com/66fffe878e76dbeff1853c4abaf19f846af46529/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539383336383833352f6d6973632f656d61696c6f7074696f6e2e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-postfix/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539383336383833352f6d6973632f656d61696c6f7074696f6e2e706e67" alt="clientemail" /></a></p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-postfix/&lt;https://github.com/lorenzogirardi/kubernetes-postfix#conclusion&gt;"></a>Conclusion</h2>
+<h2>Conclusion</h2>
 <p>You can add postfix infrastructure to kubernetes with no problems at all ,<br />
 this project is a  <em>prototype</em> , in a production infrastructure you can work around this to let it rock solid and scalable</p>
     </div>

@@ -89,11 +89,11 @@ We have ingress resources , we have ambassador and we are using microservices...
 True but internet was not built yesterday and for some reasons out of my knowledge ,<br />
 people are ostinated to manage rewrite rules in apache instead to use a dedicated router application (react, zuul .. database!?!?! etc etc)<br />
 However sometimes we have to balance between the academic vision and the reality.</p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-apacherr/&lt;https://github.com/lorenzogirardi/kubernetes-apacherr#digression&gt;"></a>digression</h2>
+<h2>digression</h2>
 <p>Talking about apache https , nginx , haproxy ... i'm referring to the idea behind manage a complex website.<br />
 A website could be composed my hundreds of microservices but the domain it's usually one<br />
-<a href="/grav_k8s.it/blog/kubernetes-apacherr/&lt;http://www.example.com/&gt;">www.example.com</a></p>
-<p><a href="/grav_k8s.it/blog/kubernetes-apacherr/&lt;http://www.example.com/&gt;">www.example.com</a> has the root path /<br />
+<a href="http://www.example.com/">www.example.com</a></p>
+<p><a href="http://www.example.com/">www.example.com</a> has the root path /<br />
 /it/ managed by cms<br />
 /it/offerte managed by cms<br />
 /uk/ managed by cms<br />
@@ -134,7 +134,7 @@ front controller take the ownership to match brand plus .tld (or paths "/fr/")<b
 in order to dinamically generate the right url with canonical pages.</p>
 <p>Many and many others assumptions can be covered by this componet, however we have to stay grounded<br />
 and check how we can manage an apache responsible to redirects proxypass an rewrite rules.</p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-apacherr/&lt;https://github.com/lorenzogirardi/kubernetes-apacherr#some-concepts-about-this-project&gt;"></a>Some concepts about this project</h2>
+<h2>Some concepts about this project</h2>
 <p>Even if we are working in a dynamic environment it's no rare to have the traditional layers</p>
 <p>DMZ --&gt; layer 1<br />
 Application --&gt; layer 2<br />
@@ -145,12 +145,12 @@ something that could be managed not by SRE , but Product Engeneer.<br />
 A product that own a dedicated business, like seo, sem , vanity urls etc etc.</p>
 <p>Having those considerations, we can "downgrade" apache httpd in layer 2 like any application<br />
 and honor the DMZ (if needed ?!?!) on top by ingress/haproxy/bigf5 (where maybe we can terminate the TLS).</p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-apacherr/&lt;https://github.com/lorenzogirardi/kubernetes-apacherr#implementation&gt;"></a>Implementation</h2>
+<h2>Implementation</h2>
 <p>The code in this project is designet to manage apache configuration by configmap,<br />
 however some websites are really complex and there are some limits implication with ectd max object size.</p>
 <p>In this scenario it's higly raccomended to deploy the release with a standard pipeline with compiled<br />
 container on the source.</p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-apacherr/&lt;https://github.com/lorenzogirardi/kubernetes-apacherr#deploy&gt;"></a>deploy</h2>
+<h2>deploy</h2>
 <p><code>kubectl apply -f apacherr/deployment/</code></p>
     </div>
 

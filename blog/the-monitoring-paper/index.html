@@ -91,8 +91,8 @@
     <div class="e-content">
         <p>Contrary to popular belief, monitoring an infrastructure is the opposite to just have some metrics about applications and network</p>
 <p>There are many many documents the lead this topic,<br />
-one of the most interesting it's just few pages from Google around <a href="/grav_k8s.it/blog/the-monitoring-paper/&lt;https://static.googleusercontent.com/media/sre.google/it//static/pdf/art-of-slos-slides.pdf&gt;">the art of slos</a><br />
-or the [book](&lt;https://www.k8s.it/media/files/The Art of SLOs - Google.pdf&gt;) version i took from a google onsite deep dive. [](&lt;https://www.k8s.it/media/files/The Art of SLOs - Google.pdf&gt;)</p>
+one of the most interesting it's just few pages from Google around <a href="https://static.googleusercontent.com/media/sre.google/it//static/pdf/art-of-slos-slides.pdf">the art of slos</a><br />
+or the [book](https://www.k8s.it/media/files/The Art of SLOs - Google.pdf) version i took from a google onsite deep dive. </p>
 <p>To better details this topic i'd like to use simple statements:</p>
 <ul>
 <li>WHAT</li>
@@ -145,7 +145,7 @@ This is because as soon we are increasing the technology level from bare metal, 
 <p><img src="/grav_k8s.it/user/images/the-monitoring-paper/Screenshot-2021-01-05-at-15.49.59.png" alt="" /></p>
 <p>always on the system metrics we can go more in deep checking a virtual machine inside this host, here the one i used to host my kubernetes lab</p>
 <p><img src="/grav_k8s.it/user/images/the-monitoring-paper/Screenshot-2021-01-05-at-15.53.29.png" alt="" /></p>
-<p>In the 2 images for example we can assume that we have something that move the cpu close to 100% cyclically (it's a <a href="/grav_k8s.it/blog/the-monitoring-paper/&lt;https://www.k8s.it/kubernetes-sitespeedio.html&gt;">crawler</a> to perform check on website pages every hours)</p>
+<p>In the 2 images for example we can assume that we have something that move the cpu close to 100% cyclically (it's a <a href="https://www.k8s.it/kubernetes-sitespeedio.html">crawler</a> to perform check on website pages every hours)</p>
 <h4><strong>Application</strong></h4>
 <p>It's time now to move inside the kubernetes cluster and check how is going on the a web application inside the cluster<br />
 Since this application it is springboot based, we have the opportunity to understand how is going on from a framework side (java) and behavioural interactions.<br />
@@ -174,7 +174,7 @@ It's a website:</p>
 If you are selling something through it ,conversion is always the most relevant buzzword</p>
 <p>From the 100 visitors , who will continue the navigation till the purchase, the remaining are really a small slice (e-commerce for example)</p>
 <p><img src="/grav_k8s.it/user/images/the-monitoring-paper/conversion-impact-score-funnel-NEW.png" alt="" /></p>
-<p>This images comes from an 2015 <a href="/grav_k8s.it/blog/the-monitoring-paper/&lt;https:/blogs.akamai.com/2015/07/conversion-impact-score-what-is-it-and-why-do-you-need-to-know-yours.html&gt;">article</a> from Akamai that is really still actual ...<br />
+<p>This images comes from an 2015 <a href="https:/blogs.akamai.com/2015/07/conversion-impact-score-what-is-it-and-why-do-you-need-to-know-yours.html">article</a> from Akamai that is really still actual ...<br />
 Conversion is always impacted by page response time , more close you are in the first navigation phases like searching rather than checkout where you probably have more clear will to purchase  </p>
 <p>Now we know the data around the usage of our website and we can create <strong>GOALs</strong> and <strong>KPI</strong> to improve those values in order to better fit with the customer expectation.</p>
 <h3>WHO</h3>
@@ -205,7 +205,7 @@ have tons of metrics that generate only <strong>noise</strong> without identifyi
 <h4>Smart metrics</h4>
 <p>It’s not only ONE value that show off the healthiness, but the combination of multiple metrics that guarantee the status</p>
 <p><img src="/grav_k8s.it/user/images/the-monitoring-paper/Screenshot-2021-01-05-at-17.46.34.png" alt="" /></p>
-<p>This concept is really important, imagine a dynamic infrastructure based on kubernetes <a href="/grav_k8s.it/blog/the-monitoring-paper/&lt;https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/&gt;">HPA</a></p>
+<p>This concept is really important, imagine a dynamic infrastructure based on kubernetes <a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">HPA</a></p>
 <p><img src="/grav_k8s.it/user/images/the-monitoring-paper/Screenshot-2021-01-05-at-18.22.01.png" alt="" /></p>
 <p>where you can probable have some value linear (like thread), mitigated by the horizontal autoscaling, you should combine multiple values to define the application status.</p>
 <p>Create the metrics alert with <strong>trends</strong> not with the pure number<br />

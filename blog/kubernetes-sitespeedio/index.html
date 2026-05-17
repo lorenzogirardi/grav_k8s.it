@@ -96,7 +96,7 @@
 <li>i'm using some other tools in kubernetes just because i'm evaluating this for other purpose</li>
 </ul>
 <p>However you can reach the GOAL just using docker and crontab for example  </p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://github.com/lorenzogirardi/kubernetes-sitespeed.io#motivations&gt;"></a>Motivations</h2>
+<h2>Motivations</h2>
 <p>Well ... a website is a product itself,<br />
 it could be a Wordpress, a Magento ecommerce or a structured multiple applications that owns each ones a different section of the website.</p>
 <p>However if running a business on top, you should move your evolution as a customer perspective:</p>
@@ -126,16 +126,16 @@ Evaluate those during a long therm periode looking for performance</p>
 </ul>
 <p>First of all we have to test our websites on the customer position... so no 1gbit inline connection with 0.00001 roundtrip :)</p>
 <p>From the multitude of products , webtest , lighthouse , selenium and so on i really like sitespeed.io  </p>
-<h3><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://github.com/lorenzogirardi/kubernetes-sitespeed.io#goal&gt;"></a>GOAL</h3>
+<h3>GOAL</h3>
 <ul>
 <li>be able to have an objective trend</li>
 <li>check the goodness of releases</li>
 </ul>
-<h2><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://github.com/lorenzogirardi/kubernetes-sitespeed.io#the-customer-point-of-view&gt;"></a>The customer point of view</h2>
+<h2>The customer point of view</h2>
 <p>You have to know your product and your customer ...</p>
 <p>If you own the product you know that the customer is "forced" to buy by you. Immgine to are Apple, you know that customers are affiliated to you... so if something is slow, probably even if the device is available in other websites the customer will wait the answer.</p>
 <p>On the opposite side if you are a retailer , and the product is quite common with no brandlove etc etc ... if the website is slow the user will change immediatly the website to land to somewhere else.  </p>
-<h3><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://github.com/lorenzogirardi/kubernetes-sitespeed.io#speed&gt;"></a>Speed</h3>
+<h3>Speed</h3>
 <p>we usually define a  <em>slowness</em> by a perception.</p>
 <p>However , in 2020 you know the Data that comes from GA and understand when people leave a page , after some amount of time.</p>
 <p>Consider those, rate and the timing to tune the threadshold</p>
@@ -156,7 +156,7 @@ So ... internet connection should reflect the avg/wrost scenario Believe me that
 </ul>
 <p>I'd like to say that in 2020  <em>cable</em> and  <em>3gfast</em> cover perfectly the wrost scenario</p>
 <p>Even if you don't agree with the speed category, remember to look the graphs and the metrics considering the DELTA  </p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://github.com/lorenzogirardi/kubernetes-sitespeed.io#sitespeedio&gt;"></a>Sitespeed.io</h2>
+<h2>Sitespeed.io</h2>
 <p>This tool is open source , has a huge extension , in this scenario<br />
 i'll use only parts of that since i don't need the video recording, or HAR files and so on.</p>
 <p>A full report could be useful to check all feature and you can find here<br />
@@ -166,7 +166,7 @@ i'll use only parts of that since i don't need the video recording, or HAR files
 <p><code>docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:15.2.0 https://www.k8s.it/</code></p>
 <p>is know easy understand that you can extend in crontab this code and add some other option to store metrics and results files in s3 for example</p>
 <p><code>/usr/bin/docker run --privileged --shm-size=1g --rm --network=cable sitespeedio/sitespeed.io httos://www.example.com -v -b chrome --video --speedIndex -c cable --browsertime.iterations 1 --s3.key S3_KEY --s3.secret S3_SECRET --s3.bucketname S3_BUCKET --s3.removeLocalResult true --s3.path S3_PATH www.ecample.com --graphite.host GRAPHITE_HOST --graphite.port GRAPHITE_PORT --graphite.namespace GRAPHITE_PREFIX</code></p>
-<h3><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://github.com/lorenzogirardi/kubernetes-sitespeed.io#case-of-study&gt;"></a>Case of study</h3>
+<h3>Case of study</h3>
 <p>Since we have identified the tool i have to specify the use case</p>
 <ul>
 <li>I need only metrics in this example because, so i don't need to store the output artifact</li>
@@ -178,7 +178,7 @@ i'll use only parts of that since i don't need the video recording, or HAR files
 <a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/">https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/</a><br />
 is done to start, execute an action and exit</p>
 <p>However i'd like to explore a workflow manager ... not just for this case but also to exend some other  <em>jobs</em>  </p>
-<h4><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://github.com/lorenzogirardi/kubernetes-sitespeed.io#argo&gt;"></a>Argo</h4>
+<h4>Argo</h4>
 <p>I chose this product because i was interested to have something similar to Rundeck , but with more extended capability in order to be possible build a ci/cd without spinnaker<br />
 <a href="https://argoproj.github.io/">https://argoproj.github.io/</a></p>
 <p>The installation is quite easy , i've just trick a configmap due to volume mount problem genereted by my small kubernetes installation</p>
@@ -211,13 +211,13 @@ Forwarding from [::1]:2746 -&gt; 2746</code></pre>
 <p>Events could be retrieved and evaluated as well<br />
 <a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://camo.githubusercontent.com/a472dbd7228b9b098ad942a92a2f336a228f32d0/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3432302f76313630313535393038372f6d6973632f6172676f5f362e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-sitespeedio/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3432302f76313630313535393038372f6d6973632f6172676f5f362e706e67" alt="argo_6" /></a></p>
 <p>Last but not least .... logs are in the UI <a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://camo.githubusercontent.com/75169652516669d95b5549e5791198c3a937b5cc/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313535393038372f6d6973632f6172676f5f352e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-sitespeedio/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313535393038372f6d6973632f6172676f5f352e706e67" alt="argo_5" /></a></p>
-<h3><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://github.com/lorenzogirardi/kubernetes-sitespeed.io#results&gt;"></a>Results</h3>
+<h3>Results</h3>
 <p>We are now able to see the metrics in grafana...</p>
 <p>you have 2 option , what is used in the<br />
 <code>001-argo-job-sitespeedio.yaml</code><br />
 is the  <em>influxdb</em> backend that could be rendered using</p>
 <p><a href="https://github.com/sitespeedio/grafana-bootstrap-docker/blob/main/dashboards/influxdb/pageSummary.json">https://github.com/sitespeedio/grafana-bootstrap-docker/blob/main/dashboards/influxdb/pageSummary.json</a></p>
-<p>LIVE VIEW <a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://services.k8s.it/grafana/d/000000053/pagesummary-influxdb?orgId=2&amp;refresh=15m%3E">https://services.k8s.it/grafana/d/000000053/pagesummary-influxdb?orgId=2&amp;refresh=15m</a></p>
+<p>LIVE VIEW <a href="https://services.k8s.it/grafana/d/000000053/pagesummary-influxdb?orgId=2&amp;refresh=15m">https://services.k8s.it/grafana/d/000000053/pagesummary-influxdb?orgId=2&amp;refresh=15m</a></p>
 <p><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://camo.githubusercontent.com/db62aefc87c98b7a8ded25c187d55e255a412a62/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313636313234342f6d6973632f67726166616e615f312e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-sitespeedio/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313636313234342f6d6973632f67726166616e615f312e706e67" alt="grafana_1" /></a></p>
 <p><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://camo.githubusercontent.com/3eebdf9d9e19c08aa1a4f21dfd711c20ecce1c6a/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313636313234332f6d6973632f67726166616e615f322e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-sitespeedio/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313636313234332f6d6973632f67726166616e615f322e706e67" alt="grafana_2" /></a></p>
 <p>However you can also use  <em>graphite</em> backend with the same metrics (even more with provided dashboards)</p>
@@ -225,7 +225,7 @@ is the  <em>influxdb</em> backend that could be rendered using</p>
 <p><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://camo.githubusercontent.com/f9f4a443bf3d57412c65f77a94bc1eb149ba0d4e/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313636313832382f6d6973632f67726170686974655f322e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-sitespeedio/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313636313832382f6d6973632f67726170686974655f322e706e67" alt="graphite_2" /></a></p>
 <p><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://camo.githubusercontent.com/7e56609ce946b33a53517c01bd7ab7e0f5516334/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313636313832382f6d6973632f67726170686974655f332e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-sitespeedio/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313636313832382f6d6973632f67726170686974655f332e706e67" alt="graphite_3" /></a></p>
 <p><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://camo.githubusercontent.com/c6079d0125e7cc38de67e40345b234313a3bf107/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313636313832392f6d6973632f67726170686974655f342e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-sitespeedio/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313038302f76313630313636313832392f6d6973632f67726170686974655f342e706e67" alt="graphite_4" /></a></p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-sitespeedio/&lt;https://github.com/lorenzogirardi/kubernetes-sitespeed.io#whats-next&gt;"></a>WHAT'S NEXT</h2>
+<h2>WHAT'S NEXT</h2>
 <p>Sitespeed is really good to have an high level view but also details that probably could save load time.</p>
 <p>The introduction of Argo can orchestrate multiple checks on all pages/application you need to monitor without a specific crontab time for each job but considering a producer/consumer workflow.</p>
     </div>

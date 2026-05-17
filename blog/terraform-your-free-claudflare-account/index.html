@@ -96,14 +96,14 @@ _a169.dscksd.akamai.net has address 193.45.15.98_
 <pre><code> _bunker.ethzero.it is an alias for ve7cu.x.incapdns.net._  
 _ve7cu.x.incapdns.net has address 107.154.167.38_</code></pre>
 <p>It's now the moment to talk about Cloudflare</p>
-<p><a href="/grav_k8s.it/blog/terraform-your-free-claudflare-account/&lt;https://www.cloudflare.com/&gt;">Claudflare</a> provide a good free account that allow you to hide your source ip or you want to discover how it's work the free waf protection or have a https certificate having your origin in http and so on ... but what is really cool and quickwin than the competitors is the API support and the native integration with <a href="/grav_k8s.it/blog/terraform-your-free-claudflare-account/&lt;https://www.terraform.io/docs/providers/cloudflare/index.html&gt;">Terraform</a></p>
+<p><a href="https://www.cloudflare.com/">Claudflare</a> provide a good free account that allow you to hide your source ip or you want to discover how it's work the free waf protection or have a https certificate having your origin in http and so on ... but what is really cool and quickwin than the competitors is the API support and the native integration with <a href="https://www.terraform.io/docs/providers/cloudflare/index.html">Terraform</a></p>
 <p><img src="/grav_k8s.it/user/images/terraform-your-free-claudflare-account/git-terraform-cloudflare.png" alt="" /></p>
 <p>Terraform is the most integrated tool for cloud (not only) automation and infrastructure as a code </p>
 <p>Here some steps that can show how it's esay deploy a configuration</p>
 <p>First of all , retrive the api key from Cloudflare portal</p>
 <p><img src="/grav_k8s.it/user/images/terraform-your-free-claudflare-account/cloudflare-api-key.png" alt="" /></p>
 <p><img src="/grav_k8s.it/user/images/terraform-your-free-claudflare-account/cloudflare-global-apikey.png" alt="" /></p>
-<p>then start the main terraform file in a dedicated folder (better in a <a href="/grav_k8s.it/blog/terraform-your-free-claudflare-account/&lt;https://gitlab.com/&gt;">gitlab</a> repo)</p>
+<p>then start the main terraform file in a dedicated folder (better in a <a href="https://gitlab.com/">gitlab</a> repo)</p>
 <pre><code>$ cat cloudflare-auth.tf  
 provider "cloudflare" {  
  email = "cloudflare_registration_email"  

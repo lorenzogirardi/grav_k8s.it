@@ -88,7 +88,7 @@
     </div>
     <div class="e-content">
         <p>Here we go ... another weird sidecar container</p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/Kubernetes-nstats#motivations&gt;"></a>Motivations</h2>
+<h2>Motivations</h2>
 <p>I've always been interested in the observability area , there are many aspect that improve performances and fix bugs<br />
 One of the most interested aspect is te network usage.</p>
 <p>This is not related to "network issue"<br />
@@ -106,24 +106,24 @@ And again you have the IN and OUT  </p>
 <li>you can profile the application</li>
 <li>you can profile the vm/pod</li>
 <li>you can have a dedicated APM</li>
-<li>you can have installed a <a href="/grav_k8s.it/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh&gt;">service mesh</a>  </li>
+<li>you can have installed a <a href="https://github.com/lorenzogirardi/kubernetes-servicemesh">service mesh</a>  </li>
 </ul>
 <p>Service mesh is a good tool but for the reasons explained in the link ... you should promote it in the right way ... it's able to cover my question but let's assume it's a overengineering for my porpose.</p>
 <p>APM ... well it depends on your company/money capability</p>
 <p>What is missing ?<br />
 Well even if we are in 2021 i'm habit to use <strong>iftop</strong> to understand the usage , the limit is that is working in rountime and i miss a long vision term.<br />
 <a href="/grav_k8s.it/blog/kubernetes-nstats/&lt;https://camo.githubusercontent.com/72309f9a4ee7e1f4c6b64f784c375d764d6b73385ea107d01e132e55b1f7e7a9/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313032342f76313631333938373038352f6d6973632f6966746f702e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-nstats/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313032342f76313631333938373038352f6d6973632f6966746f702e706e67" alt="iftop" /></a></p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/Kubernetes-nstats#goals&gt;"></a>GOALs</h2>
+<h2>GOALs</h2>
 <ul>
 <li>Monitor a kubernetes pod network with a sidecar container</li>
 <li>Be able to know src-dst of the pod connections</li>
 <li>Use it as sidecar</li>
 <li>Try to imagine a win-win solution (aka quick and dirty)</li>
 </ul>
-<h2><a href="/grav_k8s.it/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/Kubernetes-nstats#implementation&gt;"></a>Implementation</h2>
+<h2>Implementation</h2>
 <p>Project https://github.com/lorenzogirardi/Kubernetes-nstats  </p>
 <p>My colleagues has done an amazing work with a GO container able to have this kind of observability.<br />
-I tried to imagine a prototype with a win-win solution and i started evaluation this interesting <a href="/grav_k8s.it/blog/kubernetes-nstats/&lt;https://github.com/scottmsilver/iftop-telegraf-influx&gt;">project</a>,<br />
+I tried to imagine a prototype with a win-win solution and i started evaluation this interesting <a href="https://github.com/scottmsilver/iftop-telegraf-influx">project</a>,<br />
 where most the work as already done with the following steps:</p>
 <ul>
 <li>Create an iftop static dump</li>
@@ -138,7 +138,7 @@ where most the work as already done with the following steps:</p>
 |-- crontab<br />
 |-- format.py<br />
 `-- parse.awk</p>
-<h3><a href="/grav_k8s.it/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/Kubernetes-nstats#dockerfile&gt;"></a>Dockerfile</h3>
+<h3>Dockerfile</h3>
 <pre><code>FROM debian:stretch-slim
 MAINTAINER lgirardi &lt;[[email protected]](&lt;/cdn-cgi/l/email-protection&gt;)&gt;
 
@@ -157,7 +157,7 @@ COPY crontab /etc/crontab
 RUN crontab /etc/crontab
 CMD env &gt; /code/env.sh ; cron -f</code></pre>
 <p>CRON ?!?!?! ... yes it's a prototype and for this scope k8s cronjob are not effective. The most interesting part is <code>env &gt; /code/env.sh</code> that is used to create an environment file based on the docker environment variables.</p>
-<h3><a href="/grav_k8s.it/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/Kubernetes-nstats#code&gt;"></a>Code</h3>
+<h3>Code</h3>
 <p>cron.sh</p>
 <pre><code>#!/bin/bash
 /usr/sbin/iftop -nNb -i $(grep IFACE /code/env.sh |cut -d= -f2) -s 10 -o 10s -t -L 100 2&gt;/dev/null |/usr/bin/awk -f /code/parse.awk |/usr/bin/python3 /code/format.py |/usr/bin/curl -i -XPOST 'http://'"$(grep INFLUX /code/env.sh |cut -d= -f2)"'/write?db='"$(grep IDB /code/env.sh |cut -d= -f2)"'' --data-binary @-</code></pre>
@@ -258,7 +258,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 <p>the format part done by python script <code>| /usr/bin/python3 /code/format.py</code><br />
 <a href="/grav_k8s.it/blog/kubernetes-nstats/&lt;https://camo.githubusercontent.com/2159b3ceb19d51de4e7a8cc95fc909cc9b3e65f7476129209e3a9f5c60b28784/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3634302f76313631333938373739312f6d6973632f6966746f705f666f726d61742e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-nstats/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3634302f76313631333938373739312f6d6973632f6966746f705f666f726d61742e706e67" alt="iftop_format" /></a></p>
 <p>and finally we ship the metrics to influxdb with <code>| /usr/bin/curl -i -XPOST 'http://$IP/write?db=$DB' --data-binary @-</code></p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/Kubernetes-nstats#results&gt;"></a>Results</h2>
+<h2>Results</h2>
 <p>You can build an run locally <code>docker build -t nstats .</code><br />
 <code>docker run -d -e IFACE=eth0 -e INFLUX=192.168.1.28:8086 -e IDB=test nstats</code></p>
 <p>or add into kubernetes in an existing pod<br />

@@ -123,14 +123,14 @@ Moreover the trend in a enterprise is moving from dynamic content to static as p
 <li>etc etc</li>
 </ul>
 <p>However if you are not so nerd ... or your are tremendously lazy (like me)<br />
-a grate alternative is <a href="/grav_k8s.it/blog/maximum-yield-with-minimum-expense/&lt;https://getpublii.com/&gt;">Publii</a></p>
+a grate alternative is <a href="https://getpublii.com/">Publii</a></p>
 <p>Publii includes a WYSIWYG (What You See Is What You Get) editor for content creation,<br />
 really easy to use , and the client is available for multiple platform (win,linux,mac)</p>
 <h3>Tools</h3>
 <p>I mentioned Publii before, this tool is just a simple way for lazy people to create a static website, i'll not go in deep with this software since is well explained in its website however offer multiple possibility where store the files , the main ones are s3 bucket and github pages.<br />
 Publii is not a pretty collaborative tool but is not supposed to have this kind of interaction on a static website, is more close to a human interaction only.<br />
 On the opposite side Jekyll and the other families are more close to be collaborative based on a git project and part of a pipeline flow (runner/actions)</p>
-<p>Based on the backend for you html files, lets explore the <a href="/grav_k8s.it/blog/maximum-yield-with-minimum-expense/&lt;https://pages.github.com/&gt;">github pages</a><br />
+<p>Based on the backend for you html files, lets explore the <a href="https://pages.github.com/">github pages</a><br />
 This service is free with few limits<br />
 <em>Published GitHub Pages sites may be no larger than 1 GB.</em><br />
 <em>GitHub Pages sites have a soft bandwidth limit of 100GB per month.</em><br />
@@ -138,10 +138,10 @@ This service is free with few limits<br />
 <p>It's really easy to use and demand the security on the github account (always 2fa)<br />
 They offer a dns based on your github account and you can manage paths,<br />
 moreover you have the TLS/SSL for free</p>
-<p>With Publii configuration is quite easy and you can follow the instruction <a href="/grav_k8s.it/blog/maximum-yield-with-minimum-expense/&lt;https://getpublii.com/docs/host-static-website-github-pages.html&gt;">here</a></p>
+<p>With Publii configuration is quite easy and you can follow the instruction <a href="https://getpublii.com/docs/host-static-website-github-pages.html">here</a></p>
 <p>Another solution is use s3 as a repository, this require a bit more stuff sometimes, however even if it's a cheeper option, why not use an s3 on-prem if it's available<br />
 (this is just an excuse to use kubernetes, i still suggest to use the github pages, however i like to have this kind of exercise)</p>
-<p>So welcome <a href="/grav_k8s.it/blog/maximum-yield-with-minimum-expense/&lt;https://min.io/&gt;">minio</a> , a kubernetes object storage<br />
+<p>So welcome <a href="https://min.io/">minio</a> , a kubernetes object storage<br />
 The configuration is quite simple, as usual you can start with the namespace creation<br />
 <code>kind: "Namespace" apiVersion: "v1" metadata: name: "minio" labels: name: "minio"</code></p>
 <p>The service (this is just a single instance so no StatefulSets set is needed)<br />
@@ -257,9 +257,9 @@ to have the site ready to be used<br />
 <p>As i said github pages and s3 are not webserver so ...<br />
 how we can introduce the security headers ?</p>
 <p><img src="/grav_k8s.it/user/images/maximum-yield-with-minimum-expense/screencapture-securityheaders-2020-12-24-20_33_23.png" alt="" /></p>
-<p>Again Cloudflare help us with the <a href="/grav_k8s.it/blog/maximum-yield-with-minimum-expense/&lt;https:/blog.cloudflare.com/cloudflare-workers-unleashed/&gt;">Workers</a> feature</p>
+<p>Again Cloudflare help us with the <a href="https:/blog.cloudflare.com/cloudflare-workers-unleashed/">Workers</a> feature</p>
 <p><img src="/grav_k8s.it/user/images/maximum-yield-with-minimum-expense/screencapture-dash-cloudflare-9fb3653b948e447567a30f6b83e51eaf-workers-edit-security-headers-2020-12-24-20_38_25-2.png" alt="" /></p>
-<p>The code (<a href="/grav_k8s.it/blog/maximum-yield-with-minimum-expense/&lt;https://scotthelme.co.uk/security-headers-cloudflare-worker/&gt;">rif</a>.) is adding those headers with serverless function for each request</p>
+<p>The code (<a href="https://scotthelme.co.uk/security-headers-cloudflare-worker/">rif</a>.) is adding those headers with serverless function for each request</p>
 <p>`const securityHeaders = {<br />
 "Content-Security-Policy": "upgrade-insecure-requests",<br />
 "Strict-Transport-Security": "max-age=3600",<br />
@@ -306,16 +306,16 @@ headers: newHeaders<br />
 <h3>Monitor</h3>
 <p>What is missing now ?</p>
 <p>A bit of <strong>awareness</strong></p>
-<p>Are we safe ? maybe but better an external opinion , around the online scanner there are multiple tools , however <a href="/grav_k8s.it/blog/maximum-yield-with-minimum-expense/&lt;https://probely.com/&gt;">Probely</a> has a good free plan</p>
+<p>Are we safe ? maybe but better an external opinion , around the online scanner there are multiple tools , however <a href="https://probely.com/">Probely</a> has a good free plan</p>
 <p><img src="/grav_k8s.it/user/images/maximum-yield-with-minimum-expense/Screenshot-2020-12-26-at-14.58.41.png" alt="" /></p>
 <p>Here some hints about sensitive data shared with their crowler</p>
 <p><img src="/grav_k8s.it/user/images/maximum-yield-with-minimum-expense/Screenshot-2020-12-26-at-15.00.00.png" alt="" /></p>
 <p>Nothing relevant in my case... but useful to know</p>
 <p>Is now time to know , how is performing the website to do this i already had a deepdive about website usability</p>
 <p><a href="https://www.k8s.it/kubernetes-sitespeedio.html">https://www.k8s.it/kubernetes-sitespeedio.html</a></p>
-<p>but again we have some other feature serverless style like <a href="/grav_k8s.it/blog/maximum-yield-with-minimum-expense/&lt;https://github.com/upptime/upptime&gt;">upptime</a> ,with github actions you can create a monitoring system like this <a href="https://lorenzogirardi.github.io/status/">https://lorenzogirardi.github.io/status/</a></p>
+<p>but again we have some other feature serverless style like <a href="https://github.com/upptime/upptime">upptime</a> ,with github actions you can create a monitoring system like this <a href="https://lorenzogirardi.github.io/status/">https://lorenzogirardi.github.io/status/</a></p>
 <p><img src="/grav_k8s.it/user/images/maximum-yield-with-minimum-expense/Screenshot-2020-12-26-at-15.04.18.png" alt="" /><img src="/grav_k8s.it/user/images/maximum-yield-with-minimum-expense/Screenshot-2020-12-27-at-13.36.35.png" alt="" /></p>
-<p>Another alternative is <a href="/grav_k8s.it/blog/maximum-yield-with-minimum-expense/&lt;https://hetrixtools.com/&gt;">hetrixtools</a> , free up top 15 probes that give you the possibility to monitor your websites and smtp, and have an alerting system out of the box with a telegram bot email and sms (up to 50)</p>
+<p>Another alternative is <a href="https://hetrixtools.com/">hetrixtools</a> , free up top 15 probes that give you the possibility to monitor your websites and smtp, and have an alerting system out of the box with a telegram bot email and sms (up to 50)</p>
 <p><img src="/grav_k8s.it/user/images/maximum-yield-with-minimum-expense/screencapture-hetrixtools-report-uptime-c7596615176a822f81d67cfddc4aa179-2020-12-26-15_14_22.png" alt="" /><img src="/grav_k8s.it/user/images/maximum-yield-with-minimum-expense/Screenshot-2020-12-26-at-15.07.32.png" alt="" /></p>
 <p>Hope this post cover how the technology could be used as much as possible in a small and cheap scenario to reflect some hints to an enterprise scenario.</p>
     </div>

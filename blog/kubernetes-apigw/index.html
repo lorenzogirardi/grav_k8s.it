@@ -97,7 +97,7 @@
 <p>To better understand the differences on those products it is better to summarize the common areas</p>
 <p><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://camo.githubusercontent.com/43086b5aea0afa64170f3dac4261da1ad4a2ae2645d428fee16b7ce2eb6484f1/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313032342f76313630343730333838302f6d6973632f61706967775f76735f736572766963656d6573682e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-apigw/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313032342f76313630343730333838302f6d6973632f61706967775f76735f736572766963656d6573682e706e67" alt="apigw_vs_servicemesh" /></a></p>
 <p>So forget about service mesh and have the focus only on the apigw.</p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://github.com/lorenzogirardi/Kubernetes-apigw#goal&gt;"></a>GOAL</h2>
+<h2>GOAL</h2>
 <p>Needed:</p>
 <ul>
 <li>Api must be public</li>
@@ -117,7 +117,7 @@
 <li>Caching</li>
 <li>Documentation</li>
 </ul>
-<h2><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://github.com/lorenzogirardi/Kubernetes-apigw#software-opportunity&gt;"></a>Software opportunity</h2>
+<h2>Software opportunity</h2>
 <p>Around the api gateway world we have some possibility, some of those are onprem, some other in cloud or hybrid.</p>
 <p>The onprem scenario we have some historycal software and a "new generation" born in a kubernetes architecture, howevere here we will check for a tool that could work in kubernetes (with a plus for supporting vm)</p>
 <p>From the most knew i'd like to mention:</p>
@@ -301,9 +301,9 @@ Your engineer team need to know how it's working the infrastructure but they can
 </ul>
 <p>"*" you can easly have the apigw hosted onprem combined with a cdn/waf with ip lockdown , however you still have to pay the traffic towards it.</p>
 <p><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://camo.githubusercontent.com/e66b9fb512155cc277683660dd1ab517d7e9b9e50f023d3fc53f2b7e06a9f5e7/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313630343736363830322f6d6973632f61706967775f7761662e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-apigw/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313630343736363830322f6d6973632f61706967775f7761662e706e67" alt="apigw_waf" /></a></p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://github.com/lorenzogirardi/Kubernetes-apigw#scenario&gt;"></a>Scenario</h2>
+<h2>Scenario</h2>
 <p>I tried some cloud solution like Aws and Mashery,<br />
-i played also with some onprem solution, anyway i found out the right compromise with <a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://konghq.com/kong/&gt;">Kong</a></p>
+i played also with some onprem solution, anyway i found out the right compromise with <a href="https://konghq.com/kong/">Kong</a></p>
 <p>where compromise is :</p>
 <ul>
 <li><strong>Kubernetes ingress</strong></li>
@@ -323,7 +323,7 @@ i played also with some onprem solution, anyway i found out the right compromise
 <li>Service mesh (~ nice to have)</li>
 <li><strong>Easy to use</strong></li>
 </ul>
-<h2><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://github.com/lorenzogirardi/Kubernetes-apigw#infrastructure&gt;"></a>Infrastructure</h2>
+<h2>Infrastructure</h2>
 <ul>
 <li>kubernetes</li>
 <li>backend application</li>
@@ -371,7 +371,7 @@ i played also with some onprem solution, anyway i found out the right compromise
 </tr>
 </tbody>
 </table>
-<h2><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://github.com/lorenzogirardi/Kubernetes-apigw#configuration&gt;"></a>Configuration</h2>
+<h2>Configuration</h2>
 <p>git repo --&gt; <a href="https://github.com/lorenzogirardi/Kubernetes-apigw">https://github.com/lorenzogirardi/Kubernetes-apigw</a></p>
 <p>Let's start to work...<br />
 I've used the public kong deployment with some changes to have the database where store the configurations.</p>
@@ -454,7 +454,7 @@ datadir-postgres-0   Bound    pvc-8c5791c3-939f-4457-b5fb-74ac417ca3d7   250Mi  
 <p>Now i'd like to have also an Admin UI, i'm not fan of web ui ,<br />
 however i need to know if this interface could be shared outside IT<br />
 to delegate some business ownership and so on.</p>
-<p>Kong Enterprise has it's own web ui instead the community one needs a third party tool... <a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://github.com/pantsel/konga&gt;">Konga</a></p>
+<p>Kong Enterprise has it's own web ui instead the community one needs a third party tool... <a href="https://github.com/pantsel/konga">Konga</a></p>
 <p>In the same way of kong, konga needs a database , and in the same way i elaborated a bit the default deployment</p>
 <pre><code>konga
 |-- 01-ns-konga.yaml
@@ -620,7 +620,7 @@ and 2 on /api/get/</p>
                 --data "route.id=8d2a24aa-636d-43ee-b0aa-b0fd1d3643fd" </code></pre>
 <p><code>{"created_at":1604780101,"id":"33bfc138-776a-4116-a2a9-8c70ab9d7a2a","tags":null,"enabled":true,"protocols":["grpc","grpcs","http","https"],"name":"rate-limiting","consumer":{"id":"3d45a73d-4024-4813-b356-43a14ecea702"},"service":null,"route":{"id":"8d2a24aa-636d-43ee-b0aa-b0fd1d3643fd"},"config":{"hide_client_headers":false,"minute":null,"policy":"local","month":null,"redis_timeout":2000,"limit_by":"consumer","redis_password":null,"second":2,"day":null,"redis_database":0,"year":null,"hour":600,"redis_host":null,"redis_port":6379,"header_name":null,"fault_tolerant":true}}</code></p>
 <p><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://camo.githubusercontent.com/31f166746c62aae6fda1d4e1bdb7a85ec1683afd6bdf2d859baf6150883e302e/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313032342f76313630343738303230302f6d6973632f6b6f6e67615f726174655f6c696d69745f726f757465732e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-apigw/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313032342f76313630343738303230302f6d6973632f6b6f6e67615f726174655f6c696d69745f726f757465732e706e67" alt="konga_rate_routes" /></a></p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://github.com/lorenzogirardi/Kubernetes-apigw#use-cases&gt;"></a>Use cases</h2>
+<h2>Use cases</h2>
 <p>I created 3 users , one on the example above and a new one with a double of requests per second</p>
 <table>
 <thead>
@@ -759,7 +759,7 @@ RateLimit-Remaining: 0
 RateLimit-Reset: 1
 X-Kong-Response-Latency: 1
 Server: kong/2.1.4</code></pre>
-<h3><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://github.com/lorenzogirardi/Kubernetes-apigw#rules-precedence&gt;"></a>Rules Precedence</h3>
+<h3>Rules Precedence</h3>
 <p>A plugin will always be run once and only once per request. But the configuration with which it will run depends on the entities it has been configured for.</p>
 <p>Plugins can be configured for various entities, combination of entities, or even globally. This is useful, for example, when you wish to configure a plugin a certain way for most requests, but make authenticated requests behave slightly differently.</p>
 <p>Therefore, there exists an order of precedence for running a plugin when it has been applied to different entities with different configurations. The rule of thumb is: the more specific a plugin is with regards to how many entities it has been configured on, the higher its priority.</p>
@@ -775,7 +775,7 @@ Server: kong/2.1.4</code></pre>
 <li>Plugins configured to run globally.</li>
 </ol>
 <p>Example: if the rate-limiting plugin is applied twice (with different configurations): for a Service (Plugin config A), and for a Consumer (Plugin config B), then requests authenticating this Consumer will run Plugin config B and ignore A. However, requests that do not authenticate this Consumer will fallback to running Plugin config A. Note that if config B is disabled (its enabled flag is set to false), config A will apply to requests that would have otherwise matched config B.</p>
-<h3><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://github.com/lorenzogirardi/Kubernetes-apigw#waf&gt;"></a>WAF</h3>
+<h3>WAF</h3>
 <p>Last but not lease , the api is configured behind Cloudflare,</p>
 <p>the users <code>slow_user fast_user</code> are available in case you want to test directly the service.</p>
 <p>Endpoint: <code>https://services.k8s.it/api/</code></p>
@@ -806,7 +806,7 @@ U%2F03gx%2F91uOy3mGD%2BFE4FhBGqFt7iC2bhaPc%3D"}],"group":"cf-nel","max_age":6048
 nel: {"report_to":"cf-nel","max_age":604800}
 server: cloudflare
 cf-ray: 5eee86d319770f72-MXP</code></pre>
-<h2><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://github.com/lorenzogirardi/Kubernetes-apigw#conclusion&gt;"></a>Conclusion</h2>
+<h2>Conclusion</h2>
 <p>Kong is a scalable, open source API Gateway.<br />
 Kong runs in front of any RESTful API and is extended through Plugins, which provide extra functionality and services beyond the core platform.</p>
 <p>The architecture is quite simple to understand and is made up of a few components…</p>
@@ -819,7 +819,7 @@ Kong runs in front of any RESTful API and is extended through Plugins, which pro
 <p><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://camo.githubusercontent.com/d2a4de6795889077f983473c7575a12036254ec671f5440c6e63b68889926d65/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3438302f76313630373333323133302f6d6973632f554d4c5f6170695f67772e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-apigw/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3438302f76313630373333323133302f6d6973632f554d4c5f6170695f67772e706e67" alt="uml_api_gw" /></a></p>
 <p>Monitoring is also covered well by default kong official prometheus available here <a href="https://github.com/Kong/kong-plugin-prometheus">https://github.com/Kong/kong-plugin-prometheus</a></p>
 <p><a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://camo.githubusercontent.com/28dedd2eae334443bd6e668838f06caedc99f3c5cbd95e5b8d12869015cad8e9/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313630353732333433362f6d6973632f6b6f6e665f6d6f6e69746f722e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-apigw/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313630353732333433362f6d6973632f6b6f6e665f6d6f6e69746f722e706e67" alt="kong_monitor" /></a></p>
-<p>Live: <a href="/grav_k8s.it/blog/kubernetes-apigw/&lt;https://services.k8s.it/grafana/d/mY9p7dQmz/kong?orgId=2&amp;refresh=1m%3E">https://services.k8s.it/grafana/d/mY9p7dQmz/kong?orgId=2&amp;refresh=1m</a></p>
+<p>Live: <a href="https://services.k8s.it/grafana/d/mY9p7dQmz/kong?orgId=2&amp;refresh=1m">https://services.k8s.it/grafana/d/mY9p7dQmz/kong?orgId=2&amp;refresh=1m</a></p>
 <p><strong>If your business exposes APIs, the API GATEWAY is a requirement to handle the third party.</strong></p>
     </div>
 

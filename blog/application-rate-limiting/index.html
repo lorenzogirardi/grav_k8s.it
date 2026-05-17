@@ -95,14 +95,14 @@
 <li>have the logic inside the app , in a  <em>code</em> way</li>
 <li>have a sidecar container that has this role</li>
 </ul>
-<h2><a href="/grav_k8s.it/blog/application-rate-limiting/&lt;https://github.com/lorenzogirardi/Kubernetes-sidecar-ratelimit#the-code-way&gt;"></a>the code way</h2>
+<h2>the code way</h2>
 <p>This is the simplest one but has some side effects,<br />
 first of all can be reaused just for the same language apps.<br />
 Same as before , having this rate inside the app , we are creating a role inside this app<br />
 that can be good or bad depending of the strategy applied,<br />
 imagine the request interceptor for example will consume cpu and may  <em>false</em> metrics if we are not aware of it.  </p>
 <p>But anyway , it can be a solution , so in a simple python code you have to add the following for example<br />
-(i will use the usual <a href="/grav_k8s.it/blog/application-rate-limiting/&lt;https://github.com/lorenzogirardi/py-test-backend/tree/ratelimit/docker&gt;">app</a> i'm using for labs stuff)<br />
+(i will use the usual <a href="https://github.com/lorenzogirardi/py-test-backend/tree/ratelimit/docker">app</a> i'm using for labs stuff)<br />
 I'ts Flask so you just have to add the following:<br />
 in requirements.txt --&gt; <code>Flask-Limiter</code></p>
 <p>Inside your code , import the libraries</p>
@@ -116,7 +116,7 @@ from flask_limiter.util import get_remote_address</code></pre>
 )</code></pre>
 <p>And add the limiting option in the route u'd like to rate</p>
 <pre><code>@limiter.limit("28 per second")</code></pre>
-<h3><a href="/grav_k8s.it/blog/application-rate-limiting/&lt;https://github.com/lorenzogirardi/Kubernetes-sidecar-ratelimit#handson&gt;"></a>Handson</h3>
+<h3>Handson</h3>
 <p>Just moved from <code>@limiter.limit("28 per second")</code> to <code>@limiter.limit("2 per second")</code></p>
 <pre><code>$ docker build -t lgirardi/pytbakrated .
 [+] Building 11.1s (9/9) FINISHED
@@ -208,7 +208,7 @@ just few concepts anyway are:</p>
 <li>is stealing resources from app</li>
 <li>is really simple rate limit that can fight with others stuff</li>
 </ul>
-<h2><a href="/grav_k8s.it/blog/application-rate-limiting/&lt;https://github.com/lorenzogirardi/Kubernetes-sidecar-ratelimit#the-sidecar-way&gt;"></a>the sidecar way</h2>
+<h2>the sidecar way</h2>
 <p>Yes i know , this is a  <em>stretch</em> , since we have service mesh , gateway etc etc that embrace this concept.<br />
 However, for a specific reason, i created just a sidecar container that can be reused without the needs to implement the infrastructure mentioned before</p>
 <p>First of all the choice, tons of possibility, from nginx reverse proxy , to haproxy to  <em>whatever</em> proxy ...<br />
@@ -374,7 +374,7 @@ data:
                       value: 'true'
                   local_rate_limit_per_downstream_connection: false</code></pre>
 <p>we have a bucket of 29 token , and every second it re-enable the 29 token in the bucket ... i mean ... 29req/second  <em>almost</em> :-)</p>
-<h3><a href="/grav_k8s.it/blog/application-rate-limiting/&lt;https://github.com/lorenzogirardi/Kubernetes-sidecar-ratelimit#handson-1&gt;"></a>Handson</h3>
+<h3>Handson</h3>
 <p>Again i changed the rate limit to 2req/second</p>
 <pre><code>                  token_bucket:
                     max_tokens: 2

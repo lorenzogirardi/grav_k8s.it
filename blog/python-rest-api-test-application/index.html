@@ -92,12 +92,12 @@
     </div>
     <div class="e-content">
         <p>Working most of the times (always) in Platform i'm usually play with the infrastructure, however sometimes to create prototype i need backends that are done for the specific purpose.</p>
-<h2><a href="/grav_k8s.it/blog/python-rest-api-test-application/&lt;https://github.com/lorenzogirardi/py-test-backend#goals&gt;"></a>GOALS:</h2>
+<h2>GOALS:</h2>
 <ul>
 <li>The application must be a REST api</li>
 <li>Run in kubernetes  </li>
 </ul>
-<h3><a href="/grav_k8s.it/blog/python-rest-api-test-application/&lt;https://github.com/lorenzogirardi/py-test-backend#docker-and-kubernetes&gt;"></a>Docker and kubernetes</h3>
+<h3>Docker and kubernetes</h3>
 <p>The application is working with GET, POST, PUT, DELETE<br />
 enouth to cover most of the usages based on rest api.</p>
 <p>Inside the docker path you can run easly as local docker</p>
@@ -135,7 +135,7 @@ spec:
 <p>in my case i have the home dns as <code>h4x0r3d.lan</code><br />
 and <code>*.ing.h4x0r3d.lan</code> as a record A of my kubernetes ingress<br />
 in this way if i create a namespace  <em>pippo</em> the dns that i have to call to reach it out will be  <em>pippo.ing.4x0r3d.lan</em> with no change on DNS.  </p>
-<h3><a href="/grav_k8s.it/blog/python-rest-api-test-application/&lt;https://github.com/lorenzogirardi/py-test-backend#usage&gt;"></a>Usage</h3>
+<h3>Usage</h3>
 <p>The application answer on /api/ with the main html page with methods</p>
 <table>
 <thead>

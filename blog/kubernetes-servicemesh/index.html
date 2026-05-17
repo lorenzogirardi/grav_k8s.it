@@ -139,9 +139,9 @@ if your infrastructure is able to embrace it and only if you know what you are d
 <li>routing purpose (this is strictly related to the microservice architecture)</li>
 <li>rate limitng</li>
 </ul>
-<h2><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh#service-mesh-sample-lab&gt;"></a>Service Mesh sample lab</h2>
+<h2>Service Mesh sample lab</h2>
 <p>This lab is provided to discover and test the functionality w'd like to implement in our environment</p>
-<h3><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh#basic-setup&gt;"></a>Basic setup</h3>
+<h3>Basic setup</h3>
 <ul>
 <li>minikube v1.6.2</li>
 <li>Kubernetes v1.17.0 on Docker '19.03.5'</li>
@@ -152,7 +152,7 @@ if your infrastructure is able to embrace it and only if you know what you are d
 <ul>
 <li>network (since in production we are using flannel that is not able to manage network policy we can start using no CNI to have the environment as much as close to lmn environment)</li>
 </ul>
-<h4><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh#namespaces&gt;"></a>Namespaces</h4>
+<h4>Namespaces</h4>
 <p>a → traefik (ingress)<br />
 b → apache<br />
 c → application<br />
@@ -236,7 +236,7 @@ CMD ["app.py"]</code></pre>
 redis
 pytest
 pytest-flask</code></pre>
-<h3><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh#folders-structure&gt;"></a>Folders structure</h3>
+<h3>Folders structure</h3>
 <pre><code>kubernetes/
 ├── 00-traefik
 │   ├── A-00-traefik-ns.yaml
@@ -256,7 +256,7 @@ pytest-flask</code></pre>
     ├── C-00-app-ns.yaml
     ├── C-01-app-svc.yaml
     └── C-02-app-dpl.yaml</code></pre>
-<h3><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh#startup&gt;"></a>Startup</h3>
+<h3>Startup</h3>
 <p>kubernetes$ kubectl apply -f 00-traefik/</p>
 <pre><code>namespace/a-ingress-traefik created  
 clusterrole.rbac.authorization.k8s.io/traefik-ingress-controller created    
@@ -296,18 +296,18 @@ kube-system         kube-scheduler-minikube            1/1     Running   1      
 kube-system         storage-provisioner                1/1     Running   2          74m</code></pre>
 <p>make sure virtualbox 8081 port should be available</p>
 <p><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://camo.githubusercontent.com/f303afac85505ee6e02651c55518f1eb809a6f97/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537333731352f6d6973632f696d675f7669727475616c626f782d706f7274666f7277617264696e672e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-servicemesh/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537333731352f6d6973632f696d675f7669727475616c626f782d706f7274666f7277617264696e672e706e67" alt="Virtualbox port forwarding" /></a></p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh#flow&gt;"></a>flow</h2>
+<h2>flow</h2>
 <p><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://camo.githubusercontent.com/70a420864968278b8940023ba6aa95dd7bf932a6/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537333731342f6d6973632f696d675f666c6f772e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-servicemesh/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537333731342f6d6973632f696d675f666c6f772e706e67" alt="flow" /></a></p>
-<h5><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh#inizialize-the-redis-database&gt;"></a>inizialize the redis database</h5>
+<h5>inizialize the redis database</h5>
 <p><code>$ curl http://pippo.lan/count/set</code><br />
 {"time": "b'2019-12-28 20:06:33.919059'"}</p>
-<h5><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh#test-from-apache-to-application-case-1&gt;"></a>test from apache to application (case 1)</h5>
+<h5>test from apache to application (case 1)</h5>
 <p><code>$ curl http://pippo.lan/count/get</code><br />
 {"time": "b'2019-12-28 20:06:33.919059'"}</p>
-<h5><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh#test-from-apache-to-redis-case-2&gt;"></a>test from apache to redis (case 2)</h5>
+<h5>test from apache to redis (case 2)</h5>
 <p><code>$ curl http://pippo.lan/redis/GET/time</code><br />
 {"GET":"2019-12-28 20:06:33.919059"}</p>
-<h5><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh#network-rule-example&gt;"></a>network rule example</h5>
+<h5>network rule example</h5>
 <p>cilium labels</p>
 <pre><code>ENDPOINT   POLICY (ingress)   POLICY (egress)   IDENTITY   LABELS (source:key[=value])                           IPv6   IPv4            STATUS   
            ENFORCEMENT        ENFORCEMENT                                                                                               
@@ -353,9 +353,9 @@ spec:
           name: c-app-count</code></pre>
 <p>cilium/hubble <a href="https://github.com/cilium/hubble">https://github.com/cilium/hubble</a> <a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://camo.githubusercontent.com/70234ad4768db6537d28a417f0e73061ce2e51b4/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537343036392f6d6973632f687562626c652d64726f702e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-servicemesh/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537343036392f6d6973632f687562626c652d64726f702e706e67" alt="hubble" /></a></p>
 <p>istio/kiali <a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://camo.githubusercontent.com/79a5b07227e5651705810596cef972d074ed201f/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537343036392f6d6973632f697374696f2d6b69616c692e706e67&gt;"><img src="/grav_k8s.it/user/images/kubernetes-servicemesh/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313539343537343036392f6d6973632f697374696f2d6b69616c692e706e67" alt="kiali" /></a></p>
-<p>video Cilium example --&gt; <a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://res.cloudinary.com/ethzero/video/upload/v1594574074/misc/cilium.mkv&gt;">img/cilium.mkv</a></p>
-<p>video Istio + Cilium example --&gt; <a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://res.cloudinary.com/ethzero/video/upload/v1594574090/misc/istio.mkv&gt;">img/istio.mkv</a>  </p>
-<h2><a href="/grav_k8s.it/blog/kubernetes-servicemesh/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh#requirements&gt;"></a>requirements</h2>
+<p>video Cilium example --&gt; <a href="https://res.cloudinary.com/ethzero/video/upload/v1594574074/misc/cilium.mkv">img/cilium.mkv</a></p>
+<p>video Istio + Cilium example --&gt; <a href="https://res.cloudinary.com/ethzero/video/upload/v1594574090/misc/istio.mkv">img/istio.mkv</a>  </p>
+<h2>requirements</h2>
 <ul>
 <li>use service mesh to segregate redis "d" to accept connections only from application "c"<br />
 expected "case 1" still working, "case 2" stop working and receive an error</li>

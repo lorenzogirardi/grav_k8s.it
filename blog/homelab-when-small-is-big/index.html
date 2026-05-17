@@ -105,7 +105,7 @@ All those components were quite similar to a helicopter noise during the night.<
 <p>Let's now explain the needs behind,<br />
 i'd like to have a solution that is able to cover all my needs in terms of hobby and experiments, i don't need power , since i take care to the goodness of the solution instead the absolute performance.</p>
 <h3>Hardware</h3>
-<p>Base: <a href="/grav_k8s.it/blog/homelab-when-small-is-big/&lt;https://ark.intel.com/content/www/us/en/ark/products/126137/intel-nuc-kit-nuc7pjyh.html&gt;">Intel® NUC NUC7PJYH</a></p>
+<p>Base: <a href="https://ark.intel.com/content/www/us/en/ark/products/126137/intel-nuc-kit-nuc7pjyh.html">Intel® NUC NUC7PJYH</a></p>
 <p><img src="/grav_k8s.it/user/images/homelab-when-small-is-big/Screenshot-2021-02-19-at-16.39.21-2.png" alt="" /></p>
 <p>RAM: even if the website is reporting 8gb max... this is not true<br />
 on my installation i have 16GB with G.Skill Ripjaws SO-DIMM 16GB DDR4-2400Mhz 2x8GB</p>
@@ -119,11 +119,11 @@ on my installation i have 16GB with G.Skill Ripjaws SO-DIMM 16GB DDR4-2400Mhz 2x
 <p>Now:</p>
 <p><strong>Why</strong> vmware?<br />
 Because the virtualization stack is really important to have an abstraction layer ,<br />
-see this <a href="/grav_k8s.it/blog/homelab-when-small-is-big/&lt;https://www.k8s.it/kubernetes-destroyed-the-virtualization-or-not.html&gt;">post</a></p>
+see this <a href="https://www.k8s.it/kubernetes-destroyed-the-virtualization-or-not.html">post</a></p>
 <p><strong>Why</strong> 6.7?<br />
 Because the vmkernel in 7.0 is changed and is not possible import external network driver (needed for this nuc model), even if there is a trick with usb network adapter and <a href="https://flings.vmware.com/usb-network-native-driver-for-esxi">https://flings.vmware.com/usb-network-native-driver-for-esxi</a> vmware labs usb drivers.</p>
 <p><strong>How</strong> build the image with Realtek network card ?<br />
-First of all you need a windows :( , than you should need to identify your hardware driver , in my case <a href="https://vibsdepot.v-front.de/wiki/index.php/Net55-r8168">https://vibsdepot.v-front.de/wiki/index.php/Net55-r8168</a> and at the end you need to rebuild the image with <a href="/grav_k8s.it/blog/homelab-when-small-is-big/&lt;https://www.v-front.de/p/esxi-customizer-ps.html&gt;">ESXi-Customizer-PS</a></p>
+First of all you need a windows :( , than you should need to identify your hardware driver , in my case <a href="https://vibsdepot.v-front.de/wiki/index.php/Net55-r8168">https://vibsdepot.v-front.de/wiki/index.php/Net55-r8168</a> and at the end you need to rebuild the image with <a href="https://www.v-front.de/p/esxi-customizer-ps.html">ESXi-Customizer-PS</a></p>
 <p><img src="/grav_k8s.it/user/images/homelab-when-small-is-big/Screenshot-2021-02-19-at-17.16.41.png" alt="" /></p>
 <p><strong>What</strong> we can do with this "toy"?<br />
 Well more or less everything you are doing in your datacenter, using packer and ansible for the installation and vm configuration , you can boostrap a k3s cluster or a microk8s standalone kubernetes, few virtualmachines and so on.  </p>
@@ -208,7 +208,7 @@ crond`</p>
 2021-02-13 22:00:01 -- info: CONFIG - RSYNC_LINK = 0<br />
 2021-02-13 22:00:01 -- info: CONFIG - BACKUP_FILES_CHMOD =<br />
 2021-02-13 22:00:01 -- info: CONFIG - EMAIL_LOG = 1<br />
-2021-02-13 22:00:01 -- info: CONFIG - EMAIL_SERVER = <a href="/grav_k8s.it/blog/homelab-when-small-is-big/&lt;http://smtp.k8s.it/&gt;">smtp.xxs.it</a><br />
+2021-02-13 22:00:01 -- info: CONFIG - EMAIL_SERVER = <a href="http://smtp.k8s.it/">smtp.xxs.it</a><br />
 2021-02-13 22:00:01 -- info: CONFIG - EMAIL_SERVER_PORT = 25<br />
 2021-02-13 22:00:01 -- info: CONFIG - EMAIL_DELAY_INTERVAL = 1<br />
 2021-02-13 22:00:01 -- info: CONFIG - EMAIL_FROM = <a href="/grav_k8s.it/blog/homelab-when-small-is-big/&lt;/cdn-cgi/l/email-protection#d4b3bcb1a0a0bb829796f9b5b9b5a0b1a6b5a7a194bfeca7fabda0&gt;">[email protected]</a><br />

@@ -76,7 +76,7 @@
 </span>
             </div>
     <div class="e-content">
-        <h2><a href="/grav_k8s.it/blog/docker-latency/&lt;https://github.com/lorenzogirardi/docker-latency#aka-the-network-blaming-tool&gt;"></a>aka the network blaming tool</h2>
+        <h2>aka the network blaming tool</h2>
 <p>So again another grafana stack with docker<br />
 Well yes but with a precise scope</p>
 <p>In this period we are almost all working from home,<br />
@@ -85,21 +85,21 @@ the blaming topic is usually the connection with our offices or the datacenters.
 <em>the vpn is slow</em> ,  <em>i cannot connect to ... $something</em> , bla bla bla</p>
 <p>In my experience this is usually due to the quality of the provider,<br />
 sometimes is also a problem on route path on T2/T3 providers</p>
-<h3><a href="/grav_k8s.it/blog/docker-latency/&lt;https://github.com/lorenzogirardi/docker-latency#how-we-can-undestand-if-our-network-is-really-slow-&gt;"></a>HOW we can undestand if our network is really slow ?</h3>
+<h3>HOW we can undestand if our network is really slow ?</h3>
 <p>The idea is to start a grafana stack ready-made to handle the basics statistics of our internet connection.<br />
 We need to choose some endpoints to monitor, example , your vpn endpoint , your datacenter/office public ip , the main dns servers and so on</p>
-<h4><a href="/grav_k8s.it/blog/docker-latency/&lt;https://github.com/lorenzogirardi/docker-latency#requirements&gt;"></a>Requirements</h4>
+<h4>Requirements</h4>
 <ul>
 <li>Docker</li>
 <li>Docker Compose</li>
 </ul>
-<h4><a href="/grav_k8s.it/blog/docker-latency/&lt;https://github.com/lorenzogirardi/docker-latency#stack&gt;"></a>Stack</h4>
+<h4>Stack</h4>
 <ul>
 <li>Influxdb</li>
 <li>Grafana</li>
 <li>Telegraf</li>
 </ul>
-<h4><a href="/grav_k8s.it/blog/docker-latency/&lt;https://github.com/lorenzogirardi/docker-latency#tree&gt;"></a>Tree</h4>
+<h4>Tree</h4>
 <pre><code>├── .env
 ├── Makefile
 ├── README.md
@@ -124,7 +124,7 @@ Since this tool is hosted in your laptop (could be everywhere), never mind the  
 GRAFANA_PASSWORD=EQyFJpjxvJG8k2K8
 INFLUXDB_DOMAIN=influxdb
 INFLUXDB_DATABASE=ping</code></pre>
-<h3><a href="/grav_k8s.it/blog/docker-latency/&lt;https://github.com/lorenzogirardi/docker-latency#configuration&gt;"></a>Configuration</h3>
+<h3>Configuration</h3>
 <p>We just need to choose the endpoints we'd like to monitor from our internet connection This could be done editing  <em>telegraf.conf</em></p>
 <pre><code>[global_tags]
 [agent]
@@ -148,7 +148,7 @@ ping_interval = 1.0</code></pre>
 <p>Edit  <em>urls =</em> adding / modify the endpoints<br />
 (in this example, Cloudflare dns , Google dns, opendns, and a server in Madrid used for speedtest)</p>
 <p>The configuration is collecting information every 10 seconds , and run a ping command 7 time each with 1 second delay.</p>
-<h3><a href="/grav_k8s.it/blog/docker-latency/&lt;https://github.com/lorenzogirardi/docker-latency#startup&gt;"></a>Startup</h3>
+<h3>Startup</h3>
 <p>Inside the main folder run</p>
 <p><code>make up</code></p>
 <p>output:</p>
@@ -167,7 +167,7 @@ Creating telegraf ... done</code></pre>
 <p><a href="/grav_k8s.it/blog/docker-latency/&lt;https://camo.githubusercontent.com/5fd87b371e34b4497018003fcd41cd2e09d23c72/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313538353539353832342f6d6973632f67726166616e615f70696e672e706e67&gt;"><img src="/grav_k8s.it/user/images/docker-latency/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f76313538353539353832342f6d6973632f67726166616e615f70696e672e706e67" alt="grafana_ping" /></a></p>
 <p>100% packet loss simulated disabling network card for few seconds.<br />
 The dashboard is using variables in order to create 1 row for each endpoint.</p>
-<h3><a href="/grav_k8s.it/blog/docker-latency/&lt;https://github.com/lorenzogirardi/docker-latency#conclusion&gt;"></a>Conclusion</h3>
+<h3>Conclusion</h3>
 <p>Now we have data, so we know what is going on in our internet connection and we can probably<br />
 have more details about the  <em>infomagic</em> words like ...  <em>is slow</em></p>
     </div>

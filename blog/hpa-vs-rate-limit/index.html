@@ -152,7 +152,7 @@
 <li>minimum resources available </li>
 </ul>
 <h2>HPA</h2>
-<p>In Kubernetes, a <em>HorizontalPodAutoscaler</em> automatically updates a workload resource (such as a <a href="/grav_k8s.it/blog/hpa-vs-rate-limit/&lt;https://kubernetes.io/docs/concepts/workloads/controllers/deployment/&gt;">Deployment</a> or <a href="/grav_k8s.it/blog/hpa-vs-rate-limit/&lt;https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/&gt;">StatefulSet</a>), with the aim of automatically scaling the workload to match demand.</p>
+<p>In Kubernetes, a <em>HorizontalPodAutoscaler</em> automatically updates a workload resource (such as a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> or <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a>), with the aim of automatically scaling the workload to match demand.</p>
 <h3>Patterns</h3>
 <p><img src="/grav_k8s.it/user/images/hpa-vs-rate-limit/Screenshot-2023-02-16-at-20.28.38.png" alt="" /></p>
 <h3>Meaning</h3>
@@ -223,7 +223,7 @@
 <h1>Hands-on</h1>
 <h2>Simulation</h2>
 <ul>
-<li><a href="/grav_k8s.it/blog/hpa-vs-rate-limit/&lt;https://github.com/lorenzogirardi/py-test-backend&gt;">python</a> app that generates fibonacci sequence</li>
+<li><a href="https://github.com/lorenzogirardi/py-test-backend">python</a> app that generates fibonacci sequence</li>
 <li>fibonacci number 18500</li>
 <li>load test done using gatling</li>
 <li>Application capped on cpu (each request is ~10mcpu) with max of 300mcpu for pod (cpu bound)</li>
@@ -329,7 +329,7 @@ Here we are !!!</p>
 <img src="/grav_k8s.it/user/images/hpa-vs-rate-limit/Screenshot-2023-02-16-at-22.01.22.png" alt="" /><br />
 Naaaa .... no more than 24 rps</p>
 <h3>AUTOSCALING Internal rate limit</h3>
-<p><a href="/grav_k8s.it/blog/hpa-vs-rate-limit/&lt;https://www.k8s.it/application-rate-limiting.html&gt;">Here how to</a></p>
+<p><a href="https://www.k8s.it/application-rate-limiting.html">Here how to</a></p>
 <h4>[optimal] 1 pod start - hpa 25rps- 15 min - 99 max requests rate-limit 27</h4>
 <p>I suppose that the <em>optimal</em> before (24rps) is working good also with RL so let’s start with 25</p>
 <p><img src="/grav_k8s.it/user/images/hpa-vs-rate-limit/Screenshot-2023-02-16-at-22.08.07.png" alt="" /><br />
@@ -404,7 +404,7 @@ Errors are not only 429 as rate but 5xx</p>
 <h4>HPA</h4>
 <p>This application is cpu bound … so I used req/s even if the right autoscaling metric is the cpu usage, however, I would say that each application has the intent to serve requests.<br />
 Create a dedicated configuration, application per application, for the hpa is the best option but it requires <strong>HUGE</strong> know-how and time …<br />
-Considering the sentence before, I was impressed about <a href="/grav_k8s.it/blog/hpa-vs-rate-limit/&lt;https://gatling.io/docs/gatling/reference/current/stats/reports/#:~:text=“Active users” is neither “,load at a given second”.&gt;">Active users</a> since share the correct clue at high levels about the status of the application, it’s really really close to measuring the enervation of the app</p>
+Considering the sentence before, I was impressed about <a href="https://gatling.io/docs/gatling/reference/current/stats/reports/#:~:text=“Active users” is neither “,load at a given second”.">Active users</a> since share the correct clue at high levels about the status of the application, it’s really really close to measuring the enervation of the app</p>
 <p><img src="/grav_k8s.it/user/images/hpa-vs-rate-limit/Screenshot-2023-02-16-at-22.30.45.png" alt="" /></p>
 <p>I would say that the concept of active users as a HPA metric is better than flask_http_request_duration_seconds_count</p>
 <p>Even if we can reach 33rps in a single pod , we should consider that in an autoscaling scenario this will be reduced to <strong>less,</strong> cause for a certain amount of time we have more requests till we are waiting for new pods/node etc etc </p>
@@ -439,7 +439,7 @@ Better is to perform this action outside the application container since will im
 <p>In a dynamic infrastructure where we have autoscaling and downscaling, a legit peak like google scrape is not possible to handle, cause the RL is service level<br />
 <strong>AND…</strong><br />
 during the night, it's supposed to have the minimum pods available as there is less user traffic for example.</p>
-<p>So … I’ll remark on the drawback of cost savings following the matrix based on hpa patterns (cit <a href="/grav_k8s.it/blog/hpa-vs-rate-limit/&lt;https://www.imdb.com/title/tt0088850/&gt;">brewster's millions</a>)<br />
+<p>So … I’ll remark on the drawback of cost savings following the matrix based on hpa patterns (cit <a href="https://www.imdb.com/title/tt0088850/">brewster's millions</a>)<br />
 As much as we are close to using fewer resources as possible, as much we are increasing corner cases and unexpected situations.  </p>
 <p>Be careful to evaluate the rate limit concept </p>
 <p>Cheers :-) </p>
