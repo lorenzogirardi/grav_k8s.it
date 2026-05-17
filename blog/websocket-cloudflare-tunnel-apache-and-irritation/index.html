@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Websocket, Cloudflare tunnel, apache httpd and a bit of security | Grav</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="generator" content="GravCMS" />
+    <meta name="description" content="Grav is an easy to use, yet powerful, open source flat-file CMS" />
+
+    <link rel="icon" type="image/png" href="/user/themes/quark/images/favicon.png" />
+    <link rel="canonical" href="http://localhost/blog/websocket-cloudflare-tunnel-apache-and-irritation" />
+
+                        
+            
+    <link href="/assets/user/themes/quark/css/bricklayer.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css-compiled/spectre.min.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css-compiled/theme.min.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css/custom.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css/line-awesome.min.css" type="text/css" rel="stylesheet">
+
+    <script src="/assets/system/assets/jquery/jquery-3.x.min.js"></script>
+<script src="/assets/user/themes/quark/js/bricklayer.min.js"></script>
+<script src="/assets/user/themes/quark/js/scopedQuerySelectorShim.min.js"></script>
+
+</head>
+<body id="top" class=" header-fixed header-animated sticky-footer">
+    <div id="page-wrapper">
+            <section id="header" class="section">
+            <section class="container grid-lg">
+                <nav class="navbar">
+                    <section class="navbar-section logo">
+                        <a href="/" class="navbar-brand mr-10">
+  <svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" viewBox="0 0 504 140" clip-rule="evenodd"><path d="M235.83 71.56h-7.98c-1.2 0-2.2 1-2.2 2.2V89.1l-.15.13c-4.7 3.96-10.64 6.14-16.72 6.14-14.36 0-26.04-11.68-26.04-26.04s11.68-26.04 26.04-26.04c5.58 0 10.92 1.76 15.44 5.1.87.66 2.1.57 2.86-.2l5.7-5.7c.44-.44.67-1.05.63-1.68-.02-.62-.32-1.2-.82-1.6-6.76-5.35-15.2-8.3-23.8-8.3-21.18 0-38.42 17.23-38.42 38.4 0 21.2 17.24 38.42 38.42 38.42 10.93 0 21.4-4.7 28.7-12.9.35-.4.55-.93.55-1.47v-19.6c0-1.22-.98-2.2-2.2-2.2M502.8 34.44c-.4-.6-1.1-.98-1.84-.98h-8.7c-.87 0-1.66.52-2 1.32l-24.5 56.84-24.9-56.85c-.36-.8-1.15-1.3-2.02-1.3h-8.72c-.74 0-1.44.36-1.84.98-.4.62-.48 1.4-.17 2.1l30.2 68.85c.34.8 1.13 1.32 2 1.32h11c.88 0 1.67-.53 2.02-1.33l29.66-68.87c.3-.68.22-1.47-.2-2.1"/><path d="M388.68 34.77c-.35-.8-1.14-1.32-2-1.32h-11c-.88 0-1.67.53-2.02 1.33L344 103.64c-.3.68-.22 1.47.18 2.08.4.62 1.1 1 1.84 1h8.7c.86 0 1.66-.53 2-1.33l24.5-56.86 24.9 56.86c.36.8 1.15 1.32 2.02 1.32h8.72c.74 0 1.44-.38 1.84-1 .4-.62.47-1.4.17-2.1l-30.2-68.85zM309.2 81.52l.47-.22c8.68-4.2 14.28-13.1 14.28-22.67 0-13.88-11.3-25.18-25.17-25.18H266.9c-1.2 0-2.2 1-2.2 2.2v68.86c0 1.23 1 2.22 2.2 2.22h8c1.2 0 2.2-1 2.2-2.2V45.8h21.68c7.05 0 12.8 5.75 12.8 12.8 0 5.9-4 11-9.73 12.42-1.04.26-2.07.4-3.07.4h-7.98c-.83 0-1.6.46-1.96 1.2-.38.73-.3 1.62.2 2.3l22.6 30.87c.42.58 1.08.92 1.78.92h9.9c.84 0 1.6-.47 1.97-1.2.37-.75.3-1.64-.2-2.3l-15.9-21.7zM107.2 80.97c-7.26-4.8-11.4-8.85-15.02-16.1-2.47 4.97-8.24 12.37-17.96 18.2-4.86 15.1-27.96 44-35.43 39.9-2.22-1.2-2.64-2.8-2.15-4.45.54-4.13 9.08-13.62 9.08-13.62s.18 2 2.92 6.18c-3.6-11.2 5.96-25.03 8.5-29.73 3.98-1.27 4.27-6.4 4.27-6.4.26-7.9-3.28-13.63-6.7-17.05 2.46 3 3.25 7.54 3.37 11.7v.02c0 .47 0 .93 0 1.4-.12 3.43-1.16 8.18-3.38 8.18v.03c-2.28-.1-5.1.4-7.63 1.18l-5.6 1.34s2.98-.13 4.6 1.25c-1.8 2.9-5.78 6.53-10.22 8.58-6.45 3-8.3-2.96-5.03-6.84.8-.94 1.62-1.74 2.38-2.4-.5-.5-.8-1.2-.88-2.06 0 0 0 0 0-.02-.46-1.97-.2-4.54 2.6-8.62.54-.86 1.2-1.75 2-2.65.02-.04.04-.07.07-.1.03-.04.07-.08.1-.12.02-.02.04-.04.06-.06.2-.23.42-.45.64-.67 3.34-3.4 8.6-6.96 16.9-10.15C64.4 43.68 67.94 41 67.94 41c1.07-1.1 2.94-2.45 3.63-2.8-5.05-8.77-6.07-21.15-4.75-24.5-.1.2-.2.38-.3.57.5-1.14.83-1.5 1.34-2.1 1.38-1.64 6.06-2.5 7.74.96.9 1.84 1.06 4.23 1.03 6.02-3.7-.2-7.06 4.04-7.06 4.04s3.07-1.46 6.88-1.5c0 0 1 .9 2.28 2.56-1.7 3.2-4.52 10.02-2.5 17.16.35 1.4.86 2.62 1.5 3.65.02.05.04.1.07.14.05.07.1.13.14.2 3.37 5.06 9.54 5.66 9.54 5.66-2.9-1.45-5.27-3.76-6.8-6.56-.82-1.5-1.3-2.77-1.6-3.77-1.64-6.3.77-10 2.14-12.47 3.17-4.9 8.95-7.9 15.15-7.18 8.72 1 14.97 8.86 13.98 17.57-.6 5.32-3.78 9.72-8.15 12.12 1.05 2.84-.07 6.28-.07 6.28 2.64 3.32 2.76 5.23 2.67 7-3.36-.55-6.62 1.7-6.62 1.7s6.48-1.53 10.24 1.82c2.44 2.64 4.08 5 5.05 6.77 1.4 2.5 7.86 2.68 7.12 7.2-.74 4.5-5.68 4.53-13.4-.57M69.56 0C31.15 0 0 31.15 0 69.57c0 38.42 31.15 69.57 69.57 69.57 38.42 0 69.57-31.15 69.57-69.57C139.14 31.15 108 0 69.57 0M73.8 51.7c.8-.82.8-2.14 0-2.95-.82-.82-2.14-.82-2.95 0-.82.8-.82 2.13 0 2.94.8.8 2.13.8 2.95 0M66.45 53.15c-.82.8-.82 2.13 0 2.95.8.8 2.13.8 2.94 0 .8-.82.8-2.14 0-2.95-.82-.8-2.14-.8-2.95 0"/><path d="M79.23 54.23c-1.27-1.27-3.34-1.27-4.6 0l-2.72 2.7c-1.27 1.3-1.27 3.35 0 4.63l3 2.97c1.26 1.28 3.32 1.28 4.6 0l2.7-2.7c1.28-1.28 1.28-3.35 0-4.62l-2.97-2.97zM95.76 41.44c-2.15-2.57 1.87-7.25 4.4-4.46 4.64 5.15-2.25 7.04-4.4 4.46m9.24 2.7c3.45-6.56-1.42-10.4-4.77-13.53-5.36-5.03-10.7-7.2-16.8-.23-6.1 6.98-2.24 15.07 3.35 19.06 5.58 4 14.78 1.25 18.22-5.3"/></svg></a>                    </section>
+                    <section class="navbar-section desktop-menu">
+
+                        <nav class="dropmenu animated">
+                                                    
+<ul >
+        
+</ul>
+
+                                                </nav>
+
+                        
+                    </section>
+                </nav>
+            </section>
+        </section>
+        <div class="mobile-menu">
+            <div class="button_container" id="toggle">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </div>
+        </div>
+    
+        
+        <section id="start">
+        <section id="body-wrapper" class="section blog-listing">
+    <section class="container grid-lg">
+
+        
+        
+<div class="columns">
+    <div id="item" class="column col-9 col-md-12 extra-spacing">
+                        <div class="content-item h-entry">
+
+    <div class="content-title text-center">
+            <h2 class="p-name mt-1"><a href="/blog/websocket-cloudflare-tunnel-apache-and-irritation" class="u-url">Websocket, Cloudflare tunnel, apache httpd and a bit of security</a></h2>
+                <span class="blog-date">
+    <time class="dt-published" datetime="2023-08-03T21:56:00+00:00">
+        <i class="fa fa-calendar"></i> 3rd Aug 2023
+    </time>
+</span>
+        <span class="tags">
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:apache httpd#body-wrapper">apache httpd</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:argo#body-wrapper">argo</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:cloudflare#body-wrapper">cloudflare</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:headers#body-wrapper">headers</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:httpd#body-wrapper">httpd</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:security#body-wrapper">security</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:tunnel#body-wrapper">tunnel</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:websocket#body-wrapper">websocket</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:workers#body-wrapper">workers</a>
+    </span>
+    </div>
+    <div class="e-content">
+        <h3>Table of Contents</h3>
+<ul>
+<li>The Infrastructure Overview</li>
+<li>Starting point </li>
+<li>Why Cloudflare Tunnel?</li>
+<li>Setting Up Cloudflared in Kubernetes
+<ul>
+<li>Configuration</li>
+<li>Deployment</li>
+</ul></li>
+<li>How the Traffic Flows: Sequence Diagram</li>
+<li>Security Considerations
+<ul>
+<li>1. Cloudflare WAF Protection</li>
+<li>2. Zero Trust Network Architecture</li>
+<li>3. Defense in Depth</li>
+<li>4. Credential Management</li>
+<li>5. HTTPS Everywhere</li>
+</ul></li>
+<li>Monitoring and Observability</li>
+<li>Advanced Configurations
+<ul>
+<li>Load Balancing</li>
+<li>Path-Based Routing</li>
+<li>Apache configuration</li>
+</ul></li>
+<li>Conclusion</li>
+</ul>
+<p>Here we are</p>
+<h2>The Infrastructure Overview</h2>
+<p>In today's interconnected world, exposing your home lab or self-hosted services to the internet can be both necessary and risky. Traditional methods like port forwarding or VPNs come with their own set of challenges and security concerns. This is where Cloudflare Tunnel (formerly Argo Tunnel) comes in as an elegant solution.</p>
+<p>In this article, I'll walk you through how I've implemented a secure infrastructure using Cloudflare Tunnel with WebSocket support, running on a Kubernetes cluster with Apache HTTPD as a reverse proxy. This setup allows me to securely expose internal services without opening ports on my residential firewall while gaining the benefits of Cloudflare's security features.</p>
+<h2>Starting point</h2>
+<p>This one of the scenarios (what made me crazy) where websocket are in use , grafana, since version 8.~ starts to use websocket to update dashboards</p>
+<p><img src="/user/images/websocket-cloudflare-tunnel-apache-and-irritation/home_all_v1.drawio-4.png" alt="" /></p>
+<p>The original idea was to define a "role" for each aspect  </p>
+<p><img src="/user/images/websocket-cloudflare-tunnel-apache-and-irritation/cworkers.png" alt="" />Used as global security header , this will take care to implement the same level of security for each application exposed</p>
+<p><img src="/user/images/websocket-cloudflare-tunnel-apache-and-irritation/cfwaf.png" alt="" />Used to "obfuscate" the origin and implement a sort of protection even if it's the free version of Cloudflare </p>
+<p><img src="/user/images/websocket-cloudflare-tunnel-apache-and-irritation/Screenshot-2023-08-12-at-11.46.00.png" alt="" />Firewall linux based cause i need to make same acl and fw rules</p>
+<p><img src="/user/images/websocket-cloudflare-tunnel-apache-and-irritation/vmware-esxi.png" alt="VMware ESXi" /> Vmware esxi as a "flat" platform to abstract hardware brands, extend portability, backups, etc etc</p>
+<p><img src="/user/images/websocket-cloudflare-tunnel-apache-and-irritation/kubernetes-wordmark.png" alt="Kubernetes Logo and Wordmark Sticker - Just Stickers" /> Kubernetes for all the workloads can be run as immutable images</p>
+<p><img src="/user/images/websocket-cloudflare-tunnel-apache-and-irritation/Screenshot-2023-08-12-at-11.54.58.png" alt="" />Virtual machines when i need disk pressure </p>
+<p>The code used for workers was the following</p>
+<p><code>const securityHeaders = {</code></p>
+<p><code>"Content-Security-Policy":"upgrade-insecure-requests",</code></p>
+<p><code>"Strict-Transport-Security":"max-age=3600;includeSubdomains",</code></p>
+<p><code>"X-Xss-Protection":"1; mode=block",</code></p>
+<p><code>"X-Frame-Options":"DENY",</code></p>
+<p><code>"X-Content-Type-Options":"nosniff",</code></p>
+<p><code>"Permissions-Policy":"geolocation=()",</code></p>
+<p><code>"Referrer-Policy":"strict-origin-when-cross-origin"</code></p>
+<p><code>};</code></p>
+<p><code>async function addHeaders(req) {</code></p>
+<p><code>constresponse=awaitfetch(req),</code></p>
+<p><code>newHeaders=newHeaders(response.headers),</code></p>
+<p><code>setHeaders=Object.assign({},securityHeaders);</code></p>
+<p><code>if (newHeaders.has("Content-Type") &amp;&amp;!newHeaders.get("Content-Type").includes("text/html")) {</code></p>
+<p><code>returnnewResponse(response.body,{</code></p>
+<p><code>status: response.status,</code></p>
+<p><code>statusText: response.statusText,</code></p>
+<p><code>headers: newHeaders</code></p>
+<p><code>});</code></p>
+<p><code>}</code></p>
+<p><code>Object.keys(setHeaders).forEach(name=&gt;newHeaders.set(name,setHeaders[name]));</code></p>
+<p><code>returnnewResponse(response.body,{</code></p>
+<p><code>status: response.status,</code></p>
+<p><code>statusText: response.statusText,</code></p>
+<p><code>headers: newHeaders</code></p>
+<p><code>});</code></p>
+<p><code>}</code></p>
+<p><code>addEventListener("fetch", event =&gt; event.respondWith(addHeaders(event.request)));</code></p>
+<p>Anyway now there is a specific topic in cloudflare portal about the alter headers for security ... <a href="https://developers.cloudflare.com/workers/examples/security-headers/">https://developers.cloudflare.com/workers/examples/security-headers/</a></p>
+<h2>Why Cloudflare Tunnel?</h2>
+<p>Before diving into the technical details, let's understand why this approach is superior:</p>
+<ol>
+<li><strong>No Open Inbound Ports</strong> : Cloudflare Tunnel establishes an outbound-only connection, eliminating the need to open ports on your firewall</li>
+<li><strong>DDoS Protection</strong> : Cloudflare's network absorbs and mitigates attack traffic before it reaches your infrastructure</li>
+<li><strong>Zero Trust Access</strong> : Integrate with Cloudflare Access for identity-based authentication</li>
+<li><strong>TLS Encryption</strong> : All traffic is encrypted end-to-end</li>
+<li><strong>WebSocket Support</strong> : Critical for real-time applications and API</li>
+</ol>
+<h2>Setting Up Cloudflared in Kubernetes</h2>
+<p>The core component of this setup is cloudflared, the daemon that creates and maintains the secure tunnel. Here's how I've deployed it in Kubernetes:</p>
+<h3>Configuration</h3>
+<p>Let's examine the key components of the <code>ConfigMap</code> that defines how cloudflared operates:</p>
+<p>yaml</p>
+<pre><code>apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared
+  namespace: cloudflared
+data:
+  config.yaml: |
+    # Name of the tunnel
+    tunnel: home
+    credentials-file: /etc/cloudflared/creds/credentials.json
+    metrics: 0.0.0.0:2000
+    no-autoupdate: true
+
+    # Ingress rules define traffic routing
+    ingress:
+    # Special case for Let's Encrypt verification
+    - hostname: services.k8s.it
+      path: /.well-known/acme-challenge/
+      service: $internal-ingress
+      originRequest:
+        httpHostHeader: "services.k8s.it"
+        noTLSVerify: true
+        http2Origin: true
+
+    # Main service routing
+    - hostname: services.k8s.it
+      service: $internal-ingress
+      originRequest:
+        httpHostHeader: "services.k8s.it"
+        noTLSVerify: true
+        http2Origin: true
+
+    # Default rule
+    - service: http_status:404</code></pre>
+<p>This configuration maps different hostnames to internal services, with special handling for WebSockets and HTTP/2 connections.</p>
+<h3>Deployment</h3>
+<p>Here's the deployment configuration for cloudflared:</p>
+<p>yaml</p>
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflared
+spec:
+  selector:
+    matchLabels:
+      app: cloudflared
+  replicas: 2  # For high availability
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "2000"
+        prometheus.io/scrape: "true"
+      labels:
+        app: cloudflared
+    spec:
+      containers:
+      - name: cloudflared
+        image: cloudflare/cloudflared:2023.7.0
+        args:
+        - tunnel
+        - --config
+        - /etc/cloudflared/config/config.yaml
+        - run
+        livenessProbe:
+          httpGet:
+            path: /ready
+            port: 2000
+          failureThreshold: 1
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        volumeMounts:
+        - name: config
+          mountPath: /etc/cloudflared/config
+          readOnly: true
+        - name: creds
+          mountPath: /etc/cloudflared/creds
+          readOnly: true
+      volumes:
+      - name: creds
+        secret:
+          secretName: tunnel-credentials
+      - name: config
+        configMap:
+          name: cloudflared
+          items:
+          - key: config.yaml
+            path: config.yaml</code></pre>
+<p>Notice the use of multiple replicas for redundancy and the liveness probe that ensures connectivity to Cloudflare's edge network.</p>
+<h2>How the Traffic Flows: Sequence Diagram</h2>
+<p>Let's visualize how a request flows through this infrastructure:</p>
+<pre><code>User -&gt; Cloudflare -&gt; Cloudflared -&gt; Kubernetes Ingress -&gt; Apache HTTPD -&gt; Application</code></pre>
+<p><img src="/user/images/websocket-cloudflare-tunnel-apache-and-irritation/Screenshot-2025-04-24-at-19.07.35.png" alt="" /></p>
+<h2>Security Considerations</h2>
+<h3>1. Cloudflare WAF Protection</h3>
+<p>Cloudflare's Web Application Firewall provides protection against:</p>
+<ul>
+<li>SQL injection attacks</li>
+<li>Cross-site scripting (XSS)</li>
+<li>Cross-site request forgery (CSRF)</li>
+<li>DDoS attacks</li>
+<li>Common vulnerabilities</li>
+</ul>
+<h3>2. Zero Trust Network Architecture</h3>
+<p>The setup follows zero trust principles:</p>
+<ul>
+<li>No exposed ports on the residential firewall</li>
+<li>All connections initiated outbound from inside the network</li>
+<li>No direct path from internet to internal services</li>
+</ul>
+<h3>3. Defense in Depth</h3>
+<p>Multiple security layers provide redundant protection:</p>
+<ul>
+<li>Cloudflare WAF (first line of defense)</li>
+<li>Kubernetes network policies (segmentation)</li>
+<li>Apache as an additional security layer (request filtering)</li>
+<li>Application-level security</li>
+</ul>
+<h3>4. Credential Management</h3>
+<p>Cloudflared credentials require careful handling:</p>
+<ul>
+<li>Store tunnel credentials as Kubernetes secrets</li>
+<li>Regular credential rotation</li>
+<li>Limit access to credential management</li>
+</ul>
+<h3>5. HTTPS Everywhere</h3>
+<p>All traffic is encrypted:</p>
+<ul>
+<li>TLS between user and Cloudflare</li>
+<li>TLS in the tunnel between Cloudflare and cloudflared</li>
+<li>Optional TLS for internal communications</li>
+</ul>
+<h2>Monitoring and Observability</h2>
+<p>The infrastructure includes robust monitoring:</p>
+<ol>
+<li><strong>Prometheus Integration</strong> : Cloudflared exposes metrics on port 2000</li>
+<li><strong>Grafana Dashboards</strong> : Visualize performance and security metrics</li>
+<li><strong>Logs Aggregation</strong> : Collect logs from all components for analysis</li>
+</ol>
+<p>yaml</p>
+<pre><code>annotations:
+  prometheus.io/path: /metrics
+  prometheus.io/port: "2000"
+  prometheus.io/scrape: "true"</code></pre>
+<h2>Advanced Configurations</h2>
+<h3>Load Balancing</h3>
+<p>For high availability, the setup uses multiple cloudflared replicas:</p>
+<pre><code>replicas: 2  # Multiple instances for reliability</code></pre>
+<p>Cloudflare's global network automatically balances connections across available tunnels.</p>
+<h3>Path-Based Routing</h3>
+<p>The ingress configuration supports path-based routing:</p>
+<pre><code>- hostname: services.k8s.it
+  path: /.well-known/acme-challenge/
+  service: http://$internal-ingress</code></pre>
+<p>This allows for complex routing scenarios based on domain and path.</p>
+<h3>Apache configuration</h3>
+<pre><code>      &lt;Location /grafana/&gt;
+        ProxyPass  http://IP:3000/
+      &lt;/Location&gt;
+
+      &lt;Location /grafana/api/live/ws&gt;
+        ProxyPass  ws://IP:3000/api/live/ws
+      &lt;/Location&gt;</code></pre>
+<h2>Conclusion</h2>
+<p>This architecture provides a secure, reliable way to expose home lab services to the internet. By leveraging Cloudflare Tunnel with WebSocket support, you get:</p>
+<ol>
+<li>Enhanced security with no open ports</li>
+<li>Protection from Cloudflare's global network</li>
+<li>Reliable connections for modern web applications</li>
+<li>Simplified management through Kubernetes</li>
+</ol>
+<p>The combination of cloudflared, Kubernetes, and Apache HTTPD creates a robust infrastructure that's both secure and flexible, allowing you to safely expose services without compromising on security.</p>
+<p>Remember that security is a continuous process - regularly update components, review configurations, and monitor for unusual activity to maintain a strong security posture.</p>
+    </div>
+
+    </div>
+
+<p class="prev-next text-center">
+                <a class="btn" href="/blog/ya-vpn-service-in-kubernetes"><i class="fa fa-angle-left"></i> Previous Post</a>
+    
+            <a class="btn" href="/blog/the-monitoring-paper">Next Post <i class="fa fa-angle-right"></i></a>
+    </p>
+                </div>
+        <div id="sidebar" class="column col-3 col-md-12">
+                        
+
+
+
+                </div>
+    </div>
+
+
+    </section>
+</section>
+        </section>
+
+    </div>
+
+            <section id="footer" class="section bg-gray">
+    <section class="container grid-lg">
+        <p><a href="https://getgrav.org">Grav</a> was <i class="fa fa-code"></i> with <i class="fa fa-heart-o pulse "></i> by <a href="https://trilby.media">Trilby Media</a>.</p>
+    </section>
+</section>
+    
+        <div class="mobile-container">
+        <div class="overlay" id="overlay">
+            <div class="mobile-logo">
+                <a href="/" class="navbar-brand mr-10">
+  <svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" viewBox="0 0 504 140" clip-rule="evenodd"><path d="M235.83 71.56h-7.98c-1.2 0-2.2 1-2.2 2.2V89.1l-.15.13c-4.7 3.96-10.64 6.14-16.72 6.14-14.36 0-26.04-11.68-26.04-26.04s11.68-26.04 26.04-26.04c5.58 0 10.92 1.76 15.44 5.1.87.66 2.1.57 2.86-.2l5.7-5.7c.44-.44.67-1.05.63-1.68-.02-.62-.32-1.2-.82-1.6-6.76-5.35-15.2-8.3-23.8-8.3-21.18 0-38.42 17.23-38.42 38.4 0 21.2 17.24 38.42 38.42 38.42 10.93 0 21.4-4.7 28.7-12.9.35-.4.55-.93.55-1.47v-19.6c0-1.22-.98-2.2-2.2-2.2M502.8 34.44c-.4-.6-1.1-.98-1.84-.98h-8.7c-.87 0-1.66.52-2 1.32l-24.5 56.84-24.9-56.85c-.36-.8-1.15-1.3-2.02-1.3h-8.72c-.74 0-1.44.36-1.84.98-.4.62-.48 1.4-.17 2.1l30.2 68.85c.34.8 1.13 1.32 2 1.32h11c.88 0 1.67-.53 2.02-1.33l29.66-68.87c.3-.68.22-1.47-.2-2.1"/><path d="M388.68 34.77c-.35-.8-1.14-1.32-2-1.32h-11c-.88 0-1.67.53-2.02 1.33L344 103.64c-.3.68-.22 1.47.18 2.08.4.62 1.1 1 1.84 1h8.7c.86 0 1.66-.53 2-1.33l24.5-56.86 24.9 56.86c.36.8 1.15 1.32 2.02 1.32h8.72c.74 0 1.44-.38 1.84-1 .4-.62.47-1.4.17-2.1l-30.2-68.85zM309.2 81.52l.47-.22c8.68-4.2 14.28-13.1 14.28-22.67 0-13.88-11.3-25.18-25.17-25.18H266.9c-1.2 0-2.2 1-2.2 2.2v68.86c0 1.23 1 2.22 2.2 2.22h8c1.2 0 2.2-1 2.2-2.2V45.8h21.68c7.05 0 12.8 5.75 12.8 12.8 0 5.9-4 11-9.73 12.42-1.04.26-2.07.4-3.07.4h-7.98c-.83 0-1.6.46-1.96 1.2-.38.73-.3 1.62.2 2.3l22.6 30.87c.42.58 1.08.92 1.78.92h9.9c.84 0 1.6-.47 1.97-1.2.37-.75.3-1.64-.2-2.3l-15.9-21.7zM107.2 80.97c-7.26-4.8-11.4-8.85-15.02-16.1-2.47 4.97-8.24 12.37-17.96 18.2-4.86 15.1-27.96 44-35.43 39.9-2.22-1.2-2.64-2.8-2.15-4.45.54-4.13 9.08-13.62 9.08-13.62s.18 2 2.92 6.18c-3.6-11.2 5.96-25.03 8.5-29.73 3.98-1.27 4.27-6.4 4.27-6.4.26-7.9-3.28-13.63-6.7-17.05 2.46 3 3.25 7.54 3.37 11.7v.02c0 .47 0 .93 0 1.4-.12 3.43-1.16 8.18-3.38 8.18v.03c-2.28-.1-5.1.4-7.63 1.18l-5.6 1.34s2.98-.13 4.6 1.25c-1.8 2.9-5.78 6.53-10.22 8.58-6.45 3-8.3-2.96-5.03-6.84.8-.94 1.62-1.74 2.38-2.4-.5-.5-.8-1.2-.88-2.06 0 0 0 0 0-.02-.46-1.97-.2-4.54 2.6-8.62.54-.86 1.2-1.75 2-2.65.02-.04.04-.07.07-.1.03-.04.07-.08.1-.12.02-.02.04-.04.06-.06.2-.23.42-.45.64-.67 3.34-3.4 8.6-6.96 16.9-10.15C64.4 43.68 67.94 41 67.94 41c1.07-1.1 2.94-2.45 3.63-2.8-5.05-8.77-6.07-21.15-4.75-24.5-.1.2-.2.38-.3.57.5-1.14.83-1.5 1.34-2.1 1.38-1.64 6.06-2.5 7.74.96.9 1.84 1.06 4.23 1.03 6.02-3.7-.2-7.06 4.04-7.06 4.04s3.07-1.46 6.88-1.5c0 0 1 .9 2.28 2.56-1.7 3.2-4.52 10.02-2.5 17.16.35 1.4.86 2.62 1.5 3.65.02.05.04.1.07.14.05.07.1.13.14.2 3.37 5.06 9.54 5.66 9.54 5.66-2.9-1.45-5.27-3.76-6.8-6.56-.82-1.5-1.3-2.77-1.6-3.77-1.64-6.3.77-10 2.14-12.47 3.17-4.9 8.95-7.9 15.15-7.18 8.72 1 14.97 8.86 13.98 17.57-.6 5.32-3.78 9.72-8.15 12.12 1.05 2.84-.07 6.28-.07 6.28 2.64 3.32 2.76 5.23 2.67 7-3.36-.55-6.62 1.7-6.62 1.7s6.48-1.53 10.24 1.82c2.44 2.64 4.08 5 5.05 6.77 1.4 2.5 7.86 2.68 7.12 7.2-.74 4.5-5.68 4.53-13.4-.57M69.56 0C31.15 0 0 31.15 0 69.57c0 38.42 31.15 69.57 69.57 69.57 38.42 0 69.57-31.15 69.57-69.57C139.14 31.15 108 0 69.57 0M73.8 51.7c.8-.82.8-2.14 0-2.95-.82-.82-2.14-.82-2.95 0-.82.8-.82 2.13 0 2.94.8.8 2.13.8 2.95 0M66.45 53.15c-.82.8-.82 2.13 0 2.95.8.8 2.13.8 2.94 0 .8-.82.8-2.14 0-2.95-.82-.8-2.14-.8-2.95 0"/><path d="M79.23 54.23c-1.27-1.27-3.34-1.27-4.6 0l-2.72 2.7c-1.27 1.3-1.27 3.35 0 4.63l3 2.97c1.26 1.28 3.32 1.28 4.6 0l2.7-2.7c1.28-1.28 1.28-3.35 0-4.62l-2.97-2.97zM95.76 41.44c-2.15-2.57 1.87-7.25 4.4-4.46 4.64 5.15-2.25 7.04-4.4 4.46m9.24 2.7c3.45-6.56-1.42-10.4-4.77-13.53-5.36-5.03-10.7-7.2-16.8-.23-6.1 6.98-2.24 15.07 3.35 19.06 5.58 4 14.78 1.25 18.22-5.3"/></svg></a>            </div>
+            <nav class="overlay-menu">
+                
+<ul class="tree">
+        
+</ul>
+
+            </nav>
+        </div>
+    </div>
+    
+    <script src="/assets/user/themes/quark/js/jquery.treemenu.js"></script>
+<script src="/assets/user/themes/quark/js/site.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>application rate limit | Grav</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="generator" content="GravCMS" />
+    <meta name="description" content="Grav is an easy to use, yet powerful, open source flat-file CMS" />
+
+    <link rel="icon" type="image/png" href="/user/themes/quark/images/favicon.png" />
+    <link rel="canonical" href="http://localhost/blog/application-rate-limiting" />
+
+                        
+            
+    <link href="/assets/user/themes/quark/css/bricklayer.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css-compiled/spectre.min.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css-compiled/theme.min.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css/custom.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css/line-awesome.min.css" type="text/css" rel="stylesheet">
+
+    <script src="/assets/system/assets/jquery/jquery-3.x.min.js"></script>
+<script src="/assets/user/themes/quark/js/bricklayer.min.js"></script>
+<script src="/assets/user/themes/quark/js/scopedQuerySelectorShim.min.js"></script>
+
+</head>
+<body id="top" class=" header-fixed header-animated sticky-footer">
+    <div id="page-wrapper">
+            <section id="header" class="section">
+            <section class="container grid-lg">
+                <nav class="navbar">
+                    <section class="navbar-section logo">
+                        <a href="/" class="navbar-brand mr-10">
+  <svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" viewBox="0 0 504 140" clip-rule="evenodd"><path d="M235.83 71.56h-7.98c-1.2 0-2.2 1-2.2 2.2V89.1l-.15.13c-4.7 3.96-10.64 6.14-16.72 6.14-14.36 0-26.04-11.68-26.04-26.04s11.68-26.04 26.04-26.04c5.58 0 10.92 1.76 15.44 5.1.87.66 2.1.57 2.86-.2l5.7-5.7c.44-.44.67-1.05.63-1.68-.02-.62-.32-1.2-.82-1.6-6.76-5.35-15.2-8.3-23.8-8.3-21.18 0-38.42 17.23-38.42 38.4 0 21.2 17.24 38.42 38.42 38.42 10.93 0 21.4-4.7 28.7-12.9.35-.4.55-.93.55-1.47v-19.6c0-1.22-.98-2.2-2.2-2.2M502.8 34.44c-.4-.6-1.1-.98-1.84-.98h-8.7c-.87 0-1.66.52-2 1.32l-24.5 56.84-24.9-56.85c-.36-.8-1.15-1.3-2.02-1.3h-8.72c-.74 0-1.44.36-1.84.98-.4.62-.48 1.4-.17 2.1l30.2 68.85c.34.8 1.13 1.32 2 1.32h11c.88 0 1.67-.53 2.02-1.33l29.66-68.87c.3-.68.22-1.47-.2-2.1"/><path d="M388.68 34.77c-.35-.8-1.14-1.32-2-1.32h-11c-.88 0-1.67.53-2.02 1.33L344 103.64c-.3.68-.22 1.47.18 2.08.4.62 1.1 1 1.84 1h8.7c.86 0 1.66-.53 2-1.33l24.5-56.86 24.9 56.86c.36.8 1.15 1.32 2.02 1.32h8.72c.74 0 1.44-.38 1.84-1 .4-.62.47-1.4.17-2.1l-30.2-68.85zM309.2 81.52l.47-.22c8.68-4.2 14.28-13.1 14.28-22.67 0-13.88-11.3-25.18-25.17-25.18H266.9c-1.2 0-2.2 1-2.2 2.2v68.86c0 1.23 1 2.22 2.2 2.22h8c1.2 0 2.2-1 2.2-2.2V45.8h21.68c7.05 0 12.8 5.75 12.8 12.8 0 5.9-4 11-9.73 12.42-1.04.26-2.07.4-3.07.4h-7.98c-.83 0-1.6.46-1.96 1.2-.38.73-.3 1.62.2 2.3l22.6 30.87c.42.58 1.08.92 1.78.92h9.9c.84 0 1.6-.47 1.97-1.2.37-.75.3-1.64-.2-2.3l-15.9-21.7zM107.2 80.97c-7.26-4.8-11.4-8.85-15.02-16.1-2.47 4.97-8.24 12.37-17.96 18.2-4.86 15.1-27.96 44-35.43 39.9-2.22-1.2-2.64-2.8-2.15-4.45.54-4.13 9.08-13.62 9.08-13.62s.18 2 2.92 6.18c-3.6-11.2 5.96-25.03 8.5-29.73 3.98-1.27 4.27-6.4 4.27-6.4.26-7.9-3.28-13.63-6.7-17.05 2.46 3 3.25 7.54 3.37 11.7v.02c0 .47 0 .93 0 1.4-.12 3.43-1.16 8.18-3.38 8.18v.03c-2.28-.1-5.1.4-7.63 1.18l-5.6 1.34s2.98-.13 4.6 1.25c-1.8 2.9-5.78 6.53-10.22 8.58-6.45 3-8.3-2.96-5.03-6.84.8-.94 1.62-1.74 2.38-2.4-.5-.5-.8-1.2-.88-2.06 0 0 0 0 0-.02-.46-1.97-.2-4.54 2.6-8.62.54-.86 1.2-1.75 2-2.65.02-.04.04-.07.07-.1.03-.04.07-.08.1-.12.02-.02.04-.04.06-.06.2-.23.42-.45.64-.67 3.34-3.4 8.6-6.96 16.9-10.15C64.4 43.68 67.94 41 67.94 41c1.07-1.1 2.94-2.45 3.63-2.8-5.05-8.77-6.07-21.15-4.75-24.5-.1.2-.2.38-.3.57.5-1.14.83-1.5 1.34-2.1 1.38-1.64 6.06-2.5 7.74.96.9 1.84 1.06 4.23 1.03 6.02-3.7-.2-7.06 4.04-7.06 4.04s3.07-1.46 6.88-1.5c0 0 1 .9 2.28 2.56-1.7 3.2-4.52 10.02-2.5 17.16.35 1.4.86 2.62 1.5 3.65.02.05.04.1.07.14.05.07.1.13.14.2 3.37 5.06 9.54 5.66 9.54 5.66-2.9-1.45-5.27-3.76-6.8-6.56-.82-1.5-1.3-2.77-1.6-3.77-1.64-6.3.77-10 2.14-12.47 3.17-4.9 8.95-7.9 15.15-7.18 8.72 1 14.97 8.86 13.98 17.57-.6 5.32-3.78 9.72-8.15 12.12 1.05 2.84-.07 6.28-.07 6.28 2.64 3.32 2.76 5.23 2.67 7-3.36-.55-6.62 1.7-6.62 1.7s6.48-1.53 10.24 1.82c2.44 2.64 4.08 5 5.05 6.77 1.4 2.5 7.86 2.68 7.12 7.2-.74 4.5-5.68 4.53-13.4-.57M69.56 0C31.15 0 0 31.15 0 69.57c0 38.42 31.15 69.57 69.57 69.57 38.42 0 69.57-31.15 69.57-69.57C139.14 31.15 108 0 69.57 0M73.8 51.7c.8-.82.8-2.14 0-2.95-.82-.82-2.14-.82-2.95 0-.82.8-.82 2.13 0 2.94.8.8 2.13.8 2.95 0M66.45 53.15c-.82.8-.82 2.13 0 2.95.8.8 2.13.8 2.94 0 .8-.82.8-2.14 0-2.95-.82-.8-2.14-.8-2.95 0"/><path d="M79.23 54.23c-1.27-1.27-3.34-1.27-4.6 0l-2.72 2.7c-1.27 1.3-1.27 3.35 0 4.63l3 2.97c1.26 1.28 3.32 1.28 4.6 0l2.7-2.7c1.28-1.28 1.28-3.35 0-4.62l-2.97-2.97zM95.76 41.44c-2.15-2.57 1.87-7.25 4.4-4.46 4.64 5.15-2.25 7.04-4.4 4.46m9.24 2.7c3.45-6.56-1.42-10.4-4.77-13.53-5.36-5.03-10.7-7.2-16.8-.23-6.1 6.98-2.24 15.07 3.35 19.06 5.58 4 14.78 1.25 18.22-5.3"/></svg></a>                    </section>
+                    <section class="navbar-section desktop-menu">
+
+                        <nav class="dropmenu animated">
+                                                    
+<ul >
+        
+</ul>
+
+                                                </nav>
+
+                        
+                    </section>
+                </nav>
+            </section>
+        </section>
+        <div class="mobile-menu">
+            <div class="button_container" id="toggle">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </div>
+        </div>
+    
+        
+        <section id="start">
+        <section id="body-wrapper" class="section blog-listing">
+    <section class="container grid-lg">
+
+        
+        
+<div class="columns">
+    <div id="item" class="column col-9 col-md-12 extra-spacing">
+                        <div class="content-item h-entry">
+
+    <div class="content-title text-center">
+            <h2 class="p-name mt-1"><a href="/blog/application-rate-limiting" class="u-url">application rate limit</a></h2>
+                <span class="blog-date">
+    <time class="dt-published" datetime="2023-02-11T13:10:00+00:00">
+        <i class="fa fa-calendar"></i> 11th Feb 2023
+    </time>
+</span>
+        <span class="tags">
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:api-gateway#body-wrapper">api-gateway</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:envoy#body-wrapper">envoy</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:flask#body-wrapper">flask</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:kubernetes#body-wrapper">kubernetes</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:python#body-wrapper">python</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:rate limit#body-wrapper">rate limit</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:rate-limiting#body-wrapper">rate-limiting</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:service mesh#body-wrapper">service mesh</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:sidecar#body-wrapper">sidecar</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:sidecar conatiner#body-wrapper">sidecar conatiner</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:standalone#body-wrapper">standalone</a>
+    </span>
+    </div>
+    <div class="e-content">
+        <p>For some reasons that i will share later on in a dedicated discussion, i had the need to create a rate limit inside the application.  </p>
+<p>For this scenario we have 2 greddy options:</p>
+<ul>
+<li>have the logic inside the app , in a  <em>code</em> way</li>
+<li>have a sidecar container that has this role</li>
+</ul>
+<h2><a href="/blog/application-rate-limiting/&lt;https://github.com/lorenzogirardi/Kubernetes-sidecar-ratelimit#the-code-way&gt;"></a>the code way</h2>
+<p>This is the simplest one but has some side effects,<br />
+first of all can be reaused just for the same language apps.<br />
+Same as before , having this rate inside the app , we are creating a role inside this app<br />
+that can be good or bad depending of the strategy applied,<br />
+imagine the request interceptor for example will consume cpu and may  <em>false</em> metrics if we are not aware of it.  </p>
+<p>But anyway , it can be a solution , so in a simple python code you have to add the following for example<br />
+(i will use the usual <a href="/blog/application-rate-limiting/&lt;https://github.com/lorenzogirardi/py-test-backend/tree/ratelimit/docker&gt;">app</a> i'm using for labs stuff)<br />
+I'ts Flask so you just have to add the following:<br />
+in requirements.txt --&gt; <code>Flask-Limiter</code></p>
+<p>Inside your code , import the libraries</p>
+<pre><code>from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address</code></pre>
+<p>Enable the  <em>limiter</em></p>
+<pre><code>limiter = Limiter(
+    get_remote_address,
+    app=app,
+    storage_uri="memory://",
+)</code></pre>
+<p>And add the limiting option in the route u'd like to rate</p>
+<pre><code>@limiter.limit("28 per second")</code></pre>
+<h3><a href="/blog/application-rate-limiting/&lt;https://github.com/lorenzogirardi/Kubernetes-sidecar-ratelimit#handson&gt;"></a>Handson</h3>
+<p>Just moved from <code>@limiter.limit("28 per second")</code> to <code>@limiter.limit("2 per second")</code></p>
+<pre><code>$ docker build -t lgirardi/pytbakrated .
+[+] Building 11.1s (9/9) FINISHED
+ =&gt; [internal] load build definition from Dockerfile                                                                                                                                                                                     0.0s
+ =&gt; =&gt; transferring dockerfile: 34B                                                                                                                                                                                                      0.0s
+ =&gt; [internal] load .dockerignore                                                                                                                                                                                                        0.0s
+ =&gt; =&gt; transferring context: 2B                                                                                                                                                                                                          0.0s
+ =&gt; [internal] load metadata for docker.io/library/python:3.9-alpine                                                                                                                                                                     0.6s
+ =&gt; [internal] load build context                                                                                                                                                                                                        0.0s
+ =&gt; =&gt; transferring context: 4.47kB                                                                                                                                                                                                      0.0s
+ =&gt; CACHED [1/4] FROM docker.io/library/python:3.9-alpine@sha256:8bda1e9a98fa4e87ff6e3a7682f496532b06fcbae10326a59c8656126051d4df                                                                                                        0.0s
+ =&gt; [2/4] COPY . /app                                                                                                                                                                                                                    0.0s
+ =&gt; [3/4] WORKDIR /app                                                                                                                                                                                                                   0.0s
+ =&gt; [4/4] RUN pip install -r requirements.txt                                                                                                                                                                                            9.9s
+ =&gt; exporting to image                                                                                                                                                                                                                   0.4s
+ =&gt; =&gt; exporting layers                                                                                                                                                                                                                  0.4s
+ =&gt; =&gt; writing image sha256:583ec19905662414ad6bdb3b0da1042ec799ec46f8a676fac6553364cd02bf1e                                                                                                                                             0.0s
+ =&gt; =&gt; naming to docker.io/lgirardi/pytbakrated
+
+$ docker run -p 5000:5000 lgirardi/pytbakrated
+ * Serving Flask app 'app'
+ * Debug mode: off
+2023-02-11 10:36:06,264 INFO werkzeug MainThread : WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2023-02-11 10:36:06,264 INFO werkzeug MainThread : Press CTRL+C to quit</code></pre>
+<p>With a simple curl you can check if it's working , so the rate will be triggered if u go over 2 req/sec</p>
+<pre><code>$ while true; do curl -I localhost:5000/api/fib/1 &amp;&amp; sleep 0.4;done
+HTTP/1.1 200 OK
+Server: Werkzeug/2.2.2 Python/3.9.16
+Date: Sat, 11 Feb 2023 10:37:54 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 1
+Vary: Accept-Encoding
+Connection: close
+
+HTTP/1.1 200 OK
+Server: Werkzeug/2.2.2 Python/3.9.16
+Date: Sat, 11 Feb 2023 10:37:54 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 1
+Vary: Accept-Encoding
+Connection: close
+
+HTTP/1.1 429 TOO MANY REQUESTS
+Server: Werkzeug/2.2.2 Python/3.9.16
+Date: Sat, 11 Feb 2023 10:37:55 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 117
+Vary: Accept-Encoding
+Connection: close
+
+HTTP/1.1 200 OK
+Server: Werkzeug/2.2.2 Python/3.9.16
+Date: Sat, 11 Feb 2023 10:37:55 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 1
+Vary: Accept-Encoding
+Connection: close
+
+HTTP/1.1 200 OK
+Server: Werkzeug/2.2.2 Python/3.9.16
+Date: Sat, 11 Feb 2023 10:37:56 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 1
+Vary: Accept-Encoding
+Connection: close
+
+HTTP/1.1 429 TOO MANY REQUESTS
+Server: Werkzeug/2.2.2 Python/3.9.16
+Date: Sat, 11 Feb 2023 10:37:56 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 117</code></pre>
+<p>in the same way the contrainer logs are showing the same</p>
+<pre><code>2023-02-11 10:37:54,359 INFO werkzeug Thread-34 : 172.17.0.1 - - [11/Feb/2023 10:37:54] "HEAD /api/fib/1 HTTP/1.1" 200 -
+2023-02-11 10:37:54,778 INFO werkzeug Thread-36 : 172.17.0.1 - - [11/Feb/2023 10:37:54] "HEAD /api/fib/1 HTTP/1.1" 200 -
+2023-02-11 10:37:55,196 INFO flask-limiter Thread-38 : ratelimit 2 per 1 second (172.17.0.1) exceeded at endpoint: fib
+2023-02-11 10:37:55,197 INFO werkzeug Thread-38 : 172.17.0.1 - - [11/Feb/2023 10:37:55] "HEAD /api/fib/1 HTTP/1.1" 429 -
+2023-02-11 10:37:55,616 INFO werkzeug Thread-40 : 172.17.0.1 - - [11/Feb/2023 10:37:55] "HEAD /api/fib/1 HTTP/1.1" 200 -
+2023-02-11 10:37:56,035 INFO werkzeug Thread-42 : 172.17.0.1 - - [11/Feb/2023 10:37:56] "HEAD /api/fib/1 HTTP/1.1" 200 -
+2023-02-11 10:37:56,455 INFO flask-limiter Thread-44 : ratelimit 2 per 1 second (172.17.0.1) exceeded at endpoint: fib
+2023-02-11 10:37:56,456 INFO werkzeug Thread-44 : 172.17.0.1 - - [11/Feb/2023 10:37:56] "HEAD /api/fib/1 HTTP/1.1" 429 -</code></pre>
+<p>Honestly there are few pro and cons ... but i'd like to enter in those details with a more practical exmaple ...<br />
+just few concepts anyway are:</p>
+<ul>
+<li>is using the same pool of connections</li>
+<li>it's impacting the same metric that i'm using for autoscaling</li>
+<li>is stealing resources from app</li>
+<li>is really simple rate limit that can fight with others stuff</li>
+</ul>
+<h2><a href="/blog/application-rate-limiting/&lt;https://github.com/lorenzogirardi/Kubernetes-sidecar-ratelimit#the-sidecar-way&gt;"></a>the sidecar way</h2>
+<p>Yes i know , this is a  <em>stretch</em> , since we have service mesh , gateway etc etc that embrace this concept.<br />
+However, for a specific reason, i created just a sidecar container that can be reused without the needs to implement the infrastructure mentioned before</p>
+<p>First of all the choice, tons of possibility, from nginx reverse proxy , to haproxy to  <em>whatever</em> proxy ...<br />
+in this scenario i took the opportunity to use <strong>envoy</strong> , i've already used it with istio , and is really really flexible<br />
+(sometimes too much, in a way to be confused :-)</p>
+<p>Anyway ... it's just a sidecar<br />
+In an existing app you have to add the following to add envoy</p>
+<pre><code>      - name: sidecar
+        image: envoyproxy/envoy:v1.22-latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 150Mi
+          requests:
+            cpu: 30m
+            memory: 55Mi
+        ports:
+          - name: http
+            containerPort: 5002
+            protocol: TCP
+        volumeMounts:
+          - name: sidecar-config
+            mountPath: "/etc/envoy"
+            readOnly: true
+      volumes:
+        - name: sidecar-config
+          configMap:
+            name: pytbakt-configmap</code></pre>
+<p>(great fantasy for the name :-)</p>
+<p>and ... well the most important configuration is the <code>pytbakt-configmap</code> that is the envoy configuration</p>
+<pre><code>apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pytbakt-configmap
+  labels:
+    app: pytbak
+  namespace: pytbak
+data:
+  envoy.yaml: |
+    static_resources:
+      listeners:
+      - name: listener_0
+        address:
+          socket_address:
+            address: 0.0.0.0
+            port_value: 5002
+        filter_chains:
+        - filters:
+          - name: envoy.filters.network.http_connection_manager
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+              stat_prefix: ingress_http
+              route_config:
+                name: local_route
+                virtual_hosts:
+                - name: local_service
+                  domains: ["*"]
+                  routes:
+                  - match:
+                      prefix: "/"
+                    route:
+                      cluster: pytbak
+              http_filters:
+              - name: envoy.filters.http.local_ratelimit
+                typed_config:
+                  "@type": type.googleapis.com/envoy.extensions.filters.http.local_ratelimit.v3.LocalRateLimit
+                  stat_prefix: http_local_rate_limiter
+                  token_bucket:
+                    max_tokens: 29
+                    tokens_per_fill: 29
+                    fill_interval: 1s
+                  filter_enabled:
+                    runtime_key: local_rate_limit_enabled
+                    default_value:
+                      numerator: 100
+                      denominator: HUNDRED
+                  filter_enforced:
+                    runtime_key: local_rate_limit_enforced
+                    default_value:
+                      numerator: 100
+                      denominator: HUNDRED
+                  response_headers_to_add:
+                  - append_action: OVERWRITE_IF_EXISTS_OR_ADD
+                    header:
+                      key: x-local-rate-limit
+                      value: 'true'
+                  local_rate_limit_per_downstream_connection: false
+
+              - name: envoy.filters.http.router
+                typed_config:
+                  "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+
+      clusters:
+      - name: pytbak
+        connect_timeout: 0.25s
+        type: LOGICAL_DNS
+        dns_lookup_family: V4_ONLY
+        lb_policy: ROUND_ROBIN
+        load_assignment:
+          cluster_name: service_a
+          endpoints:
+          - lb_endpoints:
+            - endpoint:
+                address:
+                  socket_address:
+                    address: localhost
+                    port_value: 5000</code></pre>
+<p>in a Human readable way ...</p>
+<pre><code>      - name: listener_0
+        address:
+          socket_address:
+            address: 0.0.0.0
+            port_value: 5002</code></pre>
+<p>envoy proxy is listening on port 5002</p>
+<pre><code>                - name: local_service
+                  domains: ["*"]
+                  routes:
+                  - match:
+                      prefix: "/"
+                    route:
+                      cluster: pytbak</code></pre>
+<p>no path or domain configuration , just handle all after <code>/</code></p>
+<pre><code>      clusters:
+      - name: pytbak
+        connect_timeout: 0.25s
+        type: LOGICAL_DNS
+        dns_lookup_family: V4_ONLY
+        lb_policy: ROUND_ROBIN
+        load_assignment:
+          cluster_name: service_a
+          endpoints:
+          - lb_endpoints:
+            - endpoint:
+                address:
+                  socket_address:
+                    address: localhost
+                    port_value: 5000</code></pre>
+<p>something like  <em>reverse proxy</em> configuration since the app is listening on port 5000</p>
+<p>And now the Rate limiting section</p>
+<pre><code>              http_filters:
+              - name: envoy.filters.http.local_ratelimit
+                typed_config:
+                  "@type": type.googleapis.com/envoy.extensions.filters.http.local_ratelimit.v3.LocalRateLimit
+                  stat_prefix: http_local_rate_limiter
+                  token_bucket:
+                    max_tokens: 29
+                    tokens_per_fill: 29
+                    fill_interval: 1s
+                  filter_enabled:
+                    runtime_key: local_rate_limit_enabled
+                    default_value:
+                      numerator: 100
+                      denominator: HUNDRED
+                  filter_enforced:
+                    runtime_key: local_rate_limit_enforced
+                    default_value:
+                      numerator: 100
+                      denominator: HUNDRED
+                  response_headers_to_add:
+                  - append_action: OVERWRITE_IF_EXISTS_OR_ADD
+                    header:
+                      key: x-local-rate-limit
+                      value: 'true'
+                  local_rate_limit_per_downstream_connection: false</code></pre>
+<p>we have a bucket of 29 token , and every second it re-enable the 29 token in the bucket ... i mean ... 29req/second  <em>almost</em> :-)</p>
+<h3><a href="/blog/application-rate-limiting/&lt;https://github.com/lorenzogirardi/Kubernetes-sidecar-ratelimit#handson-1&gt;"></a>Handson</h3>
+<p>Again i changed the rate limit to 2req/second</p>
+<pre><code>                  token_bucket:
+                    max_tokens: 2
+                    tokens_per_fill: 2
+                    fill_interval: 1s</code></pre>
+<p>in kubernetes <code>pytbak pytbak-stable-bd648fd46-nj95m 2/2 Running 0 13s</code></p>
+<p>kubectl describe pod pytbak-stable-bd648fd46-nj95m -n pytbak</p>
+<pre><code>Name:         pytbak-stable-bd648fd46-nj95m
+Namespace:    pytbak
+Priority:     0
+Node:         instance-20220215-1853/10.0.254.135
+Start Time:   Sat, 11 Feb 2023 11:19:45 +0000
+Labels:       app=pytbak
+              pod-template-hash=bd648fd46
+              track=pytbak-stable
+Annotations:  cni.projectcalico.org/podIP: 10.1.156.173/32
+              cni.projectcalico.org/podIPs: 10.1.156.173/32
+              prometheus.io/path: /metrics
+              prometheus.io/port: 5000
+              prometheus.io/scrape: true
+Status:       Running
+IP:           10.1.156.173
+IPs:
+  IP:           10.1.156.173
+Controlled By:  ReplicaSet/pytbak-stable-bd648fd46
+Containers:
+  pytbak:
+    Container ID:   containerd://9a54504e73a14746299366e2941b51f7069b6649208329a3f87708b053ef1eaf
+    Image:          lgirardi/rest-test-multip:0.6
+    Image ID:       docker.io/lgirardi/rest-test-multip@sha256:c94695a04fb3b862bfb576ead460aba3528bd098327f88122d087f48380506dd
+    Port:           5000/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sat, 11 Feb 2023 11:19:46 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     300m
+      memory:  250Mi
+    Requests:
+      cpu:        30m
+      memory:     125Mi
+    Liveness:     http-get http://:5000/api/ delay=40s timeout=10s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:5000/api/ delay=5s timeout=15s period=10s #success=1 #failure=3
+    Environment:  &lt;none&gt;
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-xrr7c (ro)
+  sidecar:
+    Container ID:   containerd://a0d45982aa56704983a89bacd664e5cbb8b38b1df943df92ad879e7c66986c22
+    Image:          envoyproxy/envoy:v1.22-latest
+    Image ID:       docker.io/envoyproxy/envoy@sha256:3b1e0114dbead3fbd9f561994f3894f5d113a815e023065cabdf0c48d55396ce
+    Port:           5002/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sat, 11 Feb 2023 11:19:47 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  150Mi
+    Requests:
+      cpu:        30m
+      memory:     55Mi
+    Environment:  &lt;none&gt;
+    Mounts:
+      /etc/envoy from sidecar-config (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-xrr7c (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  sidecar-config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      pytbakt-configmap
+    Optional:  false
+  kube-api-access-xrr7c:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       &lt;nil&gt;
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              &lt;none&gt;
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  3m53s  default-scheduler  Successfully assigned pytbak/pytbak-stable-bd648fd46-nj95m to instance-20220215-1853
+  Normal  Pulled     3m53s  kubelet            Container image "lgirardi/rest-test-multip:0.6" already present on machine
+  Normal  Created    3m53s  kubelet            Created container pytbak
+  Normal  Started    3m53s  kubelet            Started container pytbak
+  Normal  Pulled     3m53s  kubelet            Container image "envoyproxy/envoy:v1.22-latest" already present on machine
+  Normal  Created    3m53s  kubelet            Created container sidecar
+  Normal  Started    3m52s  kubelet            Started container sidecar</code></pre>
+<p>With curl</p>
+<p>$ while true;do curl -I <a href="http://oracolo.k8s.it/api/fib/1">http://oracolo.k8s.it/api/fib/1</a> &amp;&amp; sleep 0.4;done</p>
+<pre><code>HTTP/1.1 200 OK
+Date: Sat, 11 Feb 2023 11:29:48 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 1
+Connection: keep-alive
+vary: Accept-Encoding
+x-envoy-upstream-service-time: 2
+
+HTTP/1.1 200 OK
+Date: Sat, 11 Feb 2023 11:29:49 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 1
+Connection: keep-alive
+vary: Accept-Encoding
+x-envoy-upstream-service-time: 2
+
+HTTP/1.1 429 Too Many Requests
+Date: Sat, 11 Feb 2023 11:29:49 GMT
+Content-Type: text/plain
+Content-Length: 18
+Connection: keep-alive
+x-local-rate-limit: true
+
+HTTP/1.1 200 OK
+Date: Sat, 11 Feb 2023 11:29:50 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 1
+Connection: keep-alive
+vary: Accept-Encoding
+x-envoy-upstream-service-time: 2
+
+HTTP/1.1 200 OK
+Date: Sat, 11 Feb 2023 11:29:50 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 1
+Connection: keep-alive
+vary: Accept-Encoding
+x-envoy-upstream-service-time: 2
+
+HTTP/1.1 429 Too Many Requests
+Date: Sat, 11 Feb 2023 11:29:50 GMT
+Content-Type: text/plain
+Content-Length: 18
+Connection: keep-alive
+x-local-rate-limit: true
+
+HTTP/1.1 200 OK
+Date: Sat, 11 Feb 2023 11:29:51 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 1
+Connection: keep-alive
+vary: Accept-Encoding
+x-envoy-upstream-service-time: 2
+
+HTTP/1.1 200 OK
+Date: Sat, 11 Feb 2023 11:29:51 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 1
+Connection: keep-alive
+vary: Accept-Encoding
+x-envoy-upstream-service-time: 2
+
+HTTP/1.1 429 Too Many Requests
+Date: Sat, 11 Feb 2023 11:29:51 GMT
+Content-Type: text/plain
+Content-Length: 18
+Connection: keep-alive
+x-local-rate-limit: true</code></pre>
+<p>Both solution are working, different ways and different impacts on the app. In the next episode i will explain why i did this job , however, now in case u need a simple way to rate limit you app you can have a sidecar container out of the box.</p>
+    </div>
+
+    </div>
+
+<p class="prev-next text-center">
+                <a class="btn" href="/blog/building-a-scalable-image-cdn-with-minio-imgproxy-and-cloudflare"><i class="fa fa-angle-left"></i> Previous Post</a>
+    
+            <a class="btn" href="/blog/ambient-sensor-for-mere-mortal">Next Post <i class="fa fa-angle-right"></i></a>
+    </p>
+                </div>
+        <div id="sidebar" class="column col-3 col-md-12">
+                        
+
+
+
+                </div>
+    </div>
+
+
+    </section>
+</section>
+        </section>
+
+    </div>
+
+            <section id="footer" class="section bg-gray">
+    <section class="container grid-lg">
+        <p><a href="https://getgrav.org">Grav</a> was <i class="fa fa-code"></i> with <i class="fa fa-heart-o pulse "></i> by <a href="https://trilby.media">Trilby Media</a>.</p>
+    </section>
+</section>
+    
+        <div class="mobile-container">
+        <div class="overlay" id="overlay">
+            <div class="mobile-logo">
+                <a href="/" class="navbar-brand mr-10">
+  <svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" viewBox="0 0 504 140" clip-rule="evenodd"><path d="M235.83 71.56h-7.98c-1.2 0-2.2 1-2.2 2.2V89.1l-.15.13c-4.7 3.96-10.64 6.14-16.72 6.14-14.36 0-26.04-11.68-26.04-26.04s11.68-26.04 26.04-26.04c5.58 0 10.92 1.76 15.44 5.1.87.66 2.1.57 2.86-.2l5.7-5.7c.44-.44.67-1.05.63-1.68-.02-.62-.32-1.2-.82-1.6-6.76-5.35-15.2-8.3-23.8-8.3-21.18 0-38.42 17.23-38.42 38.4 0 21.2 17.24 38.42 38.42 38.42 10.93 0 21.4-4.7 28.7-12.9.35-.4.55-.93.55-1.47v-19.6c0-1.22-.98-2.2-2.2-2.2M502.8 34.44c-.4-.6-1.1-.98-1.84-.98h-8.7c-.87 0-1.66.52-2 1.32l-24.5 56.84-24.9-56.85c-.36-.8-1.15-1.3-2.02-1.3h-8.72c-.74 0-1.44.36-1.84.98-.4.62-.48 1.4-.17 2.1l30.2 68.85c.34.8 1.13 1.32 2 1.32h11c.88 0 1.67-.53 2.02-1.33l29.66-68.87c.3-.68.22-1.47-.2-2.1"/><path d="M388.68 34.77c-.35-.8-1.14-1.32-2-1.32h-11c-.88 0-1.67.53-2.02 1.33L344 103.64c-.3.68-.22 1.47.18 2.08.4.62 1.1 1 1.84 1h8.7c.86 0 1.66-.53 2-1.33l24.5-56.86 24.9 56.86c.36.8 1.15 1.32 2.02 1.32h8.72c.74 0 1.44-.38 1.84-1 .4-.62.47-1.4.17-2.1l-30.2-68.85zM309.2 81.52l.47-.22c8.68-4.2 14.28-13.1 14.28-22.67 0-13.88-11.3-25.18-25.17-25.18H266.9c-1.2 0-2.2 1-2.2 2.2v68.86c0 1.23 1 2.22 2.2 2.22h8c1.2 0 2.2-1 2.2-2.2V45.8h21.68c7.05 0 12.8 5.75 12.8 12.8 0 5.9-4 11-9.73 12.42-1.04.26-2.07.4-3.07.4h-7.98c-.83 0-1.6.46-1.96 1.2-.38.73-.3 1.62.2 2.3l22.6 30.87c.42.58 1.08.92 1.78.92h9.9c.84 0 1.6-.47 1.97-1.2.37-.75.3-1.64-.2-2.3l-15.9-21.7zM107.2 80.97c-7.26-4.8-11.4-8.85-15.02-16.1-2.47 4.97-8.24 12.37-17.96 18.2-4.86 15.1-27.96 44-35.43 39.9-2.22-1.2-2.64-2.8-2.15-4.45.54-4.13 9.08-13.62 9.08-13.62s.18 2 2.92 6.18c-3.6-11.2 5.96-25.03 8.5-29.73 3.98-1.27 4.27-6.4 4.27-6.4.26-7.9-3.28-13.63-6.7-17.05 2.46 3 3.25 7.54 3.37 11.7v.02c0 .47 0 .93 0 1.4-.12 3.43-1.16 8.18-3.38 8.18v.03c-2.28-.1-5.1.4-7.63 1.18l-5.6 1.34s2.98-.13 4.6 1.25c-1.8 2.9-5.78 6.53-10.22 8.58-6.45 3-8.3-2.96-5.03-6.84.8-.94 1.62-1.74 2.38-2.4-.5-.5-.8-1.2-.88-2.06 0 0 0 0 0-.02-.46-1.97-.2-4.54 2.6-8.62.54-.86 1.2-1.75 2-2.65.02-.04.04-.07.07-.1.03-.04.07-.08.1-.12.02-.02.04-.04.06-.06.2-.23.42-.45.64-.67 3.34-3.4 8.6-6.96 16.9-10.15C64.4 43.68 67.94 41 67.94 41c1.07-1.1 2.94-2.45 3.63-2.8-5.05-8.77-6.07-21.15-4.75-24.5-.1.2-.2.38-.3.57.5-1.14.83-1.5 1.34-2.1 1.38-1.64 6.06-2.5 7.74.96.9 1.84 1.06 4.23 1.03 6.02-3.7-.2-7.06 4.04-7.06 4.04s3.07-1.46 6.88-1.5c0 0 1 .9 2.28 2.56-1.7 3.2-4.52 10.02-2.5 17.16.35 1.4.86 2.62 1.5 3.65.02.05.04.1.07.14.05.07.1.13.14.2 3.37 5.06 9.54 5.66 9.54 5.66-2.9-1.45-5.27-3.76-6.8-6.56-.82-1.5-1.3-2.77-1.6-3.77-1.64-6.3.77-10 2.14-12.47 3.17-4.9 8.95-7.9 15.15-7.18 8.72 1 14.97 8.86 13.98 17.57-.6 5.32-3.78 9.72-8.15 12.12 1.05 2.84-.07 6.28-.07 6.28 2.64 3.32 2.76 5.23 2.67 7-3.36-.55-6.62 1.7-6.62 1.7s6.48-1.53 10.24 1.82c2.44 2.64 4.08 5 5.05 6.77 1.4 2.5 7.86 2.68 7.12 7.2-.74 4.5-5.68 4.53-13.4-.57M69.56 0C31.15 0 0 31.15 0 69.57c0 38.42 31.15 69.57 69.57 69.57 38.42 0 69.57-31.15 69.57-69.57C139.14 31.15 108 0 69.57 0M73.8 51.7c.8-.82.8-2.14 0-2.95-.82-.82-2.14-.82-2.95 0-.82.8-.82 2.13 0 2.94.8.8 2.13.8 2.95 0M66.45 53.15c-.82.8-.82 2.13 0 2.95.8.8 2.13.8 2.94 0 .8-.82.8-2.14 0-2.95-.82-.8-2.14-.8-2.95 0"/><path d="M79.23 54.23c-1.27-1.27-3.34-1.27-4.6 0l-2.72 2.7c-1.27 1.3-1.27 3.35 0 4.63l3 2.97c1.26 1.28 3.32 1.28 4.6 0l2.7-2.7c1.28-1.28 1.28-3.35 0-4.62l-2.97-2.97zM95.76 41.44c-2.15-2.57 1.87-7.25 4.4-4.46 4.64 5.15-2.25 7.04-4.4 4.46m9.24 2.7c3.45-6.56-1.42-10.4-4.77-13.53-5.36-5.03-10.7-7.2-16.8-.23-6.1 6.98-2.24 15.07 3.35 19.06 5.58 4 14.78 1.25 18.22-5.3"/></svg></a>            </div>
+            <nav class="overlay-menu">
+                
+<ul class="tree">
+        
+</ul>
+
+            </nav>
+        </div>
+    </div>
+    
+    <script src="/assets/user/themes/quark/js/jquery.treemenu.js"></script>
+<script src="/assets/user/themes/quark/js/site.js"></script>
+
+
+</body>
+</html>

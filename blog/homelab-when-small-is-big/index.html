@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Homelab , when small is big | Grav</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="generator" content="GravCMS" />
+    <meta name="description" content="Grav is an easy to use, yet powerful, open source flat-file CMS" />
+
+    <link rel="icon" type="image/png" href="/user/themes/quark/images/favicon.png" />
+    <link rel="canonical" href="http://localhost/blog/homelab-when-small-is-big" />
+
+                        
+            
+    <link href="/assets/user/themes/quark/css/bricklayer.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css-compiled/spectre.min.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css-compiled/theme.min.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css/custom.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css/line-awesome.min.css" type="text/css" rel="stylesheet">
+
+    <script src="/assets/system/assets/jquery/jquery-3.x.min.js"></script>
+<script src="/assets/user/themes/quark/js/bricklayer.min.js"></script>
+<script src="/assets/user/themes/quark/js/scopedQuerySelectorShim.min.js"></script>
+
+</head>
+<body id="top" class=" header-fixed header-animated sticky-footer">
+    <div id="page-wrapper">
+            <section id="header" class="section">
+            <section class="container grid-lg">
+                <nav class="navbar">
+                    <section class="navbar-section logo">
+                        <a href="/" class="navbar-brand mr-10">
+  <svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" viewBox="0 0 504 140" clip-rule="evenodd"><path d="M235.83 71.56h-7.98c-1.2 0-2.2 1-2.2 2.2V89.1l-.15.13c-4.7 3.96-10.64 6.14-16.72 6.14-14.36 0-26.04-11.68-26.04-26.04s11.68-26.04 26.04-26.04c5.58 0 10.92 1.76 15.44 5.1.87.66 2.1.57 2.86-.2l5.7-5.7c.44-.44.67-1.05.63-1.68-.02-.62-.32-1.2-.82-1.6-6.76-5.35-15.2-8.3-23.8-8.3-21.18 0-38.42 17.23-38.42 38.4 0 21.2 17.24 38.42 38.42 38.42 10.93 0 21.4-4.7 28.7-12.9.35-.4.55-.93.55-1.47v-19.6c0-1.22-.98-2.2-2.2-2.2M502.8 34.44c-.4-.6-1.1-.98-1.84-.98h-8.7c-.87 0-1.66.52-2 1.32l-24.5 56.84-24.9-56.85c-.36-.8-1.15-1.3-2.02-1.3h-8.72c-.74 0-1.44.36-1.84.98-.4.62-.48 1.4-.17 2.1l30.2 68.85c.34.8 1.13 1.32 2 1.32h11c.88 0 1.67-.53 2.02-1.33l29.66-68.87c.3-.68.22-1.47-.2-2.1"/><path d="M388.68 34.77c-.35-.8-1.14-1.32-2-1.32h-11c-.88 0-1.67.53-2.02 1.33L344 103.64c-.3.68-.22 1.47.18 2.08.4.62 1.1 1 1.84 1h8.7c.86 0 1.66-.53 2-1.33l24.5-56.86 24.9 56.86c.36.8 1.15 1.32 2.02 1.32h8.72c.74 0 1.44-.38 1.84-1 .4-.62.47-1.4.17-2.1l-30.2-68.85zM309.2 81.52l.47-.22c8.68-4.2 14.28-13.1 14.28-22.67 0-13.88-11.3-25.18-25.17-25.18H266.9c-1.2 0-2.2 1-2.2 2.2v68.86c0 1.23 1 2.22 2.2 2.22h8c1.2 0 2.2-1 2.2-2.2V45.8h21.68c7.05 0 12.8 5.75 12.8 12.8 0 5.9-4 11-9.73 12.42-1.04.26-2.07.4-3.07.4h-7.98c-.83 0-1.6.46-1.96 1.2-.38.73-.3 1.62.2 2.3l22.6 30.87c.42.58 1.08.92 1.78.92h9.9c.84 0 1.6-.47 1.97-1.2.37-.75.3-1.64-.2-2.3l-15.9-21.7zM107.2 80.97c-7.26-4.8-11.4-8.85-15.02-16.1-2.47 4.97-8.24 12.37-17.96 18.2-4.86 15.1-27.96 44-35.43 39.9-2.22-1.2-2.64-2.8-2.15-4.45.54-4.13 9.08-13.62 9.08-13.62s.18 2 2.92 6.18c-3.6-11.2 5.96-25.03 8.5-29.73 3.98-1.27 4.27-6.4 4.27-6.4.26-7.9-3.28-13.63-6.7-17.05 2.46 3 3.25 7.54 3.37 11.7v.02c0 .47 0 .93 0 1.4-.12 3.43-1.16 8.18-3.38 8.18v.03c-2.28-.1-5.1.4-7.63 1.18l-5.6 1.34s2.98-.13 4.6 1.25c-1.8 2.9-5.78 6.53-10.22 8.58-6.45 3-8.3-2.96-5.03-6.84.8-.94 1.62-1.74 2.38-2.4-.5-.5-.8-1.2-.88-2.06 0 0 0 0 0-.02-.46-1.97-.2-4.54 2.6-8.62.54-.86 1.2-1.75 2-2.65.02-.04.04-.07.07-.1.03-.04.07-.08.1-.12.02-.02.04-.04.06-.06.2-.23.42-.45.64-.67 3.34-3.4 8.6-6.96 16.9-10.15C64.4 43.68 67.94 41 67.94 41c1.07-1.1 2.94-2.45 3.63-2.8-5.05-8.77-6.07-21.15-4.75-24.5-.1.2-.2.38-.3.57.5-1.14.83-1.5 1.34-2.1 1.38-1.64 6.06-2.5 7.74.96.9 1.84 1.06 4.23 1.03 6.02-3.7-.2-7.06 4.04-7.06 4.04s3.07-1.46 6.88-1.5c0 0 1 .9 2.28 2.56-1.7 3.2-4.52 10.02-2.5 17.16.35 1.4.86 2.62 1.5 3.65.02.05.04.1.07.14.05.07.1.13.14.2 3.37 5.06 9.54 5.66 9.54 5.66-2.9-1.45-5.27-3.76-6.8-6.56-.82-1.5-1.3-2.77-1.6-3.77-1.64-6.3.77-10 2.14-12.47 3.17-4.9 8.95-7.9 15.15-7.18 8.72 1 14.97 8.86 13.98 17.57-.6 5.32-3.78 9.72-8.15 12.12 1.05 2.84-.07 6.28-.07 6.28 2.64 3.32 2.76 5.23 2.67 7-3.36-.55-6.62 1.7-6.62 1.7s6.48-1.53 10.24 1.82c2.44 2.64 4.08 5 5.05 6.77 1.4 2.5 7.86 2.68 7.12 7.2-.74 4.5-5.68 4.53-13.4-.57M69.56 0C31.15 0 0 31.15 0 69.57c0 38.42 31.15 69.57 69.57 69.57 38.42 0 69.57-31.15 69.57-69.57C139.14 31.15 108 0 69.57 0M73.8 51.7c.8-.82.8-2.14 0-2.95-.82-.82-2.14-.82-2.95 0-.82.8-.82 2.13 0 2.94.8.8 2.13.8 2.95 0M66.45 53.15c-.82.8-.82 2.13 0 2.95.8.8 2.13.8 2.94 0 .8-.82.8-2.14 0-2.95-.82-.8-2.14-.8-2.95 0"/><path d="M79.23 54.23c-1.27-1.27-3.34-1.27-4.6 0l-2.72 2.7c-1.27 1.3-1.27 3.35 0 4.63l3 2.97c1.26 1.28 3.32 1.28 4.6 0l2.7-2.7c1.28-1.28 1.28-3.35 0-4.62l-2.97-2.97zM95.76 41.44c-2.15-2.57 1.87-7.25 4.4-4.46 4.64 5.15-2.25 7.04-4.4 4.46m9.24 2.7c3.45-6.56-1.42-10.4-4.77-13.53-5.36-5.03-10.7-7.2-16.8-.23-6.1 6.98-2.24 15.07 3.35 19.06 5.58 4 14.78 1.25 18.22-5.3"/></svg></a>                    </section>
+                    <section class="navbar-section desktop-menu">
+
+                        <nav class="dropmenu animated">
+                                                    
+<ul >
+        
+</ul>
+
+                                                </nav>
+
+                        
+                    </section>
+                </nav>
+            </section>
+        </section>
+        <div class="mobile-menu">
+            <div class="button_container" id="toggle">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </div>
+        </div>
+    
+        
+        <section id="start">
+        <section id="body-wrapper" class="section blog-listing">
+    <section class="container grid-lg">
+
+        
+        
+<div class="columns">
+    <div id="item" class="column col-9 col-md-12 extra-spacing">
+                        <div class="content-item h-entry">
+
+    <div class="content-title text-center">
+            <h2 class="p-name mt-1"><a href="/blog/homelab-when-small-is-big" class="u-url">Homelab , when small is big</a></h2>
+                <span class="blog-date">
+    <time class="dt-published" datetime="2021-02-19T16:33:00+00:00">
+        <i class="fa fa-calendar"></i> 19th Feb 2021
+    </time>
+</span>
+        <span class="tags">
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:backup#body-wrapper">backup</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:cluster#body-wrapper">cluster</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:ghettovcb#body-wrapper">ghettovcb</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:homelab#body-wrapper">homelab</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:k3s#body-wrapper">k3s</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:kubernetes#body-wrapper">kubernetes</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:microk8s#body-wrapper">microk8s</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:vmware#body-wrapper">vmware</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:vspehere#body-wrapper">vspehere</a>
+    </span>
+    </div>
+    <div class="e-content">
+        <p>When I started getting interested on the IT world , i've usually kept all my devices on 24 h to 24.</p>
+<p>The first labs was an impressive tower in '99 with a huge amount of disk and memory banks, a good cpu cooled by a giant copper heatsink combined with a 12cm fan.<br />
+All those components were quite similar to a helicopter noise during the night.</p>
+<p>The evolution of the lab than , changed a lot year by year , not only reaching a good level of noise but mostly to be cost effective hardware that guarantee new a semplificate production environment.</p>
+<p>Now some goals has changed compared with the '99 approach so let's summarize the lab expectations:</p>
+<ul>
+<li>Cheap hardware </li>
+<li>Noiseless </li>
+<li>TDP under 20w</li>
+<li>24/24 uptime</li>
+<li>Virtualization support </li>
+<li>Enough to have a Kubernetes installation</li>
+<li>Backup solution</li>
+<li>Automation ready </li>
+</ul>
+<p>Let's now explain the needs behind,<br />
+i'd like to have a solution that is able to cover all my needs in terms of hobby and experiments, i don't need power , since i take care to the goodness of the solution instead the absolute performance.</p>
+<h3>Hardware</h3>
+<p>Base: <a href="/blog/homelab-when-small-is-big/&lt;https://ark.intel.com/content/www/us/en/ark/products/126137/intel-nuc-kit-nuc7pjyh.html&gt;">Intel® NUC NUC7PJYH</a></p>
+<p><img src="/user/images/homelab-when-small-is-big/Screenshot-2021-02-19-at-16.39.21-2.png" alt="" /></p>
+<p>RAM: even if the website is reporting 8gb max... this is not true<br />
+on my installation i have 16GB with G.Skill Ripjaws SO-DIMM 16GB DDR4-2400Mhz 2x8GB</p>
+<p><img src="/user/images/homelab-when-small-is-big/Screenshot-2021-02-19-at-16.39.50-2.png" alt="" /></p>
+<p>CPU: j5005 i thinks is the best tdp/performance (here compared to the old q6600 the first intel quadcore ever)</p>
+<p><img src="/user/images/homelab-when-small-is-big/j5005vsq6600.png" alt="" /></p>
+<p>DISK: 250gb with ocz vertex4 are a good starting point </p>
+<p><img src="/user/images/homelab-when-small-is-big/Screenshot-2021-02-19-at-16.40.09.png" alt="" /></p>
+<h3>Software</h3>
+<p>Base os vmware esxi 6.7 (free/essential)</p>
+<p>Now:</p>
+<p><strong>Why</strong> vmware?<br />
+Because the virtualization stack is really important to have an abstraction layer ,<br />
+see this <a href="/blog/homelab-when-small-is-big/&lt;https://www.k8s.it/kubernetes-destroyed-the-virtualization-or-not.html&gt;">post</a></p>
+<p><strong>Why</strong> 6.7?<br />
+Because the vmkernel in 7.0 is changed and is not possible import external network driver (needed for this nuc model), even if there is a trick with usb network adapter and <a href="https://flings.vmware.com/usb-network-native-driver-for-esxi">https://flings.vmware.com/usb-network-native-driver-for-esxi</a> vmware labs usb drivers.</p>
+<p><strong>How</strong> build the image with Realtek network card ?<br />
+First of all you need a windows :( , than you should need to identify your hardware driver , in my case <a href="https://vibsdepot.v-front.de/wiki/index.php/Net55-r8168">https://vibsdepot.v-front.de/wiki/index.php/Net55-r8168</a> and at the end you need to rebuild the image with <a href="/blog/homelab-when-small-is-big/&lt;https://www.v-front.de/p/esxi-customizer-ps.html&gt;">ESXi-Customizer-PS</a></p>
+<p><img src="/user/images/homelab-when-small-is-big/Screenshot-2021-02-19-at-17.16.41.png" alt="" /></p>
+<p><strong>What</strong> we can do with this "toy"?<br />
+Well more or less everything you are doing in your datacenter, using packer and ansible for the installation and vm configuration , you can boostrap a k3s cluster or a microk8s standalone kubernetes, few virtualmachines and so on.  </p>
+<p><strong>But</strong> is small compared to a server !1!1!<br />
+different needs , different size ( but same mindset in terms of reliability , flexibility , usability)... however this is my current usage</p>
+<p>4 VMS:</p>
+<ul>
+<li>microk8s installation </li>
+<li>monitoring infrastructure</li>
+<li>windows active directory</li>
+<li>console vm (usually used as ephemeral environment)</li>
+</ul>
+<p><img src="/user/images/homelab-when-small-is-big/Screenshot-2021-02-19-at-17.26.10.png" alt="" /></p>
+<p>If you have some doubts about the possibility to run kubernetes in a <em>toy</em> , is the base that i used for all my posts</p>
+<p><img src="/user/images/homelab-when-small-is-big/Screenshot-2021-02-19-at-17.30.13.png" alt="" /></p>
+<h3>Monitoring</h3>
+<p>Well again grafana and influxdb are supporting me</p>
+<p>HOST</p>
+<p><img src="/user/images/homelab-when-small-is-big/Screenshot-2021-02-19-at-17.34.04.png" alt="" /></p>
+<p>VMS</p>
+<p><img src="/user/images/homelab-when-small-is-big/vmsgrafana.png" alt="" /></p>
+<h3>Backup</h3>
+<p><strong>Why</strong> backup?<br />
+Because even if the env is automated, some data are inside the vms and i'd like to play with the env and if needed restore the previous snapshot.</p>
+<p>Again another free tool is helping me <a href="https://github.com/lamw/ghettoVCB">https://github.com/lamw/ghettoVCB</a></p>
+<p>It's a quite simple script that i used for non production environment since the beginning.</p>
+<p>In the main path i've created a <em>script</em> folder with ghetto inside and other stuff like packer firewall rules</p>
+<p><code>[root@amaterasu:/vmfs/volumes/5eafe677-1260d7e8-2521-94c691a54f7d/script] ls -la total 2240 drwxr-xr-x 1 root root 73728 May 6 2020 . drwxr-xr-t 1 root root 77824 Dec 28 10:51 .. -rw-r--r-- 1 root root 577 May 4 2020 email.xml -rwxr-xr-x 1 root root 17207 May 4 2020 ghettoVCB-restore.sh -rw-r--r-- 1 root root 309 May 4 2020 ghettoVCB-restore_vm_restore_configuration_template -rw-r--r-- 1 root root 356 May 4 2020 ghettoVCB-vm_backup_configuration_template -rw-r--r-- 1 root root 832 May 10 2020 ghettoVCB.conf -rwxr-xr-x 1 root root 72122 May 4 2020 ghettoVCB.sh -rwxr-xr-x 1 root root 404 May 12 2020 init.sh -rw-r--r-- 1 root root 372 May 4 2020 packer.xml</code></p>
+<p>The init.sh files should be added on local.sh to have it running on all machine startup<br />
+`[root@amaterasu:/vmfs/volumes/5eafe677-1260d7e8-2521-94c691a54f7d/script] cat /etc/rc.local.d/local.sh  </p>
+<h1>!/bin/sh</h1>
+<h1>local configuration options</h1>
+<h1>Note: modify at your own risk! If you do/use anything in this</h1>
+<h1>script that is not part of a stable API (relying on files to be in</h1>
+<h1>specific places, specific tools, specific output, etc) there is a</h1>
+<h1>possibility you will end up with a broken system after patching or</h1>
+<h1>upgrading. Changes are not supported unless under direction of</h1>
+<h1>VMware support.</h1>
+<h1>Note: This script will not be run when UEFI secure boot is enabled.</h1>
+<p>sh -x /vmfs/volumes/amaterasu-datastore/script/init.sh  </p>
+<p>exit 0`</p>
+<p>... on the init file you need to apply all changes to have the ghetto running in crontab</p>
+<p>`[root@amaterasu:/vmfs/volumes/5eafe677-1260d7e8-2521-94c691a54f7d/script] cat init.sh  </p>
+<h1>!/bin/bash</h1>
+<p>cp /vmfs/volumes/amaterasu-datastore/script/email.xml /etc/vmware/firewall/<br />
+cp /vmfs/volumes/amaterasu-datastore/script/packer.xml /etc/vmware/firewall/<br />
+esxcli network firewall refresh<br />
+echo "0 22 <em> </em> 6 /vmfs/volumes/amaterasu-datastore/script/ghettoVCB.sh -a -g /vmfs/volumes/amaterasu-datastore/script/ghettoVCB.conf<br />
+" &gt;&gt; /var/spool/cron/crontabs/root<br />
+kill $(cat /var/run/crond.pid)<br />
+crond`</p>
+<p>it is missing only the ghettoVCB.conf configuration that depends on your needs</p>
+<p><code>[root@amaterasu:/vmfs/volumes/5eafe677-1260d7e8-2521-94c691a54f7d/script] cat ghettoVCB.conf DISK_BACKUP_FORMAT=thin VM_BACKUP_ROTATION_COUNT=3 POWER_VM_DOWN_BEFORE_BACKUP=0 ENABLE_HARD_POWER_OFF=0 ITER_TO_WAIT_SHUTDOWN=3 POWER_DOWN_TIMEOUT=5 ENABLE_COMPRESSION=0 VM_SNAPSHOT_MEMORY=0 VM_SNAPSHOT_QUIESCE=0 ALLOW_VMS_WITH_SNAPSHOTS_TO_BE_BACKEDUP=0 ENABLE_NON_PERSISTENT_NFS=1 UNMOUNT_NFS=1 NFS_SERVER=192.168.1.13 NFS_VERSION=nfs NFS_MOUNT=/export/backup NFS_LOCAL_NAME=nfs_storage_backup NFS_VM_BACKUP_DIR=amaterasu ENABLE_NFS_IO_HACK=1 NFS_IO_HACK_LOOP_MAX=10 NFS_IO_HACK_SLEEP_TIMER=60 SNAPSHOT_TIMEOUT=15 EMAIL_ALERT=0 EMAIL_LOG=1 EMAIL_SERVER=smtp.k8s.it EMAIL_SERVER_PORT=25 EMAIL_DELAY_INTERVAL=1 EMAIL_USER_NAME= EMAIL_USER_PASSWORD= [[email protected]](&lt;/cdn-cgi/l/email-protection&gt;) [[email protected]](&lt;/cdn-cgi/l/email-protection&gt;) [[email protected]](&lt;/cdn-cgi/l/email-protection&gt;) WORKDIR_DEBUG=0 VM_SHUTDOWN_ORDER= VM_STARTUP_ORDER=</code></p>
+<p>And ... well thats all ... you have your weekly snapshot<br />
+`2021-02-13 22:00:00 -- info: ============================== ghettoVCB LOG START ==============================  </p>
+<p>2021-02-13 22:00:01 -- info: CONFIG - USING GLOBAL GHETTOVCB CONFIGURATION FILE = /vmfs/volumes/amaterasu-datastore/script/ghettoVCB.conf<br />
+2021-02-13 22:00:01 -- info: CONFIG - VERSION = 2019_01_06_4<br />
+2021-02-13 22:00:01 -- info: CONFIG - GHETTOVCB_PID = 2250208<br />
+2021-02-13 22:00:01 -- info: CONFIG - VM_BACKUP_VOLUME = /vmfs/volumes/nfs_storage_backup/amaterasu<br />
+2021-02-13 22:00:01 -- info: CONFIG - ENABLE_NON_PERSISTENT_NFS = 1<br />
+2021-02-13 22:00:01 -- info: CONFIG - UNMOUNT_NFS = 1<br />
+2021-02-13 22:00:01 -- info: CONFIG - NFS_SERVER = 192.168.1.13<br />
+2021-02-13 22:00:01 -- info: CONFIG - NFS_VERSION = nfs<br />
+2021-02-13 22:00:01 -- info: CONFIG - NFS_MOUNT = /export/backup<br />
+2021-02-13 22:00:01 -- info: CONFIG - VM_BACKUP_ROTATION_COUNT = 3<br />
+2021-02-13 22:00:01 -- info: CONFIG - VM_BACKUP_DIR_NAMING_CONVENTION = 2021-02-13_22-00-00<br />
+2021-02-13 22:00:01 -- info: CONFIG - DISK_BACKUP_FORMAT = thin<br />
+2021-02-13 22:00:01 -- info: CONFIG - POWER_VM_DOWN_BEFORE_BACKUP = 0<br />
+2021-02-13 22:00:01 -- info: CONFIG - ENABLE_HARD_POWER_OFF = 0<br />
+2021-02-13 22:00:01 -- info: CONFIG - ITER_TO_WAIT_SHUTDOWN = 3<br />
+2021-02-13 22:00:01 -- info: CONFIG - POWER_DOWN_TIMEOUT = 5<br />
+2021-02-13 22:00:01 -- info: CONFIG - SNAPSHOT_TIMEOUT = 15<br />
+2021-02-13 22:00:01 -- info: CONFIG - LOG_LEVEL = info<br />
+2021-02-13 22:00:01 -- info: CONFIG - BACKUP_LOG_OUTPUT = /tmp/ghettoVCB-2021-02-13_22-00-00-2250208.log<br />
+2021-02-13 22:00:01 -- info: CONFIG - ENABLE_COMPRESSION = 0<br />
+2021-02-13 22:00:01 -- info: CONFIG - VM_SNAPSHOT_MEMORY = 0<br />
+2021-02-13 22:00:01 -- info: CONFIG - VM_SNAPSHOT_QUIESCE = 0<br />
+2021-02-13 22:00:01 -- info: CONFIG - ALLOW_VMS_WITH_SNAPSHOTS_TO_BE_BACKEDUP = 0<br />
+2021-02-13 22:00:01 -- info: CONFIG - VMDK_FILES_TO_BACKUP = all<br />
+2021-02-13 22:00:01 -- info: CONFIG - VM_SHUTDOWN_ORDER =<br />
+2021-02-13 22:00:01 -- info: CONFIG - VM_STARTUP_ORDER =<br />
+2021-02-13 22:00:01 -- info: CONFIG - RSYNC_LINK = 0<br />
+2021-02-13 22:00:01 -- info: CONFIG - BACKUP_FILES_CHMOD =<br />
+2021-02-13 22:00:01 -- info: CONFIG - EMAIL_LOG = 1<br />
+2021-02-13 22:00:01 -- info: CONFIG - EMAIL_SERVER = <a href="/blog/homelab-when-small-is-big/&lt;http://smtp.k8s.it/&gt;">smtp.xxs.it</a><br />
+2021-02-13 22:00:01 -- info: CONFIG - EMAIL_SERVER_PORT = 25<br />
+2021-02-13 22:00:01 -- info: CONFIG - EMAIL_DELAY_INTERVAL = 1<br />
+2021-02-13 22:00:01 -- info: CONFIG - EMAIL_FROM = <a href="/blog/homelab-when-small-is-big/&lt;/cdn-cgi/l/email-protection#d4b3bcb1a0a0bb829796f9b5b9b5a0b1a6b5a7a194bfeca7fabda0&gt;">[email protected]</a><br />
+2021-02-13 22:00:01 -- info: CONFIG - EMAIL_TO = <a href="/blog/homelab-when-small-is-big/&lt;/cdn-cgi/l/email-protection#cdafacaea6b8bd8da6f5bee3a4b9&gt;">[email protected]</a><br />
+2021-02-13 22:00:01 -- info: CONFIG - WORKDIR_DEBUG = 0<br />
+2021-02-13 22:00:01 -- info: CONFIG - ENABLE NFS IO HACK = 1<br />
+2021-02-13 22:00:01 -- info: CONFIG - NFS IO HACK LOOP MAX = 10<br />
+2021-02-13 22:00:01 -- info: CONFIG - NFS IO HACK SLEEP TIMER = 60<br />
+2021-02-13 22:00:01 -- info: CONFIG - NFS BACKUP DELAY = 0  </p>
+<p>2021-02-13 22:00:06 -- info: Initiate backup for izanami<br />
+2021-02-13 22:00:06 -- info: Creating Snapshot "ghettoVCB-snapshot-2021-02-13" for izanami<br />
+2021-02-13 22:09:55 -- info: Removing snapshot from izanami ...<br />
+2021-02-13 22:10:56 -- info: Slept 60 seconds to work around NFS I/O error<br />
+2021-02-13 22:10:56 -- info: Backup Duration: 10.83 Minutes<br />
+2021-02-13 22:10:56 -- info: Successfully completed backup for izanami!  </p>
+<p>2021-02-13 22:11:02 -- info: Initiate backup for izanagi<br />
+2021-02-13 22:11:02 -- info: Creating Snapshot "ghettoVCB-snapshot-2021-02-13" for izanagi<br />
+2021-02-13 22:16:37 -- info: Removing snapshot from izanagi ...<br />
+2021-02-13 22:17:37 -- info: Slept 60 seconds to work around NFS I/O error<br />
+2021-02-13 22:17:37 -- info: Backup Duration: 6.58 Minutes<br />
+2021-02-13 22:17:37 -- info: Successfully completed backup for izanagi!  </p>
+<p>2021-02-13 22:17:43 -- info: Initiate backup for hiroito<br />
+2021-02-13 22:17:43 -- info: Creating Snapshot "ghettoVCB-snapshot-2021-02-13" for hiroito<br />
+2021-02-13 22:23:55 -- info: Removing snapshot from hiroito ...<br />
+2021-02-13 22:24:56 -- info: Slept 60 seconds to work around NFS I/O error<br />
+2021-02-13 22:24:56 -- info: Backup Duration: 7.22 Minutes<br />
+2021-02-13 22:24:56 -- info: Successfully completed backup for hiroito!  </p>
+<p>2021-02-13 22:25:01 -- info: Initiate backup for raijin<br />
+2021-02-13 22:25:01 -- info: Creating Snapshot "ghettoVCB-snapshot-2021-02-13" for raijin<br />
+2021-02-13 22:26:21 -- info: Removing snapshot from raijin ...<br />
+2021-02-13 22:27:21 -- info: Slept 60 seconds to work around NFS I/O error<br />
+2021-02-13 22:27:21 -- info: Backup Duration: 2.33 Minutes<br />
+2021-02-13 22:27:21 -- info: Successfully completed backup for raijin!  </p>
+<p>2021-02-13 22:27:54 -- info: ###### Final status: All VMs backed up OK! ######  </p>
+<p>2021-02-13 22:27:54 -- info: ============================== ghettoVCB LOG END ================================`  </p>
+<h3>Price</h3>
+<p>nuc7PJYH ~ 160€<br />
+G.Skill Ripjaws SO-DIMM 16GB DDR4-2400Mhz 2x8GB ~ 60€<br />
+hard disk ssd 250db ~ 40€  </p>
+<p>Is not cheap as a raspberry 4 but it's 10 time more performant and guarantee a full server experience with the possibility to play and grow your skills and challenges</p>
+    </div>
+
+    </div>
+
+<p class="prev-next text-center">
+                <a class="btn" href="/blog/hpa-vs-rate-limit"><i class="fa fa-angle-left"></i> Previous Post</a>
+    
+            <a class="btn" href="/blog/docker-latency">Next Post <i class="fa fa-angle-right"></i></a>
+    </p>
+                </div>
+        <div id="sidebar" class="column col-3 col-md-12">
+                        
+
+
+
+                </div>
+    </div>
+
+
+    </section>
+</section>
+        </section>
+
+    </div>
+
+            <section id="footer" class="section bg-gray">
+    <section class="container grid-lg">
+        <p><a href="https://getgrav.org">Grav</a> was <i class="fa fa-code"></i> with <i class="fa fa-heart-o pulse "></i> by <a href="https://trilby.media">Trilby Media</a>.</p>
+    </section>
+</section>
+    
+        <div class="mobile-container">
+        <div class="overlay" id="overlay">
+            <div class="mobile-logo">
+                <a href="/" class="navbar-brand mr-10">
+  <svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" viewBox="0 0 504 140" clip-rule="evenodd"><path d="M235.83 71.56h-7.98c-1.2 0-2.2 1-2.2 2.2V89.1l-.15.13c-4.7 3.96-10.64 6.14-16.72 6.14-14.36 0-26.04-11.68-26.04-26.04s11.68-26.04 26.04-26.04c5.58 0 10.92 1.76 15.44 5.1.87.66 2.1.57 2.86-.2l5.7-5.7c.44-.44.67-1.05.63-1.68-.02-.62-.32-1.2-.82-1.6-6.76-5.35-15.2-8.3-23.8-8.3-21.18 0-38.42 17.23-38.42 38.4 0 21.2 17.24 38.42 38.42 38.42 10.93 0 21.4-4.7 28.7-12.9.35-.4.55-.93.55-1.47v-19.6c0-1.22-.98-2.2-2.2-2.2M502.8 34.44c-.4-.6-1.1-.98-1.84-.98h-8.7c-.87 0-1.66.52-2 1.32l-24.5 56.84-24.9-56.85c-.36-.8-1.15-1.3-2.02-1.3h-8.72c-.74 0-1.44.36-1.84.98-.4.62-.48 1.4-.17 2.1l30.2 68.85c.34.8 1.13 1.32 2 1.32h11c.88 0 1.67-.53 2.02-1.33l29.66-68.87c.3-.68.22-1.47-.2-2.1"/><path d="M388.68 34.77c-.35-.8-1.14-1.32-2-1.32h-11c-.88 0-1.67.53-2.02 1.33L344 103.64c-.3.68-.22 1.47.18 2.08.4.62 1.1 1 1.84 1h8.7c.86 0 1.66-.53 2-1.33l24.5-56.86 24.9 56.86c.36.8 1.15 1.32 2.02 1.32h8.72c.74 0 1.44-.38 1.84-1 .4-.62.47-1.4.17-2.1l-30.2-68.85zM309.2 81.52l.47-.22c8.68-4.2 14.28-13.1 14.28-22.67 0-13.88-11.3-25.18-25.17-25.18H266.9c-1.2 0-2.2 1-2.2 2.2v68.86c0 1.23 1 2.22 2.2 2.22h8c1.2 0 2.2-1 2.2-2.2V45.8h21.68c7.05 0 12.8 5.75 12.8 12.8 0 5.9-4 11-9.73 12.42-1.04.26-2.07.4-3.07.4h-7.98c-.83 0-1.6.46-1.96 1.2-.38.73-.3 1.62.2 2.3l22.6 30.87c.42.58 1.08.92 1.78.92h9.9c.84 0 1.6-.47 1.97-1.2.37-.75.3-1.64-.2-2.3l-15.9-21.7zM107.2 80.97c-7.26-4.8-11.4-8.85-15.02-16.1-2.47 4.97-8.24 12.37-17.96 18.2-4.86 15.1-27.96 44-35.43 39.9-2.22-1.2-2.64-2.8-2.15-4.45.54-4.13 9.08-13.62 9.08-13.62s.18 2 2.92 6.18c-3.6-11.2 5.96-25.03 8.5-29.73 3.98-1.27 4.27-6.4 4.27-6.4.26-7.9-3.28-13.63-6.7-17.05 2.46 3 3.25 7.54 3.37 11.7v.02c0 .47 0 .93 0 1.4-.12 3.43-1.16 8.18-3.38 8.18v.03c-2.28-.1-5.1.4-7.63 1.18l-5.6 1.34s2.98-.13 4.6 1.25c-1.8 2.9-5.78 6.53-10.22 8.58-6.45 3-8.3-2.96-5.03-6.84.8-.94 1.62-1.74 2.38-2.4-.5-.5-.8-1.2-.88-2.06 0 0 0 0 0-.02-.46-1.97-.2-4.54 2.6-8.62.54-.86 1.2-1.75 2-2.65.02-.04.04-.07.07-.1.03-.04.07-.08.1-.12.02-.02.04-.04.06-.06.2-.23.42-.45.64-.67 3.34-3.4 8.6-6.96 16.9-10.15C64.4 43.68 67.94 41 67.94 41c1.07-1.1 2.94-2.45 3.63-2.8-5.05-8.77-6.07-21.15-4.75-24.5-.1.2-.2.38-.3.57.5-1.14.83-1.5 1.34-2.1 1.38-1.64 6.06-2.5 7.74.96.9 1.84 1.06 4.23 1.03 6.02-3.7-.2-7.06 4.04-7.06 4.04s3.07-1.46 6.88-1.5c0 0 1 .9 2.28 2.56-1.7 3.2-4.52 10.02-2.5 17.16.35 1.4.86 2.62 1.5 3.65.02.05.04.1.07.14.05.07.1.13.14.2 3.37 5.06 9.54 5.66 9.54 5.66-2.9-1.45-5.27-3.76-6.8-6.56-.82-1.5-1.3-2.77-1.6-3.77-1.64-6.3.77-10 2.14-12.47 3.17-4.9 8.95-7.9 15.15-7.18 8.72 1 14.97 8.86 13.98 17.57-.6 5.32-3.78 9.72-8.15 12.12 1.05 2.84-.07 6.28-.07 6.28 2.64 3.32 2.76 5.23 2.67 7-3.36-.55-6.62 1.7-6.62 1.7s6.48-1.53 10.24 1.82c2.44 2.64 4.08 5 5.05 6.77 1.4 2.5 7.86 2.68 7.12 7.2-.74 4.5-5.68 4.53-13.4-.57M69.56 0C31.15 0 0 31.15 0 69.57c0 38.42 31.15 69.57 69.57 69.57 38.42 0 69.57-31.15 69.57-69.57C139.14 31.15 108 0 69.57 0M73.8 51.7c.8-.82.8-2.14 0-2.95-.82-.82-2.14-.82-2.95 0-.82.8-.82 2.13 0 2.94.8.8 2.13.8 2.95 0M66.45 53.15c-.82.8-.82 2.13 0 2.95.8.8 2.13.8 2.94 0 .8-.82.8-2.14 0-2.95-.82-.8-2.14-.8-2.95 0"/><path d="M79.23 54.23c-1.27-1.27-3.34-1.27-4.6 0l-2.72 2.7c-1.27 1.3-1.27 3.35 0 4.63l3 2.97c1.26 1.28 3.32 1.28 4.6 0l2.7-2.7c1.28-1.28 1.28-3.35 0-4.62l-2.97-2.97zM95.76 41.44c-2.15-2.57 1.87-7.25 4.4-4.46 4.64 5.15-2.25 7.04-4.4 4.46m9.24 2.7c3.45-6.56-1.42-10.4-4.77-13.53-5.36-5.03-10.7-7.2-16.8-.23-6.1 6.98-2.24 15.07 3.35 19.06 5.58 4 14.78 1.25 18.22-5.3"/></svg></a>            </div>
+            <nav class="overlay-menu">
+                
+<ul class="tree">
+        
+</ul>
+
+            </nav>
+        </div>
+    </div>
+    
+    <script src="/assets/user/themes/quark/js/jquery.treemenu.js"></script>
+<script src="/assets/user/themes/quark/js/site.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Kubernetes-nstats | Grav</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="generator" content="GravCMS" />
+    <meta name="description" content="Grav is an easy to use, yet powerful, open source flat-file CMS" />
+
+    <link rel="icon" type="image/png" href="/user/themes/quark/images/favicon.png" />
+    <link rel="canonical" href="http://localhost/blog/kubernetes-nstats" />
+
+                        
+            
+    <link href="/assets/user/themes/quark/css/bricklayer.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css-compiled/spectre.min.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css-compiled/theme.min.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css/custom.css" type="text/css" rel="stylesheet">
+<link href="/assets/user/themes/quark/css/line-awesome.min.css" type="text/css" rel="stylesheet">
+
+    <script src="/assets/system/assets/jquery/jquery-3.x.min.js"></script>
+<script src="/assets/user/themes/quark/js/bricklayer.min.js"></script>
+<script src="/assets/user/themes/quark/js/scopedQuerySelectorShim.min.js"></script>
+
+</head>
+<body id="top" class=" header-fixed header-animated sticky-footer">
+    <div id="page-wrapper">
+            <section id="header" class="section">
+            <section class="container grid-lg">
+                <nav class="navbar">
+                    <section class="navbar-section logo">
+                        <a href="/" class="navbar-brand mr-10">
+  <svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" viewBox="0 0 504 140" clip-rule="evenodd"><path d="M235.83 71.56h-7.98c-1.2 0-2.2 1-2.2 2.2V89.1l-.15.13c-4.7 3.96-10.64 6.14-16.72 6.14-14.36 0-26.04-11.68-26.04-26.04s11.68-26.04 26.04-26.04c5.58 0 10.92 1.76 15.44 5.1.87.66 2.1.57 2.86-.2l5.7-5.7c.44-.44.67-1.05.63-1.68-.02-.62-.32-1.2-.82-1.6-6.76-5.35-15.2-8.3-23.8-8.3-21.18 0-38.42 17.23-38.42 38.4 0 21.2 17.24 38.42 38.42 38.42 10.93 0 21.4-4.7 28.7-12.9.35-.4.55-.93.55-1.47v-19.6c0-1.22-.98-2.2-2.2-2.2M502.8 34.44c-.4-.6-1.1-.98-1.84-.98h-8.7c-.87 0-1.66.52-2 1.32l-24.5 56.84-24.9-56.85c-.36-.8-1.15-1.3-2.02-1.3h-8.72c-.74 0-1.44.36-1.84.98-.4.62-.48 1.4-.17 2.1l30.2 68.85c.34.8 1.13 1.32 2 1.32h11c.88 0 1.67-.53 2.02-1.33l29.66-68.87c.3-.68.22-1.47-.2-2.1"/><path d="M388.68 34.77c-.35-.8-1.14-1.32-2-1.32h-11c-.88 0-1.67.53-2.02 1.33L344 103.64c-.3.68-.22 1.47.18 2.08.4.62 1.1 1 1.84 1h8.7c.86 0 1.66-.53 2-1.33l24.5-56.86 24.9 56.86c.36.8 1.15 1.32 2.02 1.32h8.72c.74 0 1.44-.38 1.84-1 .4-.62.47-1.4.17-2.1l-30.2-68.85zM309.2 81.52l.47-.22c8.68-4.2 14.28-13.1 14.28-22.67 0-13.88-11.3-25.18-25.17-25.18H266.9c-1.2 0-2.2 1-2.2 2.2v68.86c0 1.23 1 2.22 2.2 2.22h8c1.2 0 2.2-1 2.2-2.2V45.8h21.68c7.05 0 12.8 5.75 12.8 12.8 0 5.9-4 11-9.73 12.42-1.04.26-2.07.4-3.07.4h-7.98c-.83 0-1.6.46-1.96 1.2-.38.73-.3 1.62.2 2.3l22.6 30.87c.42.58 1.08.92 1.78.92h9.9c.84 0 1.6-.47 1.97-1.2.37-.75.3-1.64-.2-2.3l-15.9-21.7zM107.2 80.97c-7.26-4.8-11.4-8.85-15.02-16.1-2.47 4.97-8.24 12.37-17.96 18.2-4.86 15.1-27.96 44-35.43 39.9-2.22-1.2-2.64-2.8-2.15-4.45.54-4.13 9.08-13.62 9.08-13.62s.18 2 2.92 6.18c-3.6-11.2 5.96-25.03 8.5-29.73 3.98-1.27 4.27-6.4 4.27-6.4.26-7.9-3.28-13.63-6.7-17.05 2.46 3 3.25 7.54 3.37 11.7v.02c0 .47 0 .93 0 1.4-.12 3.43-1.16 8.18-3.38 8.18v.03c-2.28-.1-5.1.4-7.63 1.18l-5.6 1.34s2.98-.13 4.6 1.25c-1.8 2.9-5.78 6.53-10.22 8.58-6.45 3-8.3-2.96-5.03-6.84.8-.94 1.62-1.74 2.38-2.4-.5-.5-.8-1.2-.88-2.06 0 0 0 0 0-.02-.46-1.97-.2-4.54 2.6-8.62.54-.86 1.2-1.75 2-2.65.02-.04.04-.07.07-.1.03-.04.07-.08.1-.12.02-.02.04-.04.06-.06.2-.23.42-.45.64-.67 3.34-3.4 8.6-6.96 16.9-10.15C64.4 43.68 67.94 41 67.94 41c1.07-1.1 2.94-2.45 3.63-2.8-5.05-8.77-6.07-21.15-4.75-24.5-.1.2-.2.38-.3.57.5-1.14.83-1.5 1.34-2.1 1.38-1.64 6.06-2.5 7.74.96.9 1.84 1.06 4.23 1.03 6.02-3.7-.2-7.06 4.04-7.06 4.04s3.07-1.46 6.88-1.5c0 0 1 .9 2.28 2.56-1.7 3.2-4.52 10.02-2.5 17.16.35 1.4.86 2.62 1.5 3.65.02.05.04.1.07.14.05.07.1.13.14.2 3.37 5.06 9.54 5.66 9.54 5.66-2.9-1.45-5.27-3.76-6.8-6.56-.82-1.5-1.3-2.77-1.6-3.77-1.64-6.3.77-10 2.14-12.47 3.17-4.9 8.95-7.9 15.15-7.18 8.72 1 14.97 8.86 13.98 17.57-.6 5.32-3.78 9.72-8.15 12.12 1.05 2.84-.07 6.28-.07 6.28 2.64 3.32 2.76 5.23 2.67 7-3.36-.55-6.62 1.7-6.62 1.7s6.48-1.53 10.24 1.82c2.44 2.64 4.08 5 5.05 6.77 1.4 2.5 7.86 2.68 7.12 7.2-.74 4.5-5.68 4.53-13.4-.57M69.56 0C31.15 0 0 31.15 0 69.57c0 38.42 31.15 69.57 69.57 69.57 38.42 0 69.57-31.15 69.57-69.57C139.14 31.15 108 0 69.57 0M73.8 51.7c.8-.82.8-2.14 0-2.95-.82-.82-2.14-.82-2.95 0-.82.8-.82 2.13 0 2.94.8.8 2.13.8 2.95 0M66.45 53.15c-.82.8-.82 2.13 0 2.95.8.8 2.13.8 2.94 0 .8-.82.8-2.14 0-2.95-.82-.8-2.14-.8-2.95 0"/><path d="M79.23 54.23c-1.27-1.27-3.34-1.27-4.6 0l-2.72 2.7c-1.27 1.3-1.27 3.35 0 4.63l3 2.97c1.26 1.28 3.32 1.28 4.6 0l2.7-2.7c1.28-1.28 1.28-3.35 0-4.62l-2.97-2.97zM95.76 41.44c-2.15-2.57 1.87-7.25 4.4-4.46 4.64 5.15-2.25 7.04-4.4 4.46m9.24 2.7c3.45-6.56-1.42-10.4-4.77-13.53-5.36-5.03-10.7-7.2-16.8-.23-6.1 6.98-2.24 15.07 3.35 19.06 5.58 4 14.78 1.25 18.22-5.3"/></svg></a>                    </section>
+                    <section class="navbar-section desktop-menu">
+
+                        <nav class="dropmenu animated">
+                                                    
+<ul >
+        
+</ul>
+
+                                                </nav>
+
+                        
+                    </section>
+                </nav>
+            </section>
+        </section>
+        <div class="mobile-menu">
+            <div class="button_container" id="toggle">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </div>
+        </div>
+    
+        
+        <section id="start">
+        <section id="body-wrapper" class="section blog-listing">
+    <section class="container grid-lg">
+
+        
+        
+<div class="columns">
+    <div id="item" class="column col-9 col-md-12 extra-spacing">
+                        <div class="content-item h-entry">
+
+    <div class="content-title text-center">
+            <h2 class="p-name mt-1"><a href="/blog/kubernetes-nstats" class="u-url">Kubernetes-nstats</a></h2>
+                <span class="blog-date">
+    <time class="dt-published" datetime="2021-02-22T18:18:00+00:00">
+        <i class="fa fa-calendar"></i> 22nd Feb 2021
+    </time>
+</span>
+        <span class="tags">
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:docker#body-wrapper">docker</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:grafana#body-wrapper">grafana</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:iftop#body-wrapper">iftop</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:influxdb#body-wrapper">influxdb</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:kubernetes#body-wrapper">kubernetes</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:network#body-wrapper">network</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:observability#body-wrapper">observability</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:pod#body-wrapper">pod</a>
+        <a class="label label-rounded label-secondary p-category" href="/blog/tag:sidecar#body-wrapper">sidecar</a>
+    </span>
+    </div>
+    <div class="e-content">
+        <p>Here we go ... another weird sidecar container</p>
+<h2><a href="/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/Kubernetes-nstats#motivations&gt;"></a>Motivations</h2>
+<p>I've always been interested in the observability area , there are many aspect that improve performances and fix bugs<br />
+One of the most interested aspect is te network usage.</p>
+<p>This is not related to "network issue"<br />
+<a href="/blog/kubernetes-nstats/&lt;https://camo.githubusercontent.com/2f639fd02add51a9e1529a68b56a830b12ea328791f0ae671771c5db650dcccd/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3234302f76313631333938303238392f6d6973632f6e6574776f726b69737375652e706e67&gt;"><img src="/user/images/kubernetes-nstats/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3234302f76313631333938303238392f6d6973632f6e6574776f726b69737375652e706e67" alt="network_issue" /></a>  </p>
+<p>It's related to the usages</p>
+<p>You are probably habit to see something like this for your vms<br />
+<a href="/blog/kubernetes-nstats/&lt;https://camo.githubusercontent.com/722f34ecd7e011074527d76ce43b8c3eb28dba06876c311d8900ae1d9f518a17/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3634302f76313631333938303835362f6d6973632f766d5f6e65742e706e67&gt;"><img src="/user/images/kubernetes-nstats/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3634302f76313631333938303835362f6d6973632f766d5f6e65742e706e67" alt="vm_net" /></a><br />
+That is showing the traditional IN and OUT  </p>
+<p>An now ... with kubernetes you can have the same related to your pod<br />
+<a href="/blog/kubernetes-nstats/&lt;https://camo.githubusercontent.com/7051fc44a11f2cc78bd547e91bfba0218d9dd7aba2082de32ddb8475cdb1ad0f/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3634302f76313631333938313333382f6d6973632f706f645f6e65742e706e67&gt;"><img src="/user/images/kubernetes-nstats/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3634302f76313631333938313333382f6d6973632f706f645f6e65742e706e67" alt="pod_net" /></a><br />
+And again you have the IN and OUT  </p>
+<p>But <strong>where</strong> this bandwidth is be used ?</p>
+<p>Answer is not easy , i mean</p>
+<ul>
+<li>you can profile the application</li>
+<li>you can profile the vm/pod</li>
+<li>you can have a dedicated APM</li>
+<li>you can have installed a <a href="/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/kubernetes-servicemesh&gt;">service mesh</a>  </li>
+</ul>
+<p>Service mesh is a good tool but for the reasons explained in the link ... you should promote it in the right way ... it's able to cover my question but let's assume it's a overengineering for my porpose.</p>
+<p>APM ... well it depends on your company/money capability</p>
+<p>What is missing ?<br />
+Well even if we are in 2021 i'm habit to use <strong>iftop</strong> to understand the usage , the limit is that is working in rountime and i miss a long vision term.<br />
+<a href="/blog/kubernetes-nstats/&lt;https://camo.githubusercontent.com/72309f9a4ee7e1f4c6b64f784c375d764d6b73385ea107d01e132e55b1f7e7a9/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313032342f76313631333938373038352f6d6973632f6966746f702e706e67&gt;"><img src="/user/images/kubernetes-nstats/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313032342f76313631333938373038352f6d6973632f6966746f702e706e67" alt="iftop" /></a></p>
+<h2><a href="/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/Kubernetes-nstats#goals&gt;"></a>GOALs</h2>
+<ul>
+<li>Monitor a kubernetes pod network with a sidecar container</li>
+<li>Be able to know src-dst of the pod connections</li>
+<li>Use it as sidecar</li>
+<li>Try to imagine a win-win solution (aka quick and dirty)</li>
+</ul>
+<h2><a href="/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/Kubernetes-nstats#implementation&gt;"></a>Implementation</h2>
+<p>Project https://github.com/lorenzogirardi/Kubernetes-nstats  </p>
+<p>My colleagues has done an amazing work with a GO container able to have this kind of observability.<br />
+I tried to imagine a prototype with a win-win solution and i started evaluation this interesting <a href="/blog/kubernetes-nstats/&lt;https://github.com/scottmsilver/iftop-telegraf-influx&gt;">project</a>,<br />
+where most the work as already done with the following steps:</p>
+<ul>
+<li>Create an iftop static dump</li>
+<li>Filter the results in a matrix</li>
+<li>Build an influxdb layout to POST directly to the database</li>
+</ul>
+<p>so ... let's share some evidence</p>
+<p>Kubernetes-nstats<br />
+|-- Dockerfile<br />
+|-- README.md<br />
+|-- cron.sh<br />
+|-- crontab<br />
+|-- format.py<br />
+`-- parse.awk</p>
+<h3><a href="/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/Kubernetes-nstats#dockerfile&gt;"></a>Dockerfile</h3>
+<pre><code>FROM debian:stretch-slim
+MAINTAINER lgirardi &lt;[[email protected]](&lt;/cdn-cgi/l/email-protection&gt;)&gt;
+
+RUN apt-get -y update &amp;&amp; apt-get -yq install \
+    iftop \
+    python3 \
+    cron \
+    curl
+
+RUN touch /var/log/cron.log
+RUN mkdir /code
+WORKDIR /code
+ADD . /code/
+RUN chmod +x /code/cron.sh
+COPY crontab /etc/crontab
+RUN crontab /etc/crontab
+CMD env &gt; /code/env.sh ; cron -f</code></pre>
+<p>CRON ?!?!?! ... yes it's a prototype and for this scope k8s cronjob are not effective. The most interesting part is <code>env &gt; /code/env.sh</code> that is used to create an environment file based on the docker environment variables.</p>
+<h3><a href="/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/Kubernetes-nstats#code&gt;"></a>Code</h3>
+<p>cron.sh</p>
+<pre><code>#!/bin/bash
+/usr/sbin/iftop -nNb -i $(grep IFACE /code/env.sh |cut -d= -f2) -s 10 -o 10s -t -L 100 2&gt;/dev/null |/usr/bin/awk -f /code/parse.awk |/usr/bin/python3 /code/format.py |/usr/bin/curl -i -XPOST 'http://'"$(grep INFLUX /code/env.sh |cut -d= -f2)"'/write?db='"$(grep IDB /code/env.sh |cut -d= -f2)"'' --data-binary @-</code></pre>
+<p>parse.awk</p>
+<pre><code>#!/bin/awk -f
+BEGIN {
+    numlist = 0
+    nblines = 15
+}
+{
+    if ( numlist == 1 &amp;&amp; $1 == "--------------------------------------------------------------------------------------------" ) {
+        exit
+    }
+
+    if ( numlist == 0 &amp;&amp; $1 == "--------------------------------------------------------------------------------------------" ) {
+        numlist = 1
+        next
+    }
+
+    if ( numlist == 1 ) {
+        if ( $0 ~ "=&gt;" &amp;&amp; nblines &gt; 0 ) {
+            SENDER = $2
+            STX = pfFormat($5)
+            getline
+            RECEIVER = $1
+            RTX = pfFormat($4)
+            printf "%s,%s,%s,%s\n", SENDER, RECEIVER, RTX, STX
+            nblines--
+            if ( nblines &lt; 1 ) {
+                exit
+            }
+        }
+        next
+    }
+}
+END {
+}
+
+function pfFormat(str) {
+    sub("b","",str)
+    return str
+}</code></pre>
+<p>format.py</p>
+<pre><code>#!/usr/local/bin/python3
+
+import csv
+import socket
+import sys
+import re
+
+def getHostName(ipAddress):
+    hostName = ipAddress
+
+    try:
+        hostName = socket.gethostbyaddr(ipAddress.strip())[0]
+    except socket.herror:
+        pass
+
+    return hostName
+
+def prefixToMultiplier(prefix):
+    multiplier = {
+        'K': 1000,
+        'M': 1000000,
+    'G': 1000000000
+    }
+
+    return multiplier.get(prefix, 1)
+
+def expandBitRate(bitRate):
+    groups = re.match(r"(\d+\.?\d*)(?:(K|M|G)?)", bitRate).groups()
+    multiplier = 1.0
+    if len(groups) &gt; 1:
+        multiplier = prefixToMultiplier(groups[1])
+
+    value = float(groups[0])
+    return value * multiplier
+
+host = socket.gethostname()
+
+with sys.stdin as csvfile:
+    csvReader = csv.reader(csvfile)
+    for row in csvReader:
+        (senderIp, receiverIp, receiveRate, sendRate) = (row[0], row[1], expandBitRate(row[2]), expandBitRate(row[3]))
+        sender = getHostName(senderIp)
+        receiver = getHostName(receiverIp)
+        print("nstat,hosts=" + host +",sender=" + sender + ",receiver=" + receiver + " sendRate=" + str(sendRate) + ",receiveRate=" + str(receiveRate))</code></pre>
+<p>crontab</p>
+<pre><code>SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+* * * * *  sh -x /code/cron.sh &gt;&gt; /var/log/cron.log 2&gt;&amp;1
+#</code></pre>
+<p>So that this stuff is doing ?</p>
+<p><code>/usr/sbin/iftop -nNb -i $(grep IFACE /code/env.sh |cut -d= -f2) -s 10 -o 10s -t -L 100 2&gt;/dev/null</code> on this part is defined a 10 second of dump sorted on the last 10second column.</p>
+<p><a href="/blog/kubernetes-nstats/&lt;https://camo.githubusercontent.com/ec94b65472cf70ce7e0e6024aa4433bee5eccb53f02c6a4c69554598958fa5cc/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3634302f76313631333938373739312f6d6973632f6966746f705f64756d702e706e67&gt;"><img src="/user/images/kubernetes-nstats/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3634302f76313631333938373739312f6d6973632f6966746f705f64756d702e706e67" alt="iftop_dump" /></a></p>
+<p>at this point the awk parsing <code>| /usr/bin/awk -f /code/parse.awk</code></p>
+<p><a href="/blog/kubernetes-nstats/&lt;https://camo.githubusercontent.com/ca6cc436234b92705223f0d117a4b01a3bca8f109258e229b8bee0ceeced85fa/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3634302f76313631333938373739312f6d6973632f6966746f705f61776b2e706e67&gt;"><img src="/user/images/kubernetes-nstats/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3634302f76313631333938373739312f6d6973632f6966746f705f61776b2e706e67" alt="iftop_awk" /></a></p>
+<p>the format part done by python script <code>| /usr/bin/python3 /code/format.py</code><br />
+<a href="/blog/kubernetes-nstats/&lt;https://camo.githubusercontent.com/2159b3ceb19d51de4e7a8cc95fc909cc9b3e65f7476129209e3a9f5c60b28784/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3634302f76313631333938373739312f6d6973632f6966746f705f666f726d61742e706e67&gt;"><img src="/user/images/kubernetes-nstats/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f3634302f76313631333938373739312f6d6973632f6966746f705f666f726d61742e706e67" alt="iftop_format" /></a></p>
+<p>and finally we ship the metrics to influxdb with <code>| /usr/bin/curl -i -XPOST 'http://$IP/write?db=$DB' --data-binary @-</code></p>
+<h2><a href="/blog/kubernetes-nstats/&lt;https://github.com/lorenzogirardi/Kubernetes-nstats#results&gt;"></a>Results</h2>
+<p>You can build an run locally <code>docker build -t nstats .</code><br />
+<code>docker run -d -e IFACE=eth0 -e INFLUX=192.168.1.28:8086 -e IDB=test nstats</code></p>
+<p>or add into kubernetes in an existing pod<br />
+it is quite simple and doesn't need any refactoring</p>
+<pre><code>      containers:
+      - image: lgirardi/py-test-backend
+        imagePullPolicy: Always
+        name: pytbak
+    etc etc etc ....
+      - env:
+        - name: IFACE
+          value: eth0
+        - name: INFLUX
+          value: 192.168.1.28:8086
+        - name: IDB
+          value: test
+        image: lgirardi/nstats
+        imagePullPolicy: Always
+        name: nstats</code></pre>
+<p>What you should have on your grafana reflect the network usages</p>
+<p><a href="/blog/kubernetes-nstats/&lt;https://camo.githubusercontent.com/4613ad0a5c58a0c87db124ead36ff00cad611599b58314fb61cea6442163bbf0/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313032342f76313631343031333731352f6d6973632f6966746f705f67726166616e612e706e67&gt;"><img src="/user/images/kubernetes-nstats/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6574687a65726f2f696d6167652f75706c6f61642f635f7363616c652c775f313032342f76313631343031333731352f6d6973632f6966746f705f67726166616e612e706e67" alt="iftop_grafana" /></a></p>
+    </div>
+
+    </div>
+
+<p class="prev-next text-center">
+                <a class="btn" href="/blog/kubernetes-postfix"><i class="fa fa-angle-left"></i> Previous Post</a>
+    
+            <a class="btn" href="/blog/kubernetes-guacamole">Next Post <i class="fa fa-angle-right"></i></a>
+    </p>
+                </div>
+        <div id="sidebar" class="column col-3 col-md-12">
+                        
+
+
+
+                </div>
+    </div>
+
+
+    </section>
+</section>
+        </section>
+
+    </div>
+
+            <section id="footer" class="section bg-gray">
+    <section class="container grid-lg">
+        <p><a href="https://getgrav.org">Grav</a> was <i class="fa fa-code"></i> with <i class="fa fa-heart-o pulse "></i> by <a href="https://trilby.media">Trilby Media</a>.</p>
+    </section>
+</section>
+    
+        <div class="mobile-container">
+        <div class="overlay" id="overlay">
+            <div class="mobile-logo">
+                <a href="/" class="navbar-brand mr-10">
+  <svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" viewBox="0 0 504 140" clip-rule="evenodd"><path d="M235.83 71.56h-7.98c-1.2 0-2.2 1-2.2 2.2V89.1l-.15.13c-4.7 3.96-10.64 6.14-16.72 6.14-14.36 0-26.04-11.68-26.04-26.04s11.68-26.04 26.04-26.04c5.58 0 10.92 1.76 15.44 5.1.87.66 2.1.57 2.86-.2l5.7-5.7c.44-.44.67-1.05.63-1.68-.02-.62-.32-1.2-.82-1.6-6.76-5.35-15.2-8.3-23.8-8.3-21.18 0-38.42 17.23-38.42 38.4 0 21.2 17.24 38.42 38.42 38.42 10.93 0 21.4-4.7 28.7-12.9.35-.4.55-.93.55-1.47v-19.6c0-1.22-.98-2.2-2.2-2.2M502.8 34.44c-.4-.6-1.1-.98-1.84-.98h-8.7c-.87 0-1.66.52-2 1.32l-24.5 56.84-24.9-56.85c-.36-.8-1.15-1.3-2.02-1.3h-8.72c-.74 0-1.44.36-1.84.98-.4.62-.48 1.4-.17 2.1l30.2 68.85c.34.8 1.13 1.32 2 1.32h11c.88 0 1.67-.53 2.02-1.33l29.66-68.87c.3-.68.22-1.47-.2-2.1"/><path d="M388.68 34.77c-.35-.8-1.14-1.32-2-1.32h-11c-.88 0-1.67.53-2.02 1.33L344 103.64c-.3.68-.22 1.47.18 2.08.4.62 1.1 1 1.84 1h8.7c.86 0 1.66-.53 2-1.33l24.5-56.86 24.9 56.86c.36.8 1.15 1.32 2.02 1.32h8.72c.74 0 1.44-.38 1.84-1 .4-.62.47-1.4.17-2.1l-30.2-68.85zM309.2 81.52l.47-.22c8.68-4.2 14.28-13.1 14.28-22.67 0-13.88-11.3-25.18-25.17-25.18H266.9c-1.2 0-2.2 1-2.2 2.2v68.86c0 1.23 1 2.22 2.2 2.22h8c1.2 0 2.2-1 2.2-2.2V45.8h21.68c7.05 0 12.8 5.75 12.8 12.8 0 5.9-4 11-9.73 12.42-1.04.26-2.07.4-3.07.4h-7.98c-.83 0-1.6.46-1.96 1.2-.38.73-.3 1.62.2 2.3l22.6 30.87c.42.58 1.08.92 1.78.92h9.9c.84 0 1.6-.47 1.97-1.2.37-.75.3-1.64-.2-2.3l-15.9-21.7zM107.2 80.97c-7.26-4.8-11.4-8.85-15.02-16.1-2.47 4.97-8.24 12.37-17.96 18.2-4.86 15.1-27.96 44-35.43 39.9-2.22-1.2-2.64-2.8-2.15-4.45.54-4.13 9.08-13.62 9.08-13.62s.18 2 2.92 6.18c-3.6-11.2 5.96-25.03 8.5-29.73 3.98-1.27 4.27-6.4 4.27-6.4.26-7.9-3.28-13.63-6.7-17.05 2.46 3 3.25 7.54 3.37 11.7v.02c0 .47 0 .93 0 1.4-.12 3.43-1.16 8.18-3.38 8.18v.03c-2.28-.1-5.1.4-7.63 1.18l-5.6 1.34s2.98-.13 4.6 1.25c-1.8 2.9-5.78 6.53-10.22 8.58-6.45 3-8.3-2.96-5.03-6.84.8-.94 1.62-1.74 2.38-2.4-.5-.5-.8-1.2-.88-2.06 0 0 0 0 0-.02-.46-1.97-.2-4.54 2.6-8.62.54-.86 1.2-1.75 2-2.65.02-.04.04-.07.07-.1.03-.04.07-.08.1-.12.02-.02.04-.04.06-.06.2-.23.42-.45.64-.67 3.34-3.4 8.6-6.96 16.9-10.15C64.4 43.68 67.94 41 67.94 41c1.07-1.1 2.94-2.45 3.63-2.8-5.05-8.77-6.07-21.15-4.75-24.5-.1.2-.2.38-.3.57.5-1.14.83-1.5 1.34-2.1 1.38-1.64 6.06-2.5 7.74.96.9 1.84 1.06 4.23 1.03 6.02-3.7-.2-7.06 4.04-7.06 4.04s3.07-1.46 6.88-1.5c0 0 1 .9 2.28 2.56-1.7 3.2-4.52 10.02-2.5 17.16.35 1.4.86 2.62 1.5 3.65.02.05.04.1.07.14.05.07.1.13.14.2 3.37 5.06 9.54 5.66 9.54 5.66-2.9-1.45-5.27-3.76-6.8-6.56-.82-1.5-1.3-2.77-1.6-3.77-1.64-6.3.77-10 2.14-12.47 3.17-4.9 8.95-7.9 15.15-7.18 8.72 1 14.97 8.86 13.98 17.57-.6 5.32-3.78 9.72-8.15 12.12 1.05 2.84-.07 6.28-.07 6.28 2.64 3.32 2.76 5.23 2.67 7-3.36-.55-6.62 1.7-6.62 1.7s6.48-1.53 10.24 1.82c2.44 2.64 4.08 5 5.05 6.77 1.4 2.5 7.86 2.68 7.12 7.2-.74 4.5-5.68 4.53-13.4-.57M69.56 0C31.15 0 0 31.15 0 69.57c0 38.42 31.15 69.57 69.57 69.57 38.42 0 69.57-31.15 69.57-69.57C139.14 31.15 108 0 69.57 0M73.8 51.7c.8-.82.8-2.14 0-2.95-.82-.82-2.14-.82-2.95 0-.82.8-.82 2.13 0 2.94.8.8 2.13.8 2.95 0M66.45 53.15c-.82.8-.82 2.13 0 2.95.8.8 2.13.8 2.94 0 .8-.82.8-2.14 0-2.95-.82-.8-2.14-.8-2.95 0"/><path d="M79.23 54.23c-1.27-1.27-3.34-1.27-4.6 0l-2.72 2.7c-1.27 1.3-1.27 3.35 0 4.63l3 2.97c1.26 1.28 3.32 1.28 4.6 0l2.7-2.7c1.28-1.28 1.28-3.35 0-4.62l-2.97-2.97zM95.76 41.44c-2.15-2.57 1.87-7.25 4.4-4.46 4.64 5.15-2.25 7.04-4.4 4.46m9.24 2.7c3.45-6.56-1.42-10.4-4.77-13.53-5.36-5.03-10.7-7.2-16.8-.23-6.1 6.98-2.24 15.07 3.35 19.06 5.58 4 14.78 1.25 18.22-5.3"/></svg></a>            </div>
+            <nav class="overlay-menu">
+                
+<ul class="tree">
+        
+</ul>
+
+            </nav>
+        </div>
+    </div>
+    
+    <script src="/assets/user/themes/quark/js/jquery.treemenu.js"></script>
+<script src="/assets/user/themes/quark/js/site.js"></script>
+
+
+</body>
+</html>
